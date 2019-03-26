@@ -1,7 +1,6 @@
-# oop-2019-uto-18-b-kanuch-emarich
 oop-2019-uto-18-b-kanuch-emarich created by GitHub Classroom
 
-ZADANIE PROJEKTU 
+# ZADANIE PROJEKTU 
 
 E-správa (E-Governance)
 
@@ -10,7 +9,7 @@ Okrem podpory a zabezpečenia demokratickosti vládnutia (e-government), informa
 Príklady e-správy zahŕňajú elektronické zabezpečenie podávania žiadosti o víza a udeľovania víz, komunikácie s finančnou správou, resp. s jej ľubovoľnou sekciou (daňový, živnostenský, colný úrad a pod.), poradenstva pre študentov študujúcich v zahraničí, registrácie privezeného dopravného prostriedku zo zahraničia a podania daňového priznania.
 
 
-ZAMER PROJEKTU
+# ZAMER PROJEKTU
 
 EK´U - Elektronicky´ katastra´lny u´rad
 Ema Richna´kova´
