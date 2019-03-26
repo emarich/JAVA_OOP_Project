@@ -11,6 +11,12 @@ Príklady e-správy zahŕňajú elektronické zabezpečenie podávania žiadosti
 
 # ZAMER PROJEKTU
 
-EK´U - Elektronicky´ katastra´lny u´rad
-Ema Richna´kova´
-Projekt je zamerany´ na spravovanie pozemkov, nehnuteˇlnost´ı na dany´ch pozemkoch a pr´ısluˇsny´ch pr´av k nim urˇceny´ch. Program bude slu´ˇziˇt Katastr´alnemu u´radu spravovaˇt verejny´ register pozemkov a nehnuteˇlnost´ı a poskytne lepˇs´ı prehˇlaˇd o pr´avnych u´konoch, ktor´e su´ spojen´e so spr´avou. Do tejto ˇcinnosti sa zah´rnˇa evidovanie pozemkov a stavieb; ˇclenenie pozemkov; zapisovanie pr´av k pozemkom a nehnuteˇlnostiam; evidovanie majiteˇlov; spracovanie poˇziadavok o prevode vlastn´ıckeho pr´ava, zah´rnˇaju´c ku´pnu zmluvu, darovaciu zmluvu, z´amennu´ zmluvu pozemkov; komunik´acia s ´Uradom geod´ezie, kartograﬁe a katastra ohˇladom stavebnej ˇcinnosti; komunik´acia s Danˇovy´m u´radom ohˇladom vy´poˇctu sumy dane za pozemok a nehnuteˇlnosˇ t; zmena hran´ıc u´zem´ı; ukladanie poku´t za niektor´e priestupky na u´seku geod´ezie a katastra. Program taktieˇz bude slu´ˇziˇt obˇcanom. Obˇcan, ktory´ nebude registrovany´ v danom programe, bude mˆocˇt prehˇlad´avaˇt parcely a bude maˇt pr´ıstup k vlastn´ıkov a ich u´dajom. Registrovany´ obˇcan bude mˆocˇt komunikovaˇt s u´radmi spomenuty´mi vyˇsˇsie, pod´avaˇt rˆozne ˇziadosti ty´kaju´ce sa spr´avy jeho vlastn´ıctva, vystavovaˇ t zmluvy.
+EKÚ - Elektronický katastrálny úrad
+
+Ema Richnáková
+
+Projekt je zameraný na spravovanie pozemkov, nehnuteľností na daných pozemkoch a príslušných práv k nim určených.
+
+Program bude slúžiť Katastrálnemu úradu spravovať verejný register pozem\-kov a nehnuteľností a poskytne lepší prehľaď o právnych úkonoch, ktoré sú spojené so správou. Do tejto činnosti sa zahŕňa evidovanie pozemkov a stavieb; členenie pozemkov; zapisovanie práv k pozemkom a nehnuteľnostiam; evidovanie majiteľov; spracovanie požiadavok o prevode vlastníckeho práva, zahŕňajúc kúp\-nu zmluvu, darovaciu zmluvu, zámennú zmluvu pozemkov; komunikácia s Úra\-dom geodézie, kartografie a katastra ohľadom stavebnej činnosti; komunikácia s Daňo\-vým úradom ohľadom výpočtu sumy dane za pozemok a nehnuteľnosť; zmena hraníc území; ukladanie pokút za niektoré priestupky na úseku geodézie a katastra.
+
+Program taktiež bude slúžiť občanom. Občan, ktorý nebude registrovaný v danom programe, bude môcť prehľadávať parcely a bude mať prístup k vlastníkov a ich údajom. Registrovaný občan bude môcť komunikovať s úradmi spomenutý\-mi vyššie, podávať rôzne žiadosti týkajúce sa správy jeho vlastníctva, vystavovať zmluvy.
