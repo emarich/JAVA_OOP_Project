@@ -10,13 +10,18 @@ public abstract class Owner implements Serializable {
     private String username;
     private String name;
     private Date birthDate;
-    DateFormat dateFormat = new SimpleDateFormat("dd.mm.yy");
-    //Date date = DATE_FORMAT.parse("2013-12-4"); -> date.toString
+    private DateFormat dateFormat = new SimpleDateFormat("dd.mm.yy");
     private Address mutualAddress;
     private String[] outputAddress = new String[3];
     private String phoneNumber;
     private String email;
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public String getUsername() {
+        return username;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -40,7 +45,7 @@ public abstract class Owner implements Serializable {
         try {
             outputAddress = address.split(",");
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Format must be: /n (example) Hlavna 1, 801 01 Bratislava, Slovensko");
+            System.out.println("Please, write it in this format: /n (example) Hlavna 1, 801 01 Bratislava, Slovensko");
         }
         mutualAddress.setStreetAndNum(outputAddress[0]);
         mutualAddress.setCity(outputAddress[1]);
@@ -50,16 +55,22 @@ public abstract class Owner implements Serializable {
         return mutualAddress;
     }
 
-
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
     public void setEmail(String email){
-        this.email=email;
+        this.email = email;
     }
     public String getEmail(){
         return email;
     }
 
 
+    
 
 
 
@@ -69,75 +80,51 @@ public abstract class Owner implements Serializable {
 
 
 
+    private void phoneNumberCheck(String phoneNumber) {
+        if (phoneNumber.matches("[0-9 ]+")) {
+            char firstChar = phoneNumber.charAt(0);
 
+            if (phoneNumber.length() == 10) {
+                if (firstChar != '0') {
+                    System.out.println("Invalid format. \"0\" must be first");
+                }
+            } else if (phoneNumber.length() == 13) {
+                if (firstChar != '+') {
+                    System.out.println("Invalid format. \"+\" must be first");
+                }
+            } else {
+                System.out.println("Invalid length");
+            }
+        } else {
+            System.out.println("Invalid characters");
+        }
+    }
 
-
-
-    public void emailCheck(String usersEmail) {
-        int length = usersEmail.length();
-        boolean flag1 = false;
-        boolean flag2 = false;
-        boolean flag3 = false;
-        boolean flag4 = false;
-        boolean flag5 = false;
-        boolean flag6 = false;
-        boolean flag7 = false;
+    private void emailCheck(String usersEmail) {
         int count = 0;
 
+        if(!(usersEmail.length()>3 && usersEmail.length()<40)) {
+            System.out.println("Inavlid length of email");
+        }
 
-        //Condition 1
-        if((length>3 && length<60))
-            flag1 = true;
-        else
-            flag1 = false;
-
-        //Condition 2
-        int temp = email.length();
         if(email.contains("@")){
-            flag2=true;
-            int a=email.indexOf("@");
-            for(int i=a;i<temp;i++){
+            int a = email.indexOf("@");
+
+            for(int i=a; i<usersEmail.length(); i++){
                 if(email.charAt(i)=='.'){
-                    flag3=true;
-                    count=count+1;
+                    count += 1;
                 }
             }
-            if(count<1||count>2){
-                flag4=false;
+            if(count != 1){
+                System.out.println("Invalid position of special characters");
             }
-            else{
-                flag4=true;
-            }
-        }
-        else{
-            flag2 =false;
-            System.out.println("No @ symbol present");
+        } else{
+            System.out.println("No \"@\" symbol present");
         }
 
-
-        //Condition 3
-        if(email.matches("[A-Z a-z _]+@.*")) //Unable to get the right RegEx here!
-            flag5 = true;
-        else
-            flag5 = false;
-
-        //Condition4
-        if(Character.isUpperCase(email.charAt(0))==true)
-            flag6 = true;
-        else
-            flag6=false;
-
-        if(flag1==true && flag2==true && flag3==true && flag4==true && flag5==true &&flag6==true)
-            System.out.println("Email ID is valid");
-        else{
-            if(flag1==false)
-                System.out.println("Inavlid length of Email ID");
-            if(flag2==false||flag3==false||flag4==false)
-                System.out.println("Invalid Position of Special Characters");
-            if(flag5==false)
-                System.out.println("Invalid combination for username");
-            if(flag6==false)
-                System.out.println("Invalid case of first letter");
+        if(!(email.matches("[a-z _]+@.*"))) {
+            System.out.println("Invalid characters");
         }
+
     }
 }

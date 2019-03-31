@@ -14,12 +14,17 @@ public class UserPrimaryStage extends FlowPane{
 
 
     public UserPrimaryStage() {
-        this.getChildren().addAll(user);
+        this.getChildren().addAll(menuBar);
+
+        setStage();
     }
 
-    private void setLayout() {
+    private void setStage() {
         menuBar.getMenus().addAll(userInfoMenu);
-        userInfoMenu.getItems().addAll("")
+        userInfoMenu.getItems().add(new MenuItem("Accout"));
+        userInfoMenu.getItems().add(new MenuItem("Property"));
+        userInfoMenu.getItems().add(new MenuItem("Log out"));
+        userInfoMenu.getItems().add(new MenuItem("Exit"));
 
         this.setAlignment(Pos.CENTER);
         this.setOrientation(Orientation.VERTICAL);
