@@ -16,13 +16,13 @@ public class LogIn extends FlowPane {
 
     private TextField username = new TextField();
     private PasswordField password = new PasswordField();
-    private ChoiceBox<String> userTypeBox = new ChoiceBox<>(FXCollections.observableArrayList("User", "Office"));
+    private ChoiceBox<String> userTypeBox = new ChoiceBox<>(FXCollections.observableArrayList("Guest", "User", "Office"));
     private Button login = new Button();
 
     public LogIn() {
         this.getChildren().addAll(username, password, userTypeBox, login);
 
-        setProperties();
+        setLayout();
 
         Stage stage = new Stage();
 
@@ -36,6 +36,13 @@ public class LogIn extends FlowPane {
                 alert.showAndWait();
             } else {
                 switch (userTypeBox.getValue()) {
+                    case "Guest":
+                        System.out.println("Guest");
+                        UserPrimaryStage userStage = new UserPrimaryStage();
+                        Scene userScene = new Scene(userStage, 500, 500);
+                        stage.setScene(userScene);
+                        stage.show();
+                        break;
                     case "User":
                         System.out.println("User");
                         UserPrimaryStage userStage = new UserPrimaryStage();
@@ -57,7 +64,7 @@ public class LogIn extends FlowPane {
 
     }
 
-    private void setProperties() {
+    private void setLayout() {
         this.setAlignment(Pos.CENTER);
         this.setOrientation(Orientation.VERTICAL);
         this.setVgap(20);
