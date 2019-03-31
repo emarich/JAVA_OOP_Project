@@ -1,4 +1,4 @@
-package CadasterObject;
+package Owners;
 
 public class City extends Owner {
 

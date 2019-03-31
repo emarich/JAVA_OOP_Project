@@ -1,4 +1,4 @@
-package CadasterObject;
+package CadasterObjects;
 
 public class RealEstate {
 }

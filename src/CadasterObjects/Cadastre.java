@@ -1,9 +1,8 @@
-package CadasterObject;
+package CadasterObjects;
+
+import Owners.LandOwner;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 public class Cadastre implements Serializable {
     int updatedDate;
@@ -12,8 +11,8 @@ public class Cadastre implements Serializable {
     private int numOfRealEstate;
     private boolean isLandOwner;
 
-    Land land = new Land();
-    LandOwner landOwner = new LandOwner();
+    private Land land = new Land();
+    private LandOwner landOwner = new LandOwner();
 
 
 
@@ -26,7 +25,6 @@ public class Cadastre implements Serializable {
     public void setNumOfREOwners(int numOfREOwners) {
         this.numOfREOwners = numOfREOwners;
     }
-
     public int getNumOfREOwners() {
         return numOfREOwners;
     }
@@ -34,7 +32,6 @@ public class Cadastre implements Serializable {
     public void setNumOfRealEstate(int numOfRealEstate) {
         this.numOfRealEstate = numOfRealEstate;
     }
-
     public int getNumOfRealEstate() {
         return numOfRealEstate;
     }
@@ -42,7 +39,6 @@ public class Cadastre implements Serializable {
     public void setIsLandOwner(boolean isLandOwner) {
         this.isLandOwner = isLandOwner;
     }
-
     public boolean geetIsLandOwner() {
         return isLandOwner;
     }
