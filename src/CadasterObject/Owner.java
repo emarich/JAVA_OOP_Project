@@ -1,6 +1,6 @@
 package CadasterObject;
 
-public class Owner {
+public abstract class Owner {
     String name;
     String birthDate;
     String mutualAdress;

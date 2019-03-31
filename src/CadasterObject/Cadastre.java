@@ -1,13 +1,22 @@
 package CadasterObject;
 
-public class Cadastre {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+public class Cadastre implements Serializable {
     int updatedDate;
 
     private int numOfREOwners;
-    private int numOfRealaEstate;
+    private int numOfRealEstate;
+    private boolean isLandOwner;
 
     Land land = new Land();
     LandOwner landOwner = new LandOwner();
+
+
+
 
 
 
@@ -22,12 +31,21 @@ public class Cadastre {
         return numOfREOwners;
     }
 
-    public void setNumOfRealEstate(int numOfRelaEstate) {
-        this.numOfRealaEstate = numOfRelaEstate;
+    public void setNumOfRealEstate(int numOfRealEstate) {
+        this.numOfRealEstate = numOfRealEstate;
     }
 
     public int getNumOfRealEstate() {
-        return numOfRealaEstate;
+        return numOfRealEstate;
     }
+
+    public void setIsLandOwner(boolean isLandOwner) {
+        this.isLandOwner = isLandOwner;
+    }
+
+    public boolean geetIsLandOwner() {
+        return isLandOwner;
+    }
+
 
 }
