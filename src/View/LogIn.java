@@ -1,5 +1,4 @@
 package View;
-import  sample.Main;
 
 import javafx.collections.FXCollections;
 import javafx.geometry.Orientation;
@@ -7,10 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
-import java.util.SimpleTimeZone;
 
 
 public class LogIn extends FlowPane {
@@ -30,6 +26,7 @@ public class LogIn extends FlowPane {
 
 
         login.setOnAction(e -> {
+
             if (userTypeBox.getValue().equals("Guest")) {
                 GuestPrimaryStage guestStage = new GuestPrimaryStage();
                 Scene guestScene = new Scene(guestStage, 500, 500);
@@ -63,7 +60,6 @@ public class LogIn extends FlowPane {
 
 
         });
-
     }
 
     private void setStage() {
@@ -78,7 +74,7 @@ public class LogIn extends FlowPane {
         userTypeBox.show();
         userTypeBox.getSelectionModel().selectFirst();
 
-        login.setText("Login");
+        login.setText("Sign In");
         login.setPrefWidth(280);
 
     }
