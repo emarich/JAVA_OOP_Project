@@ -12,7 +12,8 @@ public class Cadastre implements Serializable {
     private boolean isLandOwner;
 
     private Land land = new Land();
-    private LandOwner landOwner = new LandOwner();
+    //private LandOwner landOwner = new LandOwner();
+    private RealEstate realEstate = new RealEstate();
 
 
 

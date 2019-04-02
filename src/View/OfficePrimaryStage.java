@@ -22,6 +22,9 @@ public class OfficePrimaryStage extends BorderPane { //skusit iny pane
     }
 
     private void setStage() {
+        //this.setAlignment(Pos.CENTER);
+        //this.setOrientation(Orientation.VERTICAL);
+        //this.setVgap(20);
         this.setTop(menuBar);
 
         menuBar.getMenus().add(citizens);

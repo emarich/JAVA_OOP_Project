@@ -6,7 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public abstract class Owner implements Serializable {
+public class Owner implements Serializable {
     private String username;
     private String name;
     private Date birthDate;
@@ -15,6 +15,15 @@ public abstract class Owner implements Serializable {
     private String[] outputAddress = new String[3];
     private String phoneNumber;
     private String email;
+
+    public Owner() {}
+
+    public Owner(String username, String fullName, String birthDate, String mutualAddress) {
+        setUsername(username);
+        setUsername(fullName);
+        setBirthDate(birthDate);
+        setMutualAddress(mutualAddress);
+    }
 
     public void setUsername(String username) {
         this.username = username;

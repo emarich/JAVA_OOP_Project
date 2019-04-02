@@ -16,12 +16,12 @@ public class LogIn extends FlowPane {
     private ChoiceBox<String> userTypeBox = new ChoiceBox<>(FXCollections.observableArrayList("Guest", "User", "Office"));
     private Button login = new Button();
 
-    public LogIn() {
+    public LogIn(Stage primaryStage) {
         this.getChildren().addAll(username, password, userTypeBox, login);
 
         setStage();
 
-        Stage stage = new Stage();
+        //Stage stage = new Stage();
 
 
 
@@ -30,8 +30,8 @@ public class LogIn extends FlowPane {
             if (userTypeBox.getValue().equals("Guest")) {
                 GuestPrimaryStage guestStage = new GuestPrimaryStage();
                 Scene guestScene = new Scene(guestStage, 500, 500);
-                stage.setScene(guestScene);
-                stage.show();
+                primaryStage.setScene(guestScene);
+                primaryStage.show();
             } else {
                 //if((username.getText() == null || username.getText().trim().isEmpty()) || (password.getText() == null || password.getText().trim().isEmpty())) {
                     /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -44,15 +44,15 @@ public class LogIn extends FlowPane {
                             System.out.println("User");
                             UserPrimaryStage userStage = new UserPrimaryStage();
                             Scene userScene = new Scene(userStage, 500 , 500);
-                            stage.setScene(userScene);
-                            stage.show();
+                            primaryStage.setScene(userScene);
+                            primaryStage.show();
                             break;
                         case "Office":
                             System.out.println("Office");
                             OfficePrimaryStage officeStage = new OfficePrimaryStage();
                             Scene officeScene = new Scene(officeStage, 500, 500);
-                            stage.setScene(officeScene);
-                            stage.show();
+                            primaryStage.setScene(officeScene);
+                            primaryStage.show();
                             break;
                     }
                 //}
