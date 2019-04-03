@@ -1,5 +1,5 @@
 package Owners;
 
-public class City extends Owner {
+public class City  {
 
 }

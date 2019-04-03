@@ -5,6 +5,7 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
+import javafx.stage.Stage;
 
 public class UserPrimaryStage extends FlowPane{
     private Button user = new Button("User");
@@ -13,7 +14,7 @@ public class UserPrimaryStage extends FlowPane{
 
 
 
-    public UserPrimaryStage() {
+    public UserPrimaryStage(Stage primaryStage) {
         this.getChildren().addAll(menuBar);
 
         setStage();

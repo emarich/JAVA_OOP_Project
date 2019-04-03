@@ -1,33 +1,54 @@
 package Offices;
 
+import CadasterObjects.Land;
+import CadasterObjects.RealEstate;
 import Owners.*;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import UserObject.Database;
+import UserObject.User;
 
 public class CadastralOffice extends Office {
+    private Database usersData = new Database();
+    private User user = new User();
+    //private HashMap<String, User> usersHMap = new HashMap<>();
 
-    private List<Owner> owners = new ArrayList<>();
 
-
-
-    public List<Owner> registeNewUser(String username, String fullName, String birthDate, String address) {
-        owners.add(new Owner(username, fullName, birthDate, address));
-        return owners;
+    public void registerNewUser(String username, String password, String userType) {
+        usersData.addUser(username, password, userType =);
     }
 
-    //public List makeUserLandOwner() { }
+    public void makeOwnerFromUser (String username, String name, String birthdate, String address) {
+        usersData.getUser(username).setOwner(new Owner(name, birthdate, address));
+    }
 
-    public Owner findUser(String username) {
-        for (Owner o : owners) {
-            if (o.getUsername() == username)  {
-                return o;
+    //potrebene upravy!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public void makeLand (String username, int regNum, String city, int area, String typeLand) {
+        usersData.getUser(username).getOwner().addLand(new Land(regNum, city, area, typeLand));
+        usersData.getUser(username).getOwner().setHaveLand(true);
+        if (usersData.getUser(username).getOwner().getHaveRealEstate()) {
+            for (RealEstate RE : usersData.getUser(username).getOwner().getOwnedRE()) {
+                for (Land l : usersData.getUser(username).getOwner().getOwnedLands()) {
+                    if (RE.getRegisterNum() == l.getRegisterNum() &&
+                            RE.getCity().equals(l.getCity())) {
+                        usersData.getUser(username).getOwner().
+                }
             }
         }
-        System.out.println("Invalid username.");
-        return null;
+
     }
+
+    public void ownerGotLand () {
+
+    }
+
+    /*public void makeLandOwnerFromUser (String username, String name, String birthdate, String address) {
+        User landOwnerUser = getUser(username);
+        landOwnerUser.setLandOwner(new (name, birthdate, address));
+    }
+
+    public void makeREOwnerFromUser (String username, String name, String birthdate, String address) {
+        User REOwnerUser = getUser(username);
+        REOwnerUser.setReOwner(new REOwner(name, birthdate, address));
+    }*/
 
 
 }

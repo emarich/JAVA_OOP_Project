@@ -1,8 +1,6 @@
 import View.*;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -10,14 +8,15 @@ public class Main extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        primaryStage.setTitle("Electronic Cadastral Office");
         //Parent root = FXMLLoader.load(getClass().getResource("../View/officeScene.fxml"));
-        LogIn login = new LogIn(primaryStage);
+        SignInScene signInScene = new SignInScene(primaryStage);
 
-        Scene LoginScene = new Scene(login, 500, 500);
+        Scene signIn = new Scene(signInScene);
+        signInScene.setPrefSize(500, 500);
 
-        primaryStage.setScene(LoginScene);
+        primaryStage.setScene(signIn);
         primaryStage.show();
-
     }
 
 

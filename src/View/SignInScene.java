@@ -9,15 +9,15 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
-public class LogIn extends FlowPane {
+public class SignInScene extends FlowPane {
 
     private TextField username = new TextField();
     private PasswordField password = new PasswordField();
     private ChoiceBox<String> userTypeBox = new ChoiceBox<>(FXCollections.observableArrayList("Guest", "User", "Office"));
-    private Button login = new Button();
+    private Button signIn = new Button();
 
-    public LogIn(Stage primaryStage) {
-        this.getChildren().addAll(username, password, userTypeBox, login);
+    public SignInScene(Stage primaryStage) {
+        this.getChildren().addAll(username, password, userTypeBox, signIn);
 
         setStage();
 
@@ -25,10 +25,10 @@ public class LogIn extends FlowPane {
 
 
 
-        login.setOnAction(e -> {
+        signIn.setOnAction(e -> {
 
             if (userTypeBox.getValue().equals("Guest")) {
-                GuestPrimaryStage guestStage = new GuestPrimaryStage();
+                GuestPrimaryScene guestStage = new GuestPrimaryScene(primaryStage);
                 Scene guestScene = new Scene(guestStage, 500, 500);
                 primaryStage.setScene(guestScene);
                 primaryStage.show();
@@ -39,22 +39,22 @@ public class LogIn extends FlowPane {
                     alert.setHeaderText("Username and/or password must be filled");
                     alert.showAndWait();*/
                 //} else {
-                    switch (userTypeBox.getValue()) {
-                        case "User":
-                            System.out.println("User");
-                            UserPrimaryStage userStage = new UserPrimaryStage();
-                            Scene userScene = new Scene(userStage, 500 , 500);
-                            primaryStage.setScene(userScene);
-                            primaryStage.show();
-                            break;
-                        case "Office":
-                            System.out.println("Office");
-                            OfficePrimaryStage officeStage = new OfficePrimaryStage();
-                            Scene officeScene = new Scene(officeStage, 500, 500);
-                            primaryStage.setScene(officeScene);
-                            primaryStage.show();
-                            break;
-                    }
+                switch (userTypeBox.getValue()) {
+                    case "User":
+                        System.out.println("User");
+                        UserPrimaryStage userStage = new UserPrimaryStage(primaryStage);
+                        Scene userScene = new Scene(userStage, 500 , 500);
+                        primaryStage.setScene(userScene);
+                        primaryStage.show();
+                        break;
+                    case "Office":
+                        System.out.println("Office");
+                        OfficePrimaryStage officeStage = new OfficePrimaryStage(primaryStage);
+                        Scene officeScene = new Scene(officeStage, 500, 500);
+                        primaryStage.setScene(officeScene);
+                        primaryStage.show();
+                        break;
+                }
                 //}
             }
 
@@ -74,8 +74,8 @@ public class LogIn extends FlowPane {
         userTypeBox.show();
         userTypeBox.getSelectionModel().selectFirst();
 
-        login.setText("Sign In");
-        login.setPrefWidth(280);
+        signIn.setText("Sign In");
+        signIn.setPrefWidth(280);
 
     }
 
@@ -83,3 +83,4 @@ public class LogIn extends FlowPane {
 
 
 }
+
