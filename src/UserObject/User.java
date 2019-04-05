@@ -2,7 +2,9 @@ package UserObject;
 
 import Owners.Owner;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String username;
     private String password;
     private Owner owner = new Owner();

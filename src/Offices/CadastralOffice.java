@@ -8,12 +8,22 @@ import UserObject.User;
 
 public class CadastralOffice extends Office {
     private Database usersData = new Database();
-    private User user = new User();
+    //private User user = new User();
     //private HashMap<String, User> usersHMap = new HashMap<>();
 
+    public void firstLoad() {
+        if (usersData == null) {
+            //usersData.loadDatabase();
+        }
+    }
+
+    public Database getUsersData () {
+    return usersData;
+    }
 
     public void registerNewUser(String username, String password, String userType) {
-        usersData.addUser(username, password, userType =);
+        usersData.addUser(username, password, userType);
+        //uloz do databazy
     }
 
     public void makeOwnerFromUser (String username, String name, String birthdate, String address) {
@@ -21,9 +31,11 @@ public class CadastralOffice extends Office {
     }
 
     //potrebene upravy!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public void makeLand (String username, int regNum, String city, int area, String typeLand) {
-        usersData.getUser(username).getOwner().addLand(new Land(regNum, city, area, typeLand));
+    /*public void makeLand (String username, int regNum, String city, int area, String typeLand) {
+        Land tmpLand = new Land(regNum, city, area, typeLand);
+        usersData.getUser(username).getOwner().addLand(tmpLand);
         usersData.getUser(username).getOwner().setHaveLand(true);
+        usersData.getUser(username).getOwner().linkLandandRE(usersData.getUser(username).getOwner().getHaveRealEstate(), tmpLand);
         if (usersData.getUser(username).getOwner().getHaveRealEstate()) {
             for (RealEstate RE : usersData.getUser(username).getOwner().getOwnedRE()) {
                 for (Land l : usersData.getUser(username).getOwner().getOwnedLands()) {
@@ -32,13 +44,8 @@ public class CadastralOffice extends Office {
                         usersData.getUser(username).getOwner().
                 }
             }
-        }
+        }*/
 
-    }
-
-    public void ownerGotLand () {
-
-    }
 
     /*public void makeLandOwnerFromUser (String username, String name, String birthdate, String address) {
         User landOwnerUser = getUser(username);

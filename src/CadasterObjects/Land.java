@@ -21,6 +21,10 @@ public class Land {
         setTypeLand(TypeLand.valueOf(typeLand));
     }
 
+    public Land(){
+
+    }
+
 
     //Getters and Setters-------------------------------------------------------
 

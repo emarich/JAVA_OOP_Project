@@ -149,8 +149,40 @@ public class Owner extends User {
     //Getters and Setters-------------------------------------------------------
 
 
+    public void linkLandandRE (boolean haveRealEstate, Land land) {
+        if (haveRealEstate) {
+            linkLandandRE(land);
+        } else {
+            System.out.println(getName()+" aren't owning real estate");
+        }
+    }
+
+    public void linkLandandRE (boolean haveLand, RealEstate RE) {
+        if (haveLand) {
+            linkLandandRE(RE);
+        } else {
+            System.out.println(getName()+" aren't owning land");
+        }
+    }
+
     public void linkLandandRE (Land land) {
-        
+        for (RealEstate RE : ownedRE) {
+            if (land.getRegisterNum() == RE.getRegisterNum() &&
+                land.getCity().equals(RE.getCity()))  {
+                RE.setLand(land);
+                land.addRealEstate(RE);
+            }
+        }
+    }
+
+    public void linkLandandRE (RealEstate RE) {
+        for (Land l : ownedLands) {
+            if (RE.getRegisterNum() == l.getRegisterNum() &&
+                RE.getCity().equals(l.getCity())) {
+                l.addRealEstate(RE);
+                RE.setLand(l);
+            }
+        }
     }
 
 

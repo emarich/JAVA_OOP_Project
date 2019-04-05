@@ -2,14 +2,14 @@ package UserObject;
 
 import OtherFunctionality.PopUp;
 import javafx.scene.control.Alert;
-import sun.security.util.Password;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.HashMap;
 
 public class Database implements Serializable {
     private HashMap<String, User> usersData = new HashMap<>();
 
+    //prida usera do hashMapy ^
     public void addUser(String username, String password, String userType) {
         if (existingUser(username)) {
             PopUp alert = new PopUp(Alert.AlertType.WARNING, "Username "+username+" is already used.");
@@ -18,10 +18,17 @@ public class Database implements Serializable {
         }
     }
 
+    //vyberie konkretneho usera z hashMapy podla username
     public User getUser(String username) {
         return usersData.get(username);
     }
 
+    //vrati hashMapu
+    public HashMap<String, User> getUsersDataHM() {
+        return usersData;
+    }
+
+    //zisti, ci zadany user existuje
     public boolean existingUser(String username) {
         for (String u : usersData.keySet()) {
             if (u.equals(username))  {
@@ -37,9 +44,9 @@ public class Database implements Serializable {
         }
     }
 
-    public HashMap<String, User> getUsersData() {
-        return usersData;
-    }
+    //ak je hashmap plna, tak ju najprv
+
+
 
     public void changeUsername(String oldUsername, String newUsername ) {
         if (existingUser(newUsername)) {
@@ -60,4 +67,7 @@ public class Database implements Serializable {
             PopUp alert = new PopUp(Alert.AlertType.WARNING, "Wrong current password.");
         }
     }
+
+
+
 }
