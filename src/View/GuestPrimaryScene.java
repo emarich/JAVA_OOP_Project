@@ -1,14 +1,11 @@
 package View;
 
 import ViewContollers.GuestController;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -16,10 +13,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class GuestPrimaryScene extends FlowPane {
     GuestController guestController = new GuestController();
@@ -97,7 +90,7 @@ public class GuestPrimaryScene extends FlowPane {
         guestController.switchRegisterStage(registerItem);
 
         //Sign in
-        guestController.switchSignInScene(signInItem, primaryStage);
+        guestController.switchToSignInScene(signInItem, primaryStage);
 
     }
 

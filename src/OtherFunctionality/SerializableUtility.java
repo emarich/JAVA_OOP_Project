@@ -14,7 +14,7 @@ public class SerializableUtility {
             out.writeObject(usersData);
             out.close();
             fileOut.close();
-            System.out.println("Serialized data is saved in Database.out");
+            System.out.println("Serialized data was saved in Database.out");
         } catch (IOException i) {
             i.printStackTrace();
         }
@@ -26,6 +26,7 @@ public class SerializableUtility {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("Database.out"));
             HashMap<String, User> usersData = (HashMap<String, User>) in.readObject();
             in.close();
+            System.out.println("Deserialized data was loaded from Database.out");
             return usersData;
         } catch (IOException | ClassNotFoundException i) {
             i.printStackTrace();

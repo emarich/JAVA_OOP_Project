@@ -1,5 +1,6 @@
 package View;
 
+import ViewContollers.OfficeContoller;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,57 +9,60 @@ import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
 public class OfficePrimaryScene extends FlowPane {
+    private OfficeContoller officeContoller = new OfficeContoller();
+
     private MenuBar menuBar = new MenuBar();
 
-    private Menu citizens = new Menu("Citizens");
+    private Menu citizensMenu = new Menu("Citizens");
     private MenuItem addUserItem = new MenuItem("Add User");
-    private Menu makeOwner = new Menu("Make owner from user");
-    private MenuItem landOwnerItem = new MenuItem("Make land owner");
-    private MenuItem REOwnerItem = new MenuItem("Make real etsate owner");
+    private MenuItem makeOwnerItem = new MenuItem("Make owner from user");
 
-    private Menu office = new Menu("Office");
+    private Menu officeMenu = new Menu("Office");
     private MenuItem requestItem = new MenuItem("Requests");
+    private MenuItem signOutItem = new MenuItem("Sign Out");
 
-    private Menu land = new Menu("Land");
-    private Menu realEstate = new Menu("Real Estates");
+    private Menu landMenu = new Menu("Land");
+    private MenuItem makeLandItem = new MenuItem("Make land");
+    private MenuItem makeREItem = new MenuItem("Make real etsate");
+    private Menu realEstateMenu = new Menu("Real Estates");
 
 
-
+    //Constructor
     public OfficePrimaryScene(Stage primaryStage, String username) {
-        this.getChildren().addAll(menuBar);
-
-        Scene officeScene = new Scene(this, primaryStage.getWidth(), primaryStage.getHeight());
-        primaryStage.setScene(officeScene);
-        primaryStage.show();
-
         setScene(primaryStage);
 
-        //addUserItem.setOnAction(event -> {
+        sceneEvets(primaryStage);
 
-        //});
-
-
+        primaryStage.show();
     }
 
     private void setScene(Stage primaryStage) {
+        primaryStage.setScene(new Scene(this, primaryStage.getWidth(), primaryStage.getHeight()));
+
+        this.getChildren().addAll(menuBar);
+
         this.setAlignment(Pos.TOP_LEFT);
-        this.menuBar.setPrefWidth(primaryStage.getWidth());
         this.setOrientation(Orientation.VERTICAL);
         this.setVgap(20);
 
+        //Menu bar
         menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
+        menuBar.getMenus().addAll(citizensMenu, officeMenu, landMenu, realEstateMenu);
 
-        menuBar.getMenus().add(citizens);
-        menuBar.getMenus().add(office);
+        citizensMenu.getItems().add(addUserItem);
+        citizensMenu.getItems().add(makeOwnerItem);
 
-        citizens.getItems().add(addUserItem);
-        citizens.getItems().add(makeOwner);
-        makeOwner.getItems().add(landOwnerItem);
-        makeOwner.getItems().add(REOwnerItem);
+        landMenu.getItems().add(makeLandItem);
+        realEstateMenu.getItems().add(makeREItem);
 
-        office.getItems().add(requestItem);
+        officeMenu.getItems().addAll(requestItem, signOutItem);
 
-        //menuBar.prefWidthProperty().bind(stage.widthProperty());
+    }
 
+    public void sceneEvets(Stage primaryStage) {
+
+        officeContoller.addUser(addUserItem);
+
+        officeContoller.switchToSignInScene(signOutItem, primaryStage);
     }
 }

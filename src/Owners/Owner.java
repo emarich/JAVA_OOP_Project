@@ -6,6 +6,7 @@ import OtherFunctionality.PopUpAlert;
 import UserObject.User;
 import javafx.scene.control.Alert;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Owner extends User {
+public class Owner extends User implements Serializable {
     public class Address {
         private String streetAndNum;
         private String city;
@@ -59,7 +60,9 @@ public class Owner extends User {
         setMutualAddress(address);
     }
 
-    public Owner() {}
+    public Owner() {
+
+    }
 
 
     //Getters and Setters-------------------------------------------------------

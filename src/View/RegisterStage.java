@@ -1,7 +1,6 @@
 package View;
 
 import ViewContollers.RegisterController;
-import ViewContollers.SignInController;
 import javafx.collections.FXCollections;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -12,8 +11,7 @@ import javafx.stage.Stage;
 
 public class RegisterStage extends FlowPane {
     //View controller
-    //RegisterController registerController = new RegisterController();
-    private SignInController signInController = new SignInController();
+    private RegisterController registerController = new RegisterController();
 
     //New stage
     private Stage register = new Stage();
@@ -30,7 +28,7 @@ public class RegisterStage extends FlowPane {
     public RegisterStage() throws Exception {
         setScene(register);
 
-        sceneEvents(register);
+        sceneEvents();
 
         register.show();
     }
@@ -41,15 +39,13 @@ public class RegisterStage extends FlowPane {
         register.setHeight(400);
         register.setScene(new Scene(this, register.getWidth(), register.getHeight()));
 
-        this.getChildren().addAll(usernameLabel,username, passwordLabel, password,
+        this.getChildren().addAll(usernameLabel, username, passwordLabel, password,
                 userTypeBox, registerBtn);
-        //this.setPrefSize(register.getWidth(), register.getHeight());
         this.setAlignment(Pos.CENTER);
         this.setOrientation(Orientation.VERTICAL);
         this.setVgap(20);
 
         username.setPromptText("Username");
-
         password.setPromptText("Password");
 
         userTypeBox.show();
@@ -59,10 +55,9 @@ public class RegisterStage extends FlowPane {
         registerBtn.setPrefWidth(280);
     }
 
-    public void sceneEvents (Stage primaryStage) {
-        signInController.checkUser(username.getText(), userTypeBox.getValue());
+    public void sceneEvents () {
 
-        signInController.signInClicked(registerBtn, username, password,
-                userTypeBox, primaryStage);
+        registerController.registerUser(register, registerBtn, username, password,
+                userTypeBox);
     }
 }

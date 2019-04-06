@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class User implements Serializable {
     private String username;
     private String password;
-    private Owner owner = new Owner();
+    private Owner owner;
     //private LandOwner landOwner = new LandOwner();
     //private REOwner reOwner = new REOwner();
     private UserType userType;
@@ -39,7 +39,7 @@ public class User implements Serializable {
     }
 
     public void setUserType(String userType) {
-        this.userType = this.userType.fromString(userType);
+        this.userType = UserType.fromString(userType);
     }
     public UserType getUserType() {
         return userType;

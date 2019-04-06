@@ -1,16 +1,18 @@
 package UserObject;
 
-public enum  UserType {
+import java.io.Serializable;
+
+public enum  UserType implements Serializable {
     CITIZEN, OFFICE;
 
-    public UserType fromString(String string) {
+    public static UserType fromString(String string) {
         if (string.equals("OFFICE")) {
             return OFFICE;
         }
         return CITIZEN;
     }
 
-    public String toString(UserType userType) {
+    public static String toString(UserType userType) {
         if (userType == OFFICE) {
             return "OFFICE";
         }
