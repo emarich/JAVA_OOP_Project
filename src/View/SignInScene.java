@@ -1,5 +1,6 @@
 package View;
 
+import ViewContollers.SignInController;
 import javafx.collections.FXCollections;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -8,65 +9,39 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 
 
 public class SignInScene extends FlowPane {
+    //View controller
+    private SignInController signInController = new SignInController();
 
+    //Stuff on scene
     private TextField username = new TextField();
     private PasswordField password = new PasswordField();
-    private ChoiceBox<String> userTypeBox = new ChoiceBox<>(FXCollections.observableArrayList("Guest", "User", "Office"));
+    private ChoiceBox<String> userTypeBox =
+            new ChoiceBox<>(FXCollections.observableArrayList( "User", "Office", "Guest"));
     private Button signIn = new Button();
+    private Button registerBtn = new Button();
 
-    public SignInScene(Stage primaryStage) throws IOException {
-            this.getChildren().addAll(username, password, userTypeBox, signIn);
+    //Constructor
+    public SignInScene(Stage primaryStage) throws Exception {
+        //Setting scene
+        setScene(primaryStage);
 
-            setStage();
+        //Actions on scene
+        sceneEvents(primaryStage);
 
-            //Stage stage = new Stage();
-
-
-
-            signIn.setOnAction(e -> {
-
-                if (userTypeBox.getValue().equals("Guest")) {
-                    GuestPrimaryScene guestStage = new GuestPrimaryScene(primaryStage);
-                    Scene guestScene = new Scene(guestStage, 500, 500);
-                    primaryStage.setScene(guestScene);
-                    primaryStage.show();
-                } else {
-                    //if((username.getText() == null || username.getText().trim().isEmpty()) || (password.getText() == null || password.getText().trim().isEmpty())) {
-                    /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Missing username or password");
-                    alert.setHeaderText("Username and/or password must be filled");
-                    alert.showAndWait();*/
-                    //} else {
-                    switch (userTypeBox.getValue()) {
-                        case "User":
-                            //System.out.println("User");
-                            UserPrimaryStage userStage = new UserPrimaryStage(primaryStage);
-                            Scene userScene = new Scene(userStage, 500 , 500);
-                            primaryStage.setScene(userScene);
-                            primaryStage.show();
-                            break;
-                        case "Office":
-                            System.out.println("Office");
-                            OfficePrimaryStage officeStage = new OfficePrimaryStage(primaryStage);
-                            Scene officeScene = new Scene(officeStage, 500, 500);
-                            primaryStage.setScene(officeScene);
-                            primaryStage.show();
-                            break;
-                    }
-                    //}
-                }
-
-
-            });
-
+        primaryStage.show();
 
     }
 
-    private void setStage() {
+    //Setting all the stuff on scene
+    private void setScene(Stage primaryStage) {
+        primaryStage.setScene(new Scene(this, primaryStage.getWidth(), primaryStage.getHeight()));
+
+        this.getChildren().addAll(username, password, userTypeBox,
+                signIn, registerBtn);
+        this.setPrefSize(primaryStage.getWidth(), primaryStage.getHeight());
         this.setAlignment(Pos.CENTER);
         this.setOrientation(Orientation.VERTICAL);
         this.setVgap(20);
@@ -81,9 +56,27 @@ public class SignInScene extends FlowPane {
         signIn.setText("Sign In");
         signIn.setPrefWidth(280);
 
+        registerBtn.setText("Register");
     }
 
+    private void sceneEvents (Stage primaryStage) {
+        //Automatically switch to Guest scene, if "Guest" is selected
+        signInController.checkGuest(userTypeBox, primaryStage);
 
+        //Button event
+        signInController.signInClicked(signIn, username, password,
+                userTypeBox.getValue(), primaryStage);
+
+        //Register switch stage ... upravit do controlleru
+        registerBtn.setOnAction(e -> {
+        try {
+            RegisterStage registerStage = new RegisterStage();
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        });
+
+}
 
 }
 

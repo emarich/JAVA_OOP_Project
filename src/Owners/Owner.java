@@ -2,7 +2,7 @@ package Owners;
 
 import CadasterObjects.Land;
 import CadasterObjects.RealEstate;
-import OtherFunctionality.PopUp;
+import OtherFunctionality.PopUpAlert;
 import UserObject.User;
 import javafx.scene.control.Alert;
 
@@ -87,7 +87,7 @@ public class Owner extends User {
         try {
             outputAddress = address.split(",");
         } catch (ArrayIndexOutOfBoundsException e) {
-            PopUp alert = new PopUp(Alert.AlertType.INFORMATION,
+            PopUpAlert alert = new PopUpAlert(Alert.AlertType.INFORMATION,
                     "Please, write it in this format: /n (example) Hlavna 1, 801 01 Bratislava, Slovensko");
         }
         mutualAddress.setStreetAndNum(outputAddress[0]);

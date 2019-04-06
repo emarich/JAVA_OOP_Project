@@ -1,6 +1,6 @@
 package UserObject;
 
-import OtherFunctionality.PopUp;
+import OtherFunctionality.PopUpAlert;
 import javafx.scene.control.Alert;
 
 import java.io.*;
@@ -12,7 +12,7 @@ public class Database implements Serializable {
     //prida usera do hashMapy ^
     public void addUser(String username, String password, String userType) {
         if (existingUser(username)) {
-            PopUp alert = new PopUp(Alert.AlertType.WARNING, "Username "+username+" is already used.");
+            PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING, "Username "+username+" is already used.");
         } else {
             usersData.put(username, new User(username, password, userType));
         }
@@ -50,7 +50,7 @@ public class Database implements Serializable {
 
     public void changeUsername(String oldUsername, String newUsername ) {
         if (existingUser(newUsername)) {
-            PopUp alert = new PopUp(Alert.AlertType.WARNING, "Username "+newUsername+" is already used.");
+            PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING, "Username "+newUsername+" is already used.");
         } else {
             usersData.put(newUsername, usersData.get(oldUsername));
             usersData.remove(oldUsername);
@@ -64,7 +64,7 @@ public class Database implements Serializable {
             usersData.put(username, tmp);
             tmp = null;
         } else {
-            PopUp alert = new PopUp(Alert.AlertType.WARNING, "Wrong current password.");
+            PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING, "Wrong current password.");
         }
     }
 

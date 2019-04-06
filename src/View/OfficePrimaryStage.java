@@ -2,6 +2,7 @@ package View;
 
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
@@ -23,8 +24,12 @@ public class OfficePrimaryStage extends FlowPane {
 
 
 
-    public OfficePrimaryStage(Stage primaryStage) {
+    public OfficePrimaryStage(Stage primaryStage, String username) {
         this.getChildren().addAll(menuBar);
+
+        Scene officeScene = new Scene(this, primaryStage.getWidth(), primaryStage.getHeight());
+        primaryStage.setScene(officeScene);
+        primaryStage.show();
 
         setScene(primaryStage);
 
@@ -40,6 +45,8 @@ public class OfficePrimaryStage extends FlowPane {
         this.menuBar.setPrefWidth(primaryStage.getWidth());
         this.setOrientation(Orientation.VERTICAL);
         this.setVgap(20);
+
+        menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
 
         menuBar.getMenus().add(citizens);
         menuBar.getMenus().add(office);
