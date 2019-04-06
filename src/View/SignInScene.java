@@ -35,7 +35,7 @@ public class SignInScene extends FlowPane {
 
     }
 
-    //Setting all the stuff on scene
+
     private void setScene(Stage primaryStage) {
         primaryStage.setScene(new Scene(this, primaryStage.getWidth(), primaryStage.getHeight()));
 
@@ -68,13 +68,7 @@ public class SignInScene extends FlowPane {
                 userTypeBox, primaryStage);
 
         //Register switch stage ... upravit do controlleru
-        registerBtn.setOnAction(e -> {
-        try {
-            RegisterStage registerStage = new RegisterStage();
-        } catch (Exception e1) {
-            e1.printStackTrace();
-        }
-        });
+        signInController.switchRegisterStage(registerBtn);
 
 }
 

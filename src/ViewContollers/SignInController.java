@@ -3,6 +3,7 @@ package ViewContollers;
 import OtherFunctionality.PopUpAlert;
 import View.GuestPrimaryScene;
 import View.OfficePrimaryStage;
+import View.RegisterStage;
 import View.UserPrimaryStage;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -22,7 +23,7 @@ public class SignInController {
                 alert.setTitle("Missing username or password");
             } else {
                 if (checkUser(username.getText(), userType.getValue())){
-                    switch (userType.getValue()) {
+                    switch (userType.getValue() ) {
                         case "User":
                             UserPrimaryStage userStage = new UserPrimaryStage(primaryStage, username.getText());
                             break;
@@ -46,7 +47,13 @@ public class SignInController {
         });
     }
 
-    public void switchRegisterStage() {
-
+    public void switchRegisterStage(Button registerBtn) {
+        registerBtn.setOnAction(e -> {
+            try {
+                RegisterStage registerStage = new RegisterStage();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        });
     }
 }
