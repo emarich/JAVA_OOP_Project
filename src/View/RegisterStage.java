@@ -1,6 +1,7 @@
 package View;
 
 import ViewContollers.RegisterController;
+import ViewContollers.SignInController;
 import javafx.collections.FXCollections;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -10,11 +11,12 @@ import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
 public class RegisterStage extends FlowPane {
-    //Constructor
-    RegisterController registerController = new RegisterController();
+    //View controller
+    //RegisterController registerController = new RegisterController();
+    private SignInController signInController = new SignInController();
 
     //New stage
-    Stage register = new Stage();
+    private Stage register = new Stage();
 
     //Stuff on scene
     private Label usernameLabel = new Label("Set username");
@@ -27,6 +29,8 @@ public class RegisterStage extends FlowPane {
 
     public RegisterStage() throws Exception {
         setScene(register);
+
+        sceneEvents(register);
 
         register.show();
     }
@@ -53,5 +57,12 @@ public class RegisterStage extends FlowPane {
 
         registerBtn.setText("Register");
         registerBtn.setPrefWidth(280);
+    }
+
+    public void sceneEvents (Stage primaryStage) {
+        signInController.checkUser(username.getText(), userTypeBox.getValue());
+
+        signInController.signInClicked(registerBtn, username, password,
+                userTypeBox, primaryStage);
     }
 }

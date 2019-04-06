@@ -2,9 +2,9 @@ package ViewContollers;
 
 import OtherFunctionality.PopUpAlert;
 import View.GuestPrimaryScene;
-import View.OfficePrimaryStage;
+import View.OfficePrimaryScene;
 import View.RegisterStage;
-import View.UserPrimaryStage;
+import View.UserPrimaryScene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
@@ -25,10 +25,10 @@ public class SignInController {
                 if (checkUser(username.getText(), userType.getValue())){
                     switch (userType.getValue() ) {
                         case "User":
-                            UserPrimaryStage userStage = new UserPrimaryStage(primaryStage, username.getText());
+                            UserPrimaryScene userStage = new UserPrimaryScene(primaryStage, username.getText());
                             break;
                         case "Office":
-                            OfficePrimaryStage officeStage = new OfficePrimaryStage(primaryStage, username.getText());
+                            OfficePrimaryScene officeStage = new OfficePrimaryScene(primaryStage, username.getText());
                             break;
                     }
                 } else {

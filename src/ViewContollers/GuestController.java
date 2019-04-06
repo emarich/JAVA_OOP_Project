@@ -1,13 +1,25 @@
 package ViewContollers;
 
 import View.RegisterStage;
+import View.SignInScene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 public class GuestController {
     public void switchRegisterStage(MenuItem registerBtn) {
         registerBtn.setOnAction(e -> {
             try {
                 RegisterStage registerStage = new RegisterStage();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        });
+    }
+
+    public void switchSignInScene(MenuItem signInBtn, Stage primaryStage) {
+        signInBtn.setOnAction(e -> {
+            try {
+                SignInScene signInScene = new SignInScene(primaryStage);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }

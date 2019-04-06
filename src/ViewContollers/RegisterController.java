@@ -1,6 +1,6 @@
 package ViewContollers;
 
-public class RegisterController {
+public class RegisterController extends SignInController {
 
 
 

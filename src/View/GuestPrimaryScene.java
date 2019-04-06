@@ -35,6 +35,7 @@ public class GuestPrimaryScene extends FlowPane {
 
     private Menu register = new Menu("Register");
     private MenuItem registerItem = new MenuItem("Register user");
+    private MenuItem signInItem = new MenuItem("Sign in");
 
     //Text fields
     private TextField searchField = new TextField();
@@ -45,7 +46,7 @@ public class GuestPrimaryScene extends FlowPane {
     public GuestPrimaryScene(Stage primaryStage) {
         setScene(primaryStage);
 
-        sceneEvents();
+        sceneEvents(primaryStage);
 
         primaryStage.show();
     }
@@ -70,7 +71,7 @@ public class GuestPrimaryScene extends FlowPane {
         findMenu.getItems().addAll(findStreetCity, findOwner);
         findStreetCity.setSelected(true);
 
-        register.getItems().addAll(registerItem);
+        register.getItems().addAll(registerItem, signInItem);
 
         //VBox - textField, textArea
         vBox.setSpacing(10);
@@ -88,12 +89,15 @@ public class GuestPrimaryScene extends FlowPane {
         textArea.setText("You will see results there, if you will search for them...");
     }
 
-    private void sceneEvents () {
+    private void sceneEvents (Stage primaryStage) {
         //Change prompt text, when you select, what are you searching for
         guestController.changePromptText(findMenu, findOwner, findStreetCity, searchField);
 
         //Register
         guestController.switchRegisterStage(registerItem);
+
+        //Sign in
+        guestController.switchSignInScene(signInItem, primaryStage);
 
     }
 

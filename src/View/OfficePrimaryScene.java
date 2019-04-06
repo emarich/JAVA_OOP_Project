@@ -7,7 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
-public class OfficePrimaryStage extends FlowPane {
+public class OfficePrimaryScene extends FlowPane {
     private MenuBar menuBar = new MenuBar();
 
     private Menu citizens = new Menu("Citizens");
@@ -24,7 +24,7 @@ public class OfficePrimaryStage extends FlowPane {
 
 
 
-    public OfficePrimaryStage(Stage primaryStage, String username) {
+    public OfficePrimaryScene(Stage primaryStage, String username) {
         this.getChildren().addAll(menuBar);
 
         Scene officeScene = new Scene(this, primaryStage.getWidth(), primaryStage.getHeight());
