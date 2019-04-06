@@ -4,10 +4,7 @@ import OtherFunctionality.PopUpAlert;
 import View.GuestPrimaryScene;
 import View.OfficePrimaryStage;
 import View.UserPrimaryStage;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class SignInController {
@@ -18,14 +15,14 @@ public class SignInController {
         return true;
     }
 
-    public void signInClicked (Button signIn, TextField username, TextField password, String userType, Stage primaryStage) {
+    public void signInClicked (Button signIn, TextField username, TextField password, ChoiceBox<String> userType, Stage primaryStage) {
         signIn.setOnAction(e -> {
             if((username.getText() == null || username.getText().trim().isEmpty()) || (password.getText() == null || password.getText().trim().isEmpty())) {
                 PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR, "Username and/or password must be filled");
                 alert.setTitle("Missing username or password");
             } else {
-                if (checkUser(username.getText(), userType)){
-                    switch (userType) {
+                if (checkUser(username.getText(), userType.getValue())){
+                    switch (userType.getValue()) {
                         case "User":
                             UserPrimaryStage userStage = new UserPrimaryStage(primaryStage, username.getText());
                             break;

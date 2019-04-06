@@ -65,7 +65,7 @@ public class SignInScene extends FlowPane {
 
         //Button event
         signInController.signInClicked(signIn, username, password,
-                userTypeBox.getValue(), primaryStage);
+                userTypeBox, primaryStage);
 
         //Register switch stage ... upravit do controlleru
         registerBtn.setOnAction(e -> {
