@@ -1,18 +1,20 @@
 package CadasterObjects;
 
 import Owners.Owner;
+import Owners.Ownership;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Land {
+public class Land implements Serializable {
     private int registerNum;
     private String city;
     private int area;
     private TypeLand typeLand;
     private List<RealEstate> realEstates = new ArrayList<>();
     private boolean haveRE = false;
-    //private Owner owner;
+    private Ownership owner;
 
     public Land(int regNum, String city, int area, String typeLand) {
         setRegisterNum(regNum);
@@ -21,9 +23,7 @@ public class Land {
         setTypeLand(TypeLand.valueOf(typeLand));
     }
 
-    public Land(){
-
-    }
+    public Land(){}
 
 
     //Getters and Setters-------------------------------------------------------
@@ -66,7 +66,7 @@ public class Land {
 
     public void addRealEstate(RealEstate realEstate) {
         if (realEstate.getRegisterNum() == registerNum &&
-            realEstate.getCity().equals(city)) {
+            realEstate.getCity().equalsIgnoreCase(city)) {
             realEstates.add(realEstate);
         }
     }

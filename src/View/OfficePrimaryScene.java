@@ -1,6 +1,9 @@
 package View;
 
-import ViewContollers.OfficeContoller;
+import Offices.CadastralOffice;
+import Offices.GeodesyOffice;
+import Offices.Office;
+import ViewContollers.OfficeController;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -9,7 +12,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
 public class OfficePrimaryScene extends FlowPane {
-    private OfficeContoller officeContoller = new OfficeContoller();
+    private OfficeController officeController = new OfficeController();
 
     private MenuBar menuBar = new MenuBar();
 
@@ -26,17 +29,20 @@ public class OfficePrimaryScene extends FlowPane {
     private MenuItem makeREItem = new MenuItem("Make real etsate");
     private Menu realEstateMenu = new Menu("Real Estates");
 
+    private Menu loggedUserText = new Menu();
+
 
     //Constructor
     public OfficePrimaryScene(Stage primaryStage, String username) {
-        setScene(primaryStage);
 
-        sceneEvets(primaryStage);
+        setScene(primaryStage, username);
+
+        sceneEvents(primaryStage);
 
         primaryStage.show();
     }
 
-    private void setScene(Stage primaryStage) {
+    private void setScene(Stage primaryStage, String username) {
         primaryStage.setScene(new Scene(this, primaryStage.getWidth(), primaryStage.getHeight()));
 
         this.getChildren().addAll(menuBar);
@@ -47,7 +53,7 @@ public class OfficePrimaryScene extends FlowPane {
 
         //Menu bar
         menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
-        menuBar.getMenus().addAll(citizensMenu, officeMenu, landMenu, realEstateMenu);
+        menuBar.getMenus().addAll(officeMenu, citizensMenu, landMenu, realEstateMenu, loggedUserText);
 
         citizensMenu.getItems().add(addUserItem);
         citizensMenu.getItems().add(makeOwnerItem);
@@ -57,12 +63,16 @@ public class OfficePrimaryScene extends FlowPane {
 
         officeMenu.getItems().addAll(requestItem, signOutItem);
 
+        loggedUserText.setText("User: "+username);
     }
 
-    public void sceneEvets(Stage primaryStage) {
+    public void sceneEvents(Stage primaryStage) {
 
-        officeContoller.addUser(addUserItem);
+        officeController.addUser(addUserItem);
 
-        officeContoller.switchToSignInScene(signOutItem, primaryStage);
+        //Log out
+        officeController.switchToSignInScene(signOutItem, primaryStage);
+
+        officeController.makeOwnerClicked(makeOwnerItem);
     }
 }

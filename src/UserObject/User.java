@@ -1,16 +1,22 @@
 package UserObject;
 
+import Offices.CadastralOffice;
+import Offices.Office;
 import Owners.Owner;
+import Owners.Ownership;
+import javafx.fxml.FXML;
 
 import java.io.Serializable;
 
 public class User implements Serializable {
     private String username;
     private String password;
-    private Owner owner;
-    //private LandOwner landOwner = new LandOwner();
-    //private REOwner reOwner = new REOwner();
     private UserType userType;
+
+    private Ownership owner;
+    private boolean isOwner = false;
+
+
 
     public User(String username, String password, String userType) {
         setUsername(username);
@@ -18,9 +24,7 @@ public class User implements Serializable {
         setUserType(userType);
     }
 
-    public User() {
-
-    }
+    public User() {}
 
     //Getters and Setters-------------------------------------------------------
 
@@ -45,27 +49,21 @@ public class User implements Serializable {
         return userType;
     }
 
-    /*public void setLandOwner(LandOwner landOwner) {
-        this.landOwner = landOwner;
-    }
-    public LandOwner getLandOwner() {
-        return landOwner;
-    }
-
-    public void setReOwner(REOwner reOwner) {
-        this.reOwner = reOwner;
-    }
-    public REOwner getReOwner() {
-        return reOwner;
-    }*/
-
-    public void setOwner(Owner owner) {
+    public void setOwner(Ownership owner) {
         this.owner = owner;
     }
-    public Owner getOwner() {
+    public Ownership getOwner() {
         return owner;
     }
 
+    public void setIsOwner(boolean isOwner) {
+        this.isOwner = isOwner;
+    }
+    public boolean getIsOwner() {
+        return isOwner;
+    }
+
     //Getters and Setters-------------------------------------------------------
+
 
 }

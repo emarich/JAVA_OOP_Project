@@ -2,11 +2,11 @@ package UserObject;
 
 import java.io.Serializable;
 
-public enum  UserType implements Serializable {
+public enum  UserType {
     CITIZEN, OFFICE;
 
     public static UserType fromString(String string) {
-        if (string.equals("OFFICE")) {
+        if (string.equalsIgnoreCase("OFFICE")) {
             return OFFICE;
         }
         return CITIZEN;
@@ -18,6 +18,4 @@ public enum  UserType implements Serializable {
         }
         return "CITIZEN";
     }
-
-
 }

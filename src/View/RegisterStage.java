@@ -16,13 +16,12 @@ public class RegisterStage extends FlowPane {
     //New stage
     private Stage register = new Stage();
 
-    //Stuff on scene
     private Label usernameLabel = new Label("Set username");
     private TextField username = new TextField();
     private Label passwordLabel = new Label("Set password");
     private PasswordField password = new PasswordField();
     private ChoiceBox<String> userTypeBox =
-            new ChoiceBox<>(FXCollections.observableArrayList( "User", "Office"));
+            new ChoiceBox<>(FXCollections.observableArrayList( "Citizen", "Office"));
     private Button registerBtn = new Button();
 
     public RegisterStage() throws Exception {

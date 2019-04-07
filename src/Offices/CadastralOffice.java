@@ -6,31 +6,20 @@ import Owners.*;
 import UserObject.Database;
 import UserObject.User;
 
-public class CadastralOffice extends Office {
-    private Database usersData = new Database();
-    //private User user = new User();
-    //private HashMap<String, User> usersHMap = new HashMap<>();
+import java.io.Serializable;
 
-    public void firstLoad() {
-        if (usersData == null) {
-            //usersData.loadDatabase();
-        }
-    }
+public class CadastralOffice extends Office implements Serializable {
+    private Database usersDatabase = new Database();
 
     public Database getUsersData () {
-    return usersData;
-    }
-
-    public void registerNewUser(String username, String password, String userType) {
-        usersData.addUser(username, password, userType);
-        //uloz do databazy
+        return usersDatabase;
     }
 
     public void makeOwnerFromUser (String username, String name, String birthdate, String address) {
-        usersData.getUser(username).setOwner(new Owner(name, birthdate, address));
+        usersDatabase.getUser(username).setOwner(new Owner(name, birthdate, address));
     }
 
-    //potrebene upravy!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //edit!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     /*public void makeLand (String username, int regNum, String city, int area, String typeLand) {
         Land tmpLand = new Land(regNum, city, area, typeLand);
         usersData.getUser(username).getOwner().addLand(tmpLand);

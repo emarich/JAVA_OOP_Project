@@ -15,11 +15,10 @@ public class SignInScene extends FlowPane {
     //View controller
     private SignInController signInController = new SignInController();
 
-    //Stuff on scene
     private TextField username = new TextField();
     private PasswordField password = new PasswordField();
     private ChoiceBox<String> userTypeBox =
-            new ChoiceBox<>(FXCollections.observableArrayList( "User", "Office", "Guest"));
+            new ChoiceBox<>(FXCollections.observableArrayList( "Citizen", "Office", "Guest"));
     private Button signIn = new Button();
     private Button registerBtn = new Button();
 
@@ -32,7 +31,6 @@ public class SignInScene extends FlowPane {
         sceneEvents(primaryStage);
 
         primaryStage.show();
-
     }
 
 
@@ -63,11 +61,11 @@ public class SignInScene extends FlowPane {
         //Automatically switch to Guest scene, if "Guest" is selected
         signInController.checkGuest(userTypeBox, primaryStage);
 
-        //Button event
+        //Sign In button event
         signInController.buttonClicked(signIn, username, password,
                 userTypeBox, primaryStage);
 
-        //Register switch stage
+        //Switch to register stage
         signInController.switchRegisterStage(registerBtn);
 
 }

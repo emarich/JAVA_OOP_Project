@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.HashMap;
 
 public class SerializableUtility {
-    //serializuje hashMapu
+    //serializing hash map
     public static void saveUsers(HashMap<String, User> usersData) {
         try {
             FileOutputStream fileOut = new FileOutputStream("Database.out");
@@ -14,19 +14,19 @@ public class SerializableUtility {
             out.writeObject(usersData);
             out.close();
             fileOut.close();
-            System.out.println("Serialized data was saved in Database.out");
+            System.out.println("Saving in Database.out");
         } catch (IOException i) {
             i.printStackTrace();
         }
     }
 
-    //deserializuje hashMapu
+    //deserializing hash map
     public static HashMap<String, User> loadUsers () {
         try {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("Database.out"));
             HashMap<String, User> usersData = (HashMap<String, User>) in.readObject();
             in.close();
-            System.out.println("Deserialized data was loaded from Database.out");
+            System.out.println("Loading from Database.out");
             return usersData;
         } catch (IOException | ClassNotFoundException i) {
             i.printStackTrace();

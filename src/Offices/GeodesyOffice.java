@@ -1,5 +1,7 @@
 package Offices;
 
-public class GeodesyOffice extends Office{
+import java.io.Serializable;
+
+public class GeodesyOffice extends Office implements Serializable {
 
 }

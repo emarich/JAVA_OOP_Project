@@ -3,7 +3,7 @@ package CadasterObjects;
 public enum TypeRealEstate {
     RESIDENTAL, COMERCIAL, INDUSTRIAL, FARM;
 
-    public TypeRealEstate fromString(String string) {
+    public static TypeRealEstate fromString(String string) {
         if (string.equals("RESIDENTAL")) {
             return RESIDENTAL;
         } else if (string.equals("COMERCIAL")) {
@@ -14,7 +14,7 @@ public enum TypeRealEstate {
         return FARM;
     }
 
-    public String toString(TypeRealEstate typeRealEstate) {
+    public static String toString(TypeRealEstate typeRealEstate) {
         if (typeRealEstate == RESIDENTAL) {
             return "RESIDENTAL";
         } else if (typeRealEstate == COMERCIAL) {

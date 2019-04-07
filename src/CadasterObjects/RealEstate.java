@@ -2,7 +2,9 @@ package CadasterObjects;
 
 import Owners.Owner;
 
-public class RealEstate {
+import java.io.Serializable;
+
+public class RealEstate implements Serializable {
     private int registerNum;
     private String city;
     private int area;
@@ -55,6 +57,7 @@ public class RealEstate {
     public boolean getHaveLand() {
         return haveLand;
     }
+
     //Getters and Setters-------------------------------------------------------
 }
 

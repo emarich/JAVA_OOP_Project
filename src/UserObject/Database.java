@@ -7,24 +7,8 @@ import java.io.*;
 import java.util.HashMap;
 
 public class Database implements Serializable {
+    //users are saving to this
     private HashMap<String, User> usersData = new HashMap<>();
-
-    //add user to hash map ^
-    public void addUser(String username, String password, String userType) {
-        //if statement is useless maybe
-        if (existingUser(username)) {
-            PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING, "Username "+username+" is already used.");
-        } else {
-            usersData.put(username, new User(username, password, userType));
-            SerializableUtility.saveUsers(usersData);
-
-        }
-    }
-
-    //get concrete user from hashMap by username
-    public User getUser(String username) {
-        return usersData.get(username);
-    }
 
     //Getter and Setter
     public HashMap<String, User> getUsersDataHM() {
@@ -35,8 +19,14 @@ public class Database implements Serializable {
     }
     //Getter and Setter
 
-    //find if user alredy exists
+    //get concrete user from hashMap by username
+    public User getUser(String username) {
+        return usersData.get(username);
+    }
+
+    //find if user already exists
     public boolean existingUser(String username) {
+        this.setUsersDataHM(SerializableUtility.loadUsers());
         for (String u : usersData.keySet()) {
             if (u.equals(username))  {
                 return true;
@@ -45,15 +35,30 @@ public class Database implements Serializable {
         return false;
     }
 
-    public void printUsers() {
-        for (String u : usersData.keySet()) {
-            System.out.println(u);
+    //add user to hash map
+    public void addUser(String username, String password, String userType) {
+        //refactor: if statement is useless maybe
+        if (existingUser(username)) {
+            PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING, "Username "+username+" is already used.");
+        } else {
+            User user = new User(username, password, userType);
+            usersData.put(username, user);
+            SerializableUtility.saveUsers(usersData);
+            user = null;
         }
     }
 
-    //ak je hashmap plna, tak ju najprv
+    public void printUsers() {
+        for (String u : usersData.keySet()) {
+            System.out.println(u+" "+usersData.get(u).getUserType().toString());
+        }
+    }
 
-
+    public void deleteAllUsers() {
+        for (String u : usersData.keySet()) {
+            usersData.remove(u);
+        }
+    }
 
     public void changeUsername(String oldUsername, String newUsername ) {
         if (existingUser(newUsername)) {
