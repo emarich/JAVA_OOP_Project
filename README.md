@@ -24,7 +24,7 @@ Program taktiež bude slúžiť občanom. Občan, ktorý nebude registrovaný v 
 
 # Implementovaná funkcionalita
 
-(pri spusteni programu sa do terminálu vypíšu existujúci použivatelia a ich typy)
+(pri spusteni programu sa do terminálu vypíšu existujúci použivatelia a ich typy... heslá nie sú podstatné, stačí jedno písmeno zadať)
 - registrácia nového použivateľa z prvej scény, z "Guest-a" a aj z "Office-u" (+ zabezpečenie zlých inputov od používateľa)
 - prihlásenie a odhlásenie použivateľov (+ zabezpečenie zlých inputov od používateľa)
 - v Office scéne sa dá vytvoriť v objekte User inštancia triedy Owner (čiže má priradené ešte navyše nejaké atritubúty a hlavne bude si vedieť ukladať v sebe inštancie z tried Land a RealEstate)
