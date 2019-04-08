@@ -50,7 +50,7 @@ public class MakeOwnerScene extends FlowPane {
             address.setPromptText("Format:  Hlavna 1, 801 01 Bratislava, Slovensko");
             makeOwnerController.btnClicked(stage, makeBtn, user, name, date, address);
         } else {
-            this.getChildren().addAll(phoneLabel, phoneNum, email, emailLabel, makeBtn);
+            this.getChildren().addAll(phoneLabel, phoneNum, emailLabel, email, makeBtn);
             makeOwnerController.btnClicked(stage, makeBtn, user, phoneNum, email);
         }
 

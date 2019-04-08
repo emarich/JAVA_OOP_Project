@@ -2,6 +2,7 @@ package Owners;
 
 import CadasterObjects.Land;
 import CadasterObjects.RealEstate;
+import CadasterObjects.TypeLand;
 import OtherFunctionality.PopUpAlert;
 import UserObject.User;
 import javafx.scene.control.Alert;
@@ -81,6 +82,10 @@ public class Owner extends Ownership implements Serializable {
         String[] outputAddress = new String[3];
         try {
             outputAddress = address.split(",");
+            if (outputAddress[0] == null || outputAddress[1] == null || outputAddress[2] == null) {
+                PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING,
+                        "You must enter street, city and state");
+            }
         } catch (ArrayIndexOutOfBoundsException e) {
             PopUpAlert alert = new PopUpAlert(Alert.AlertType.INFORMATION,
                     "Please, write it in this format: /n (example) Hlavna 1, 801 01 Bratislava, Slovensko");
@@ -103,6 +108,16 @@ public class Owner extends Ownership implements Serializable {
 
     //Getters and Setters-------------------------------------------------------
 
+    public void addLand(Land land) {
+        if (land.getTypeLand() == TypeLand.PRIVATE) {
+            ownedLands.add(land);
+        } else {
+            land.setTypeLand(TypeLand.PRIVATE);
+            PopUpAlert Alert = new PopUpAlert(javafx.scene.control.Alert.AlertType.WARNING, "" +
+                    "Type of land was changed due of the type of owner.");
+            ownedLands.add(land);
+        }
+    }
 
     public void linkLandandRE (boolean haveRealEstate, Land land) {
         if (haveRealEstate) {

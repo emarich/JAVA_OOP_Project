@@ -1,8 +1,5 @@
 package View;
 
-import Offices.CadastralOffice;
-import Offices.GeodesyOffice;
-import Offices.Office;
 import ViewContollers.OfficeController;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -70,9 +67,10 @@ public class OfficePrimaryScene extends FlowPane {
 
         officeController.addUser(addUserItem);
 
-        //Log out
-        officeController.switchToSignInScene(signOutItem, primaryStage);
+        officeController.logOut(signOutItem, primaryStage);
 
         officeController.makeOwnerClicked(makeOwnerItem);
+
+        officeController.makeLandClicked(makeLandItem);
     }
 }

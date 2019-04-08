@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 public class MakeOwnerController {
     private Database usersDatabase = new Database();
 
+    //if ownership = owner
     public void btnClicked (Stage stage, Button button, User user, TextField name, TextField date, TextField address) {
         usersDatabase.setUsersDataHM(SerializableUtility.loadUsers());
 
@@ -28,6 +29,7 @@ public class MakeOwnerController {
         });
     }
 
+    // if ownership = city
     public void btnClicked (Stage stage, Button button, User user, TextField phoneNum, TextField email) {
         usersDatabase.setUsersDataHM(SerializableUtility.loadUsers());
 

@@ -52,6 +52,7 @@ public class SignInController {
         }
     }
 
+    //if guest is checked in check box, automaticly change scenes
     public void checkGuest(ChoiceBox<String> userTypeBox, Stage primaryStage) {
         userTypeBox.setOnAction(e -> {
             if (userTypeBox.getValue().equals("Guest")) {
@@ -60,6 +61,7 @@ public class SignInController {
         });
     }
 
+    //switch to register formula
     public void switchRegisterStage(Button registerBtn) {
         registerBtn.setOnAction(e -> {
             try {

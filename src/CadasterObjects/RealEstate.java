@@ -8,6 +8,7 @@ public class RealEstate implements Serializable {
     private int registerNum;
     private String city;
     private int area;
+    //real estate can be only in one land
     private TypeRealEstate typeRealEstate;
     private Land land;
     private boolean haveLand = false;

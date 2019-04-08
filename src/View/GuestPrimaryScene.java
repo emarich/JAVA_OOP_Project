@@ -90,7 +90,7 @@ public class GuestPrimaryScene extends FlowPane {
         guestController.switchRegisterStage(registerItem);
 
         //Sign in
-        guestController.switchToSignInScene(signInItem, primaryStage);
+        guestController.logOut(signInItem, primaryStage);
 
     }
 

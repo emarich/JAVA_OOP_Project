@@ -12,6 +12,7 @@ public class Land implements Serializable {
     private String city;
     private int area;
     private TypeLand typeLand;
+    //land can have more real estates in
     private List<RealEstate> realEstates = new ArrayList<>();
     private boolean haveRE = false;
     private Ownership owner;
@@ -62,6 +63,13 @@ public class Land implements Serializable {
         return realEstates;
     }
 
+    public void setOwner(Ownership owner) {
+        this.owner = owner;
+    }
+
+    public Ownership getOwner() {
+        return owner;
+    }
     //Getters and Setters-------------------------------------------------------
 
     public void addRealEstate(RealEstate realEstate) {

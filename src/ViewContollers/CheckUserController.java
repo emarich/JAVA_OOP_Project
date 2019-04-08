@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 public class CheckUserController {
     private Database usersDatabase = new Database();
 
+    //check user, if he have already object Owner creted
     public void checkUser(TextField username, Button button, Stage stage) {
         usersDatabase.setUsersDataHM(SerializableUtility.loadUsers());
 

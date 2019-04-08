@@ -4,6 +4,7 @@ import View.RegisterStage;
 import javafx.scene.control.*;
 
 public class GuestController extends LogOut {
+    //switch to register formula
     public void switchRegisterStage(MenuItem registerBtn) {
         registerBtn.setOnAction(e -> {
             try {
