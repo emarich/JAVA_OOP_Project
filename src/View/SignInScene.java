@@ -67,7 +67,7 @@ public class SignInScene extends FlowPane {
                 userTypeBox, primaryStage, usersDatabase);
 
         //Switch to register stage
-        signInController.switchRegisterStage(registerBtn);
+        signInController.switchRegisterStage(registerBtn, usersDatabase);
 
 }
 

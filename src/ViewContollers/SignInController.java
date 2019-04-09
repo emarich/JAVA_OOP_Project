@@ -62,10 +62,10 @@ public class SignInController {
     }
 
     //switch to register formula
-    public void switchRegisterStage(Button registerBtn) {
+    public void switchRegisterStage(Button registerBtn, Database usersDatabase) {
         registerBtn.setOnAction(e -> {
             try {
-                RegisterStage registerStage = new RegisterStage();
+                RegisterStage registerStage = new RegisterStage(usersDatabase);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }

@@ -1,5 +1,6 @@
 package View;
 
+import UserObject.Database;
 import ViewContollers.RegisterController;
 import javafx.collections.FXCollections;
 import javafx.geometry.Orientation;
@@ -24,7 +25,7 @@ public class RegisterStage extends FlowPane {
             new ChoiceBox<>(FXCollections.observableArrayList( "Citizen", "Office"));
     private Button registerBtn = new Button();
 
-    public RegisterStage() throws Exception {
+    public RegisterStage(Database usersDatabase) throws Exception {
         setScene(register);
 
         sceneEvents();

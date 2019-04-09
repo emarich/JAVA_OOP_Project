@@ -13,10 +13,11 @@ public class Main extends Application{
     private Database usersDatabase = new Database();
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         //usersDatabase.deleteAllUsers();
         //SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
         usersDatabase.setUsersDataHM(SerializableUtility.loadUsers());
+
         if (usersDatabase.getUsersDataHM() == null) {
             System.out.println("There are no users in database.\nPlease, register");
         } else {
