@@ -11,9 +11,9 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class SignInController {
-    private Database usersDatabase = new Database();
 
-    public void buttonClicked(Button signIn, TextField username, TextField password, ChoiceBox<String> userType, Stage primaryStage) {
+    public void buttonClicked(Button signIn, TextField username, TextField password, ChoiceBox<String> userType,
+                              Stage primaryStage, Database usersDatabase) {
         signIn.setOnAction(e -> {
 
             //check, if text fields are filled
@@ -26,7 +26,7 @@ public class SignInController {
                 //if user exists under concrete username, switch to correct scene
                 if (usersDatabase.existingUser(username.getText()) &&
                         userType.getValue().equalsIgnoreCase(usersDatabase.getUser(username.getText()).getUserType().toString())){
-                    switchScenes(userType, username.getText(), primaryStage);
+                    switchScenes(userType, username.getText(), primaryStage, usersDatabase);
                 //if user isn't found, or if inputs are incorrect
                 } else {
                     PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING, "Check if username or password or " +
@@ -38,25 +38,25 @@ public class SignInController {
     }
 
     //choose which scene will be showing
-    private void switchScenes (ChoiceBox<String> usertype, String username, Stage primaryStage) {
+    private void switchScenes (ChoiceBox<String> usertype, String username, Stage primaryStage, Database usersDatabase) {
         if (usertype.getValue().equalsIgnoreCase("Citizen")) {
-            UserPrimaryScene userStage = new UserPrimaryScene(primaryStage, username);
+            UserPrimaryScene userStage = new UserPrimaryScene(primaryStage, username, usersDatabase);
         } else if (usertype.getValue().equalsIgnoreCase("Office")){
-            OfficePrimaryScene officeStage = new OfficePrimaryScene(primaryStage, username);
+            OfficePrimaryScene officeStage = new OfficePrimaryScene(primaryStage, username, usersDatabase);
         } else {
             try {
-                GuestPrimaryScene guestPrimaryScene = new GuestPrimaryScene(primaryStage);
+                GuestPrimaryScene guestPrimaryScene = new GuestPrimaryScene(primaryStage, usersDatabase);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    //if guest is checked in check box, automaticly change scenes
-    public void checkGuest(ChoiceBox<String> userTypeBox, Stage primaryStage) {
+    //if guest is checked in check box, automaticaly change scenes
+    public void checkGuest(ChoiceBox<String> userTypeBox, Stage primaryStage, Database usersDatabase) {
         userTypeBox.setOnAction(e -> {
             if (userTypeBox.getValue().equals("Guest")) {
-                GuestPrimaryScene guestStage = new GuestPrimaryScene(primaryStage);
+                GuestPrimaryScene guestStage = new GuestPrimaryScene(primaryStage, usersDatabase);
             }
         });
     }

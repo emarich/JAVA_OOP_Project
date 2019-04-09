@@ -1,15 +1,21 @@
 package View;
 
+import UserObject.Database;
 import ViewContollers.OfficeController;
+import javafx.collections.FXCollections;
+import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class OfficePrimaryScene extends FlowPane {
     private OfficeController officeController = new OfficeController();
+
+    private VBox vBox = new VBox();
 
     private MenuBar menuBar = new MenuBar();
 
@@ -28,13 +34,21 @@ public class OfficePrimaryScene extends FlowPane {
 
     private Menu loggedUserText = new Menu();
 
+    //Text fields
+    private TextField searchField = new TextField();
+
+    private TextArea textArea = new TextArea();
+
+    private ChoiceBox<String> findChoiceBox =
+            new ChoiceBox<>(FXCollections.observableArrayList( "street or city", "owner"));
+
 
     //Constructor
-    public OfficePrimaryScene(Stage primaryStage, String username) {
+    public OfficePrimaryScene(Stage primaryStage, String username, Database usersDatabase) {
 
         setScene(primaryStage, username);
 
-        sceneEvents(primaryStage);
+        sceneEvents(primaryStage, usersDatabase);
 
         primaryStage.show();
     }
@@ -42,11 +56,13 @@ public class OfficePrimaryScene extends FlowPane {
     private void setScene(Stage primaryStage, String username) {
         primaryStage.setScene(new Scene(this, primaryStage.getWidth(), primaryStage.getHeight()));
 
-        this.getChildren().addAll(menuBar);
+        vBox.getChildren().addAll(searchField, findChoiceBox, textArea);
 
+        this.getChildren().addAll(menuBar, vBox);
         this.setAlignment(Pos.TOP_LEFT);
         this.setOrientation(Orientation.VERTICAL);
         this.setVgap(20);
+        this.setHgap(20);
 
         //Menu bar
         menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
@@ -61,16 +77,41 @@ public class OfficePrimaryScene extends FlowPane {
         officeMenu.getItems().addAll(requestItem, signOutItem);
 
         loggedUserText.setText("User: "+username);
+
+        //ChoiceBox
+        findChoiceBox.show();
+        findChoiceBox.getSelectionModel().selectFirst();
+
+        //VBox - textField, textArea
+        vBox.setSpacing(10);
+        vBox.setAlignment(Pos.TOP_LEFT);
+        vBox.setPadding(new Insets(5, 30, 30, 10));
+        vBox.prefWidthProperty().bind(primaryStage.widthProperty());
+        vBox.prefHeightProperty().bind(primaryStage.heightProperty().subtract(150));
+
+        searchField.setPromptText("Find land by street or city");
+        searchField.setMaxWidth(300);
+
+        textArea.prefHeightProperty().bind(vBox.heightProperty());
+        textArea.setEditable(false);
+        textArea.setWrapText(true);
+        textArea.setText("You will see results there, if you will search for them...");
+
+
     }
 
-    public void sceneEvents(Stage primaryStage) {
+    public void sceneEvents(Stage primaryStage, Database usersDatabase) {
 
-        officeController.addUser(addUserItem);
+        officeController.switchRegisterStage(addUserItem);
 
-        officeController.logOut(signOutItem, primaryStage);
+        officeController.logOut(signOutItem, primaryStage, usersDatabase);
 
         officeController.makeOwnerClicked(makeOwnerItem);
 
         officeController.makeLandClicked(makeLandItem);
+
+        findChoiceBox.setOnAction(event -> {
+            officeController.changePromptText(findChoiceBox, searchField);
+        });
     }
 }

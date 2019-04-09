@@ -26,7 +26,7 @@ public class Main extends Application{
         primaryStage.setWidth(600);
         primaryStage.setHeight(600);
         primaryStage.setTitle("ECO - Electronic Cadastral Office");
-        SignInScene signInScene = new SignInScene(primaryStage);
+        SignInScene signInScene = new SignInScene(primaryStage, usersDatabase);
     }
 
     public static void main(String[] args) {

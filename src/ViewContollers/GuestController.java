@@ -30,5 +30,9 @@ public class GuestController extends LogOut {
 
     }
 
+    public void printOwners() {
+
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package View;
 
+import UserObject.Database;
 import ViewContollers.GuestController;
 import ViewContollers.UserController;
 import javafx.geometry.Insets;
@@ -35,10 +36,10 @@ public class UserPrimaryScene extends FlowPane{
     private TextArea textArea = new TextArea();
 
     //Constructor
-    public UserPrimaryScene(Stage primaryStage, String username) {
+    public UserPrimaryScene(Stage primaryStage, String username, Database usersDatabase) {
         setScene(primaryStage);
 
-        sceneEvents(primaryStage);
+        sceneEvents(primaryStage, usersDatabase);
 
         primaryStage.show();
     }
@@ -74,7 +75,7 @@ public class UserPrimaryScene extends FlowPane{
         textArea.setText("There will be username, password and user type... maybe");
     }
 
-    public void sceneEvents(Stage primaryStage) {
-        userController.switchSignInScene(signOutItem, primaryStage);
+    public void sceneEvents(Stage primaryStage, Database usersDatabase) {
+        userController.switchSignInScene(signOutItem, primaryStage, usersDatabase);
     }
 }

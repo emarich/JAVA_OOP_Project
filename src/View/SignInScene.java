@@ -1,5 +1,6 @@
 package View;
 
+import UserObject.Database;
 import ViewContollers.SignInController;
 import javafx.collections.FXCollections;
 import javafx.geometry.Orientation;
@@ -23,12 +24,12 @@ public class SignInScene extends FlowPane {
     private Button registerBtn = new Button();
 
     //Constructor
-    public SignInScene(Stage primaryStage) throws Exception {
+    public SignInScene(Stage primaryStage, Database usersDatabase) throws Exception {
         //Setting scene
         setScene(primaryStage);
 
         //Actions on scene
-        sceneEvents(primaryStage);
+        sceneEvents(primaryStage, usersDatabase);
 
         primaryStage.show();
     }
@@ -57,13 +58,13 @@ public class SignInScene extends FlowPane {
         registerBtn.setText("Register");
     }
 
-    private void sceneEvents (Stage primaryStage) {
+    private void sceneEvents (Stage primaryStage, Database usersDatabase) {
         //Automatically switch to Guest scene, if "Guest" is selected
-        signInController.checkGuest(userTypeBox, primaryStage);
+        signInController.checkGuest(userTypeBox, primaryStage, usersDatabase);
 
         //Sign In button event
         signInController.buttonClicked(signIn, username, password,
-                userTypeBox, primaryStage);
+                userTypeBox, primaryStage, usersDatabase);
 
         //Switch to register stage
         signInController.switchRegisterStage(registerBtn);

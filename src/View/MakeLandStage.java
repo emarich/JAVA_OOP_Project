@@ -58,9 +58,12 @@ public class MakeLandStage extends FlowPane {
     }
 
     public void sceneEvents () {
-        makeLandController.checkUserIfIsOwner(checkBtn, username, stage);
+        checkBtn.setOnAction(event -> {
+            makeLandController.checkUserIfIsOwner(checkBtn, username, stage);
+        });
 
-        makeLandController.makeLandClicked(makeBtn, username, regNum, city, area, stage);
-
+        makeBtn.setOnAction(event -> {
+            makeLandController.makeLandClicked(makeBtn, username.getText(), regNum, city, area, stage);
+        });
     }
 }

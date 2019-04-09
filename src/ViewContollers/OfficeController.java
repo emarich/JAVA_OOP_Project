@@ -5,22 +5,11 @@ import Offices.Office;
 import View.CheckUserStage;
 import View.MakeLandStage;
 import View.RegisterStage;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 
-public class OfficeController extends LogOut{
+public class OfficeController extends GuestController{
     private Office office = new CadastralOffice();
 
-
-    public void addUser (MenuItem addUserItem) {
-        addUserItem.setOnAction(e -> {
-            try {
-                RegisterStage registerStage = new RegisterStage();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });
-    }
 
     //switch to make owner formula stage
     public void makeOwnerClicked (MenuItem makeOwnerItem) {
@@ -42,5 +31,13 @@ public class OfficeController extends LogOut{
                 e.printStackTrace();
             }
         });
+    }
+
+    public void changePromptText(ChoiceBox<String> userTypeBox, TextField textField) {
+        if (userTypeBox.getValue().equals("owner")) {
+            textField.setPromptText("Find owner");
+        } else if (userTypeBox.getValue().equals("street or city")){
+            textField.setPromptText("Find street or city");
+        }
     }
 }

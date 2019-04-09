@@ -25,52 +25,53 @@ public class MakeLandController {
         usersDatabase.setUsersDataHM(SerializableUtility.loadUsers());
         user = usersDatabase.getUser(usernameTxt.getText());
 
-        button.setOnAction(event -> {
-            try {
-                if(user.getIsOwner()) {
-                    PopUpAlert alert = new PopUpAlert(Alert.AlertType.INFORMATION, "User is owner.");
-                } else if (user.getOwner() == null){
-                    try {
-                        PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR,
+        try {
+            if(user.getIsOwner()) {
+                PopUpAlert alert = new PopUpAlert(Alert.AlertType.INFORMATION, "User is owner.");
+            } else if (user.getOwner() == null){
+                try {
+                    PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR,
                                 "User is not owner, at first, you must create it.");
-                        //stage.close();
-                        MakeOwnerScene makeOwnerScene = new MakeOwnerScene(user, stage);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    //stage.close();
+                    MakeOwnerScene makeOwnerScene = new MakeOwnerScene(user, stage);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (NullPointerException eNull) {
-                eNull.printStackTrace();
             }
-        });
+        } catch (NullPointerException eNull) {
+            eNull.printStackTrace();
+        }
         user = null;
     }
 
-    public void makeLandClicked(Button button, TextField usernameTxt, TextField regNum, TextField city, TextField area, Stage stage) {
+    public void makeLandClicked(Button button, String usernameTxt, TextField regNum, TextField city, TextField area, Stage stage) {
         usersDatabase.setUsersDataHM(SerializableUtility.loadUsers());
-        user = usersDatabase.getUser(usernameTxt.getText());
+        user = usersDatabase.getUser(usernameTxt);
 
-        button.setOnAction(event -> {
-            if(user.getIsOwner()) {
-                if (existingRegNum(usersDatabase, Integer.parseInt(regNum.getText()))) {
-                    PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR,
-                            "Land under register num "+regNum.getText()+" is already registered.");
-                } else {
-                    Land land = new Land();
-                    land.setRegisterNum(Integer.parseInt(regNum.getText()));
-                    land.setCity(city.getText());
-                    land.setArea(Integer.parseInt(area.getText()));
+        if(user.getIsOwner()) {
+            if (existingRegNum(usersDatabase, Integer.parseInt(regNum.getText()))) {
+                PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR,
+                        "Land under register num "+regNum.getText()+" is already registered.");
+            } else {
+                Land land = new Land();
+                land.setRegisterNum(Integer.parseInt(regNum.getText()));
+                land.setCity(city.getText());
+                land.setArea(Integer.parseInt(area.getText()));
 
-                    if(user.getOwner().getClass() == Owner.class) {
-                        land.setTypeLand(TypeLand.PUBLIC);
-                    } else {
-                        land.setTypeLand(TypeLand.PRIVATE);
-                    }
-                    land.setOwner(user.getOwner());
+                 if(user.getOwner().getClass() == Owner.class) {
+                     land.setTypeLand(TypeLand.PUBLIC);
+                 } else {
+                     land.setTypeLand(TypeLand.PRIVATE);
+                 }
+                 land.setOwner(user.getOwner());
 
-                    user.getOwner().addLand(land);
+                 user.getOwner().addLand(land);
 
-                    land = null;
+                 usersDatabase.getUsersDataHM().replace(usernameTxt, user);
+
+                 SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
+
+                 land = null;
                 }
             } else {
                 PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR,
@@ -83,7 +84,6 @@ public class MakeLandController {
                     e.printStackTrace();
                 }
             }
-        });
 
     }
 

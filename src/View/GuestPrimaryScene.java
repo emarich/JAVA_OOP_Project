@@ -1,5 +1,6 @@
 package View;
 
+import UserObject.Database;
 import ViewContollers.GuestController;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -14,10 +15,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.TextArea;
 
+import javax.xml.crypto.Data;
+
 public class GuestPrimaryScene extends FlowPane {
-    GuestController guestController = new GuestController();
+    private GuestController guestController = new GuestController();
 
     private VBox vBox = new VBox();
+
     //Menu
     private MenuBar menuBar = new MenuBar();
 
@@ -36,15 +40,14 @@ public class GuestPrimaryScene extends FlowPane {
     private TextArea textArea = new TextArea();
 
     //Constructor
-    public GuestPrimaryScene(Stage primaryStage) {
+    public GuestPrimaryScene(Stage primaryStage, Database usersDatabase) {
         setScene(primaryStage);
 
-        sceneEvents(primaryStage);
+        sceneEvents(primaryStage, usersDatabase);
 
         primaryStage.show();
     }
 
-    //upravit do controlleru
     private void setScene(Stage primaryStage) {
         primaryStage.setScene(new Scene(this, primaryStage.getWidth(), primaryStage.getHeight()));
 
@@ -82,7 +85,7 @@ public class GuestPrimaryScene extends FlowPane {
         textArea.setText("You will see results there, if you will search for them...");
     }
 
-    private void sceneEvents (Stage primaryStage) {
+    private void sceneEvents (Stage primaryStage, Database usersDatabse) {
         //Change prompt text, when you select, what are you searching for
         guestController.changePromptText(findMenu, findOwner, findStreetCity, searchField);
 
@@ -90,7 +93,7 @@ public class GuestPrimaryScene extends FlowPane {
         guestController.switchRegisterStage(registerItem);
 
         //Sign in
-        guestController.logOut(signInItem, primaryStage);
+        guestController.logOut(signInItem, primaryStage, usersDatabse);
 
     }
 
