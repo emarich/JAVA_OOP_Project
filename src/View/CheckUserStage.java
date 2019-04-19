@@ -1,5 +1,6 @@
 package View;
 
+import UserObject.Database;
 import ViewContollers.CheckUserController;
 import ViewContollers.MakeOwnerController;
 import javafx.geometry.Orientation;
@@ -13,7 +14,7 @@ import javafx.stage.Stage;
 
 public class CheckUserStage extends FlowPane {
     //View controller
-    private CheckUserController checkUserController = new CheckUserController();
+    private CheckUserController checkUserController;
 
     //New stage
     private Stage stage = new Stage();
@@ -22,7 +23,9 @@ public class CheckUserStage extends FlowPane {
     private TextField username = new TextField();
     private Button checkButton = new Button("Check user");
 
-    public CheckUserStage() throws Exception {
+    public CheckUserStage(Database usersDatabase, String text) throws Exception {
+        checkUserController = new CheckUserController(usersDatabase, text);
+
         setScene(stage);
 
         sceneEvents();

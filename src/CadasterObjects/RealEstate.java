@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public class RealEstate implements Serializable {
     private int registerNum;
-    private String city;
+    private Address address;
     private int area;
     //real estate can be only in one land
     private TypeRealEstate typeRealEstate;
@@ -24,11 +24,11 @@ public class RealEstate implements Serializable {
         return registerNum;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public Address getAddress() {
+        return address;
     }
-    public String getCity() {
-        return city;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public void setArea(int area) {

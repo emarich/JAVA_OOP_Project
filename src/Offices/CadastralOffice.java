@@ -30,7 +30,7 @@ public class CadastralOffice extends Office implements Serializable {
             for (RealEstate RE : usersData.getUser(username).getOwner().getOwnedRE()) {
                 for (Land l : usersData.getUser(username).getOwner().getOwnedLands()) {
                     if (RE.getRegisterNum() == l.getRegisterNum() &&
-                            RE.getCity().equals(l.getCity())) {
+                            RE.getAddress().equals(l.getAddress())) {
                         usersData.getUser(username).getOwner().
                 }
             }

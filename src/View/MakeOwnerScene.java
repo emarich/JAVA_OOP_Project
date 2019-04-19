@@ -1,5 +1,6 @@
 package View;
 
+import UserObject.Database;
 import UserObject.User;
 import ViewContollers.MakeOwnerController;
 import javafx.collections.FXCollections;
@@ -12,7 +13,7 @@ import javafx.stage.Stage;
 
 public class MakeOwnerScene extends FlowPane {
     //View controller
-    private MakeOwnerController makeOwnerController = new MakeOwnerController();
+    private MakeOwnerController makeOwnerController;
 
 
     //For make city scene
@@ -22,7 +23,7 @@ public class MakeOwnerScene extends FlowPane {
     private TextField email = new TextField();
 
     //For make owner scene
-    private Label nameLabel = new Label("Enter full name:");
+    private Label nameLabel = new Label();
     private TextField name = new TextField();
     private Label dateLabel = new Label("Enter birth date:");
     private TextField date = new TextField();
@@ -31,7 +32,9 @@ public class MakeOwnerScene extends FlowPane {
 
     private Button makeBtn = new Button("Make");
 
-    public MakeOwnerScene(User user, Stage stage) throws Exception {
+    public MakeOwnerScene(User user, Stage stage, Database usersDatabase) throws Exception {
+        makeOwnerController = new MakeOwnerController(usersDatabase);
+
         setScene(stage, user);
     }
 
@@ -45,8 +48,9 @@ public class MakeOwnerScene extends FlowPane {
 
         if(user.getUserType().toString().equalsIgnoreCase("Citizen")) {
             this.getChildren().addAll(nameLabel, name, dateLabel, date, addressLabel, address, makeBtn);
-            name.setPromptText("Full name of user "+user.getUsername());
-            date.setPromptText("Format: DD.MM.YY");
+            nameLabel.setText("Enter full name for user "+user.getUsername());
+            name.setPromptText(user.getUsername());
+            date.setPromptText("Format: DD.MM.YYYY");
             address.setPromptText("Format:  Hlavna 1, 801 01 Bratislava, Slovensko");
             makeOwnerController.btnClicked(stage, makeBtn, user, name, date, address);
         } else {

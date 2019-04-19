@@ -18,7 +18,8 @@ import javafx.scene.control.TextArea;
 import javax.xml.crypto.Data;
 
 public class GuestPrimaryScene extends FlowPane {
-    private GuestController guestController = new GuestController();
+    //Controller
+    private GuestController guestController;
 
     private VBox vBox = new VBox();
 
@@ -41,6 +42,8 @@ public class GuestPrimaryScene extends FlowPane {
 
     //Constructor
     public GuestPrimaryScene(Stage primaryStage, Database usersDatabase) {
+        guestController = new GuestController(usersDatabase);
+
         setScene(primaryStage);
 
         sceneEvents(primaryStage, usersDatabase);

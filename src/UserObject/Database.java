@@ -1,6 +1,5 @@
 package UserObject;
 
-import OtherFunctionality.PopUpAlert;
 import OtherFunctionality.SerializableUtility;
 import javafx.scene.control.Alert;
 import java.io.*;
@@ -26,7 +25,6 @@ public class Database implements Serializable {
 
     //find if user already exists
     public boolean existingUser(String username) {
-        this.setUsersDataHM(SerializableUtility.loadUsers());
         for (String u : usersData.keySet()) {
             if (u.equals(username))  {
                 return true;
@@ -37,15 +35,10 @@ public class Database implements Serializable {
 
     //add user to hash map
     public void addUser(String username, String password, String userType) {
-        //refactor: if statement is useless maybe
-        if (existingUser(username)) {
-            PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING, "Username "+username+" is already used.");
-        } else {
-            User user = new User(username, password, userType);
-            usersData.put(username, user);
-            SerializableUtility.saveUsers(usersData);
-            user = null;
-        }
+        User user = new User(username, password, userType);
+        usersData.put(username, user);
+        SerializableUtility.saveUsers(usersData);
+        user = null;
     }
 
     public void printUsers() {
@@ -62,7 +55,8 @@ public class Database implements Serializable {
 
     public void changeUsername(String oldUsername, String newUsername ) {
         if (existingUser(newUsername)) {
-            PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING, "Username "+newUsername+" is already used.");
+            System.out.println("Username "+newUsername+" is already used.");
+            //PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING, "Username "+newUsername+" is already used.");
         } else {
             usersData.put(newUsername, usersData.get(oldUsername));
             usersData.remove(oldUsername);
@@ -76,7 +70,8 @@ public class Database implements Serializable {
             usersData.put(username, tmp);
             tmp = null;
         } else {
-            PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING, "Wrong current password.");
+            System.out.println("Wrong current password.");
+            //PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING, "Wrong current password.");
         }
     }
 

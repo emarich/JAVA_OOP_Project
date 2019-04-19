@@ -1,5 +1,7 @@
 package View;
 
+import OtherFunctionality.PopUpAlert;
+import OtherFunctionality.SerializableUtility;
 import UserObject.Database;
 import ViewContollers.SignInController;
 import javafx.collections.FXCollections;
@@ -13,8 +15,10 @@ import javafx.stage.Stage;
 
 
 public class SignInScene extends FlowPane {
+    private Database usersDatabase = new Database();
+
     //View controller
-    private SignInController signInController = new SignInController();
+    private SignInController signInController;
 
     private TextField username = new TextField();
     private PasswordField password = new PasswordField();
@@ -25,15 +29,19 @@ public class SignInScene extends FlowPane {
 
     //Constructor
     public SignInScene(Stage primaryStage, Database usersDatabase) throws Exception {
+
+        signInController = new SignInController(usersDatabase);
+
         //Setting scene
         setScene(primaryStage);
 
         //Actions on scene
-        sceneEvents(primaryStage, usersDatabase);
+        sceneEvents(primaryStage);
 
         primaryStage.show();
-    }
 
+        checkDatabase(usersDatabase);
+    }
 
     private void setScene(Stage primaryStage) {
         primaryStage.setScene(new Scene(this, primaryStage.getWidth(), primaryStage.getHeight()));
@@ -58,19 +66,26 @@ public class SignInScene extends FlowPane {
         registerBtn.setText("Register");
     }
 
-    private void sceneEvents (Stage primaryStage, Database usersDatabase) {
+    private void sceneEvents (Stage primaryStage) {
         //Automatically switch to Guest scene, if "Guest" is selected
-        signInController.checkGuest(userTypeBox, primaryStage, usersDatabase);
+        signInController.checkGuest(userTypeBox, primaryStage);
 
         //Sign In button event
-        signInController.buttonClicked(signIn, username, password,
-                userTypeBox, primaryStage, usersDatabase);
+        signInController.buttonClicked(signIn, username, password, userTypeBox, primaryStage);
 
         //Switch to register stage
-        signInController.switchRegisterStage(registerBtn, usersDatabase);
+        signInController.switchRegisterStage(registerBtn);
+    }
 
-}
-
+    private void checkDatabase(Database usersDatabase) {
+        if (usersDatabase.getUsersDataHM().isEmpty()) {
+            PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR,
+                    "Users not found." +
+                            "\nPlease register.");
+        } else {
+            usersDatabase.printUsers();
+        }
+    }
 }
 
 

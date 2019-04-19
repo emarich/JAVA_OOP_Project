@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 public class RegisterStage extends FlowPane {
     //View controller
-    private RegisterController registerController = new RegisterController();
+    private RegisterController registerController;
 
     //New stage
     private Stage register = new Stage();
@@ -26,6 +26,8 @@ public class RegisterStage extends FlowPane {
     private Button registerBtn = new Button();
 
     public RegisterStage(Database usersDatabase) throws Exception {
+        registerController = new RegisterController(usersDatabase);
+
         setScene(register);
 
         sceneEvents();

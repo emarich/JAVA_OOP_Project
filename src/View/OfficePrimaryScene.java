@@ -13,7 +13,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class OfficePrimaryScene extends FlowPane {
-    private OfficeController officeController = new OfficeController();
+    private OfficeController officeController;
+
+    private Database usersDatabase;
 
     private VBox vBox = new VBox();
 
@@ -29,7 +31,7 @@ public class OfficePrimaryScene extends FlowPane {
 
     private Menu landMenu = new Menu("Land");
     private MenuItem makeLandItem = new MenuItem("Make land");
-    private MenuItem makeREItem = new MenuItem("Make real etsate");
+    private MenuItem makeREItem = new MenuItem("Make real estate");
     private Menu realEstateMenu = new Menu("Real Estates");
 
     private Menu loggedUserText = new Menu();
@@ -45,10 +47,13 @@ public class OfficePrimaryScene extends FlowPane {
 
     //Constructor
     public OfficePrimaryScene(Stage primaryStage, String username, Database usersDatabase) {
+        officeController = new OfficeController(usersDatabase);
+
+        this.usersDatabase = usersDatabase;
 
         setScene(primaryStage, username);
 
-        sceneEvents(primaryStage, usersDatabase);
+        sceneEvents(primaryStage);
 
         primaryStage.show();
     }
@@ -74,9 +79,10 @@ public class OfficePrimaryScene extends FlowPane {
         landMenu.getItems().add(makeLandItem);
         realEstateMenu.getItems().add(makeREItem);
 
-        officeMenu.getItems().addAll(requestItem, signOutItem);
+        officeMenu.getItems().addAll(requestItem);
 
         loggedUserText.setText("User: "+username);
+        loggedUserText.getItems().addAll(signOutItem);
 
         //ChoiceBox
         findChoiceBox.show();
@@ -100,7 +106,7 @@ public class OfficePrimaryScene extends FlowPane {
 
     }
 
-    public void sceneEvents(Stage primaryStage, Database usersDatabase) {
+    public void sceneEvents(Stage primaryStage) {
 
         officeController.switchRegisterStage(addUserItem);
 

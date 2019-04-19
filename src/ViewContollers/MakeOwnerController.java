@@ -14,16 +14,18 @@ import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
 public class MakeOwnerController {
-    private Database usersDatabase = new Database();
+    private Database usersDatabase;
+
+    public MakeOwnerController(Database usersDatabase) {
+        this.usersDatabase = usersDatabase;
+    }
 
     //if ownership = owner
     public void btnClicked (Stage stage, Button button, User user, TextField name, TextField date, TextField address) {
-        usersDatabase.setUsersDataHM(SerializableUtility.loadUsers());
-
         button.setOnAction(event -> {
             user.setOwner(new Owner(name.getText(), date.getText(), address.getText()));
             user.setIsOwner(true);
-            usersDatabase.getUsersDataHM().put(user.getUsername(), user);
+            usersDatabase.getUsersDataHM().replace(user.getUsername(), user);
             SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
             stage.close();
         });
@@ -31,8 +33,6 @@ public class MakeOwnerController {
 
     // if ownership = city
     public void btnClicked (Stage stage, Button button, User user, TextField phoneNum, TextField email) {
-        usersDatabase.setUsersDataHM(SerializableUtility.loadUsers());
-
         button.setOnAction(event -> {
             user.setOwner(new City(phoneNum.getText(), email.getText()));
             user.setIsOwner(true);

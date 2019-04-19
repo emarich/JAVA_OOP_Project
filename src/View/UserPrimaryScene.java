@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class UserPrimaryScene extends FlowPane{
-    UserController userController = new UserController();
+    UserController userController;
 
     private VBox vBox = new VBox();
 
@@ -37,6 +37,8 @@ public class UserPrimaryScene extends FlowPane{
 
     //Constructor
     public UserPrimaryScene(Stage primaryStage, String username, Database usersDatabase) {
+        userController = new UserController(usersDatabase);
+
         setScene(primaryStage);
 
         sceneEvents(primaryStage, usersDatabase);
@@ -76,6 +78,6 @@ public class UserPrimaryScene extends FlowPane{
     }
 
     public void sceneEvents(Stage primaryStage, Database usersDatabase) {
-        userController.switchSignInScene(signOutItem, primaryStage, usersDatabase);
+        userController.switchSignInScene(signOutItem, primaryStage);
     }
 }

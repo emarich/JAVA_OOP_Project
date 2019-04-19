@@ -1,5 +1,6 @@
 package CadasterObjects;
 
+import Owners.City;
 import Owners.Owner;
 import Owners.Ownership;
 
@@ -9,19 +10,19 @@ import java.util.List;
 
 public class Land implements Serializable {
     private int registerNum;
-    private String city;
+    private Address address = new Address();
     private int area;
     private TypeLand typeLand;
-    //land can have more real estates in
+    //land can have more real estates
     private List<RealEstate> realEstates = new ArrayList<>();
     private boolean haveRE = false;
     private Ownership owner;
 
-    public Land(int regNum, String city, int area, String typeLand) {
+    public Land(int regNum, String address, int area, Ownership owner) {
         setRegisterNum(regNum);
-        setCity(city);
+        this.address.setAddress(address);
         setArea(area);
-        setTypeLand(TypeLand.valueOf(typeLand));
+        setTypeLand(owner);
     }
 
     public Land(){}
@@ -36,11 +37,11 @@ public class Land implements Serializable {
         return registerNum;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public Address getAddress() {
+        return address;
     }
-    public String getCity() {
-        return city;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public void setArea(int area) {
@@ -50,8 +51,14 @@ public class Land implements Serializable {
         return area;
     }
 
-    public void setTypeLand(TypeLand typeLand) {
-        this.typeLand = typeLand;
+    public void setTypeLand(Ownership owner) {
+        if(owner instanceof City) {
+            typeLand = TypeLand.PUBLIC;
+        } else if (owner instanceof Owner){
+            typeLand = TypeLand.PRIVATE;
+        } else {
+            typeLand = TypeLand.PUBLIC;
+        }
     }
     public TypeLand getTypeLand() {
         return typeLand;
@@ -74,7 +81,7 @@ public class Land implements Serializable {
 
     public void addRealEstate(RealEstate realEstate) {
         if (realEstate.getRegisterNum() == registerNum &&
-            realEstate.getCity().equalsIgnoreCase(city)) {
+            realEstate.getAddress().getCity().equalsIgnoreCase(getAddress().getCity())) {
             realEstates.add(realEstate);
         }
     }
