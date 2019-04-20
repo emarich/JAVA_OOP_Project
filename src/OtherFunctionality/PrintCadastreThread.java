@@ -1,5 +1,8 @@
 package OtherFunctionality;
 
+import Owners.City;
+import Owners.Owner;
+import Owners.Ownership;
 import UserObject.Database;
 import UserObject.User;
 import javafx.scene.control.TextArea;
@@ -20,8 +23,30 @@ public class PrintCadastreThread implements Runnable {
 
     public void run() {
         System.out.println("Running "+ tName);
+        Ownership owner;
         for (String s : usersDatabase.getUsersDataHM().keySet()) {
-            textArea.appendText(s+"\n");
+            owner = usersDatabase.getUser(s).getOwner();
+
+            textArea.appendText("\n|| Username: "+s+" ||\n");
+            if (owner instanceof Owner) {
+                textArea.appendText("|| Name: "+((Owner) owner).getName()+"\n");
+                textArea.appendText("|| Mutual address: "+((Owner) owner).getMutualAddress()+"\n");
+            } else if (owner instanceof City){
+                textArea.appendText("|| Phone number: "+((City) owner).getPhoneNumber()+"\n");
+                textArea.appendText("|| Email: "+((City) owner).getEmail()+"\n");
+            } else {
+                textArea.appendText("Nejaka chyba nastala.");
+            }
+            textArea.appendText("");
+            textArea.appendText("");
+            textArea.appendText("");
+            textArea.appendText("");
+            textArea.appendText("");
+            textArea.appendText("");
+            textArea.appendText("");
+            textArea.appendText("");
+            textArea.appendText("");
+            textArea.appendText("");
         }
 
     }
@@ -29,7 +54,7 @@ public class PrintCadastreThread implements Runnable {
     public void start() {
         System.out.println("Starting "+ tName);
         if (printThread == null) {
-            printThread = new Thread(this);
+            printThread = new Thread(this, tName);
             printThread.start();
         }
     }
