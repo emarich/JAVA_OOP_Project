@@ -2,6 +2,7 @@ package ViewContollers;
 
 import CadasterObjects.Address;
 import CadasterObjects.Land;
+import CadasterObjects.RealEstate;
 import CadasterObjects.TypeLand;
 import OtherFunctionality.PopUpAlert;
 import OtherFunctionality.SerializableUtility;
@@ -12,38 +13,39 @@ import UserObject.User;
 import View.MakeOwnerScene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 //refactor later
-public class MakeLandController {
+public class MakeREController {
     private Database usersDatabase;
     private User user;
 
-    public MakeLandController(User user, Database usersDatabase) {
+    public MakeREController(User user, Database usersDatabase) {
         this.usersDatabase = usersDatabase;
         this.user = user;
     }
 
 
-    public void makeLandClicked(Button button, TextField regNum, TextField address, TextField area, Stage stage) {
+    public void makeLandClicked(Button button, TextField regNum, TextField address, TextField area, ChoiceBox<String> REBox, Stage stage) {
         if (existingRegNum(Integer.parseInt(regNum.getText()))) {
             PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR,
-                    "Land under register number "+regNum.getText()+" is already registered.");
+                    "Real estate under register number "+regNum.getText()+" is already registered.");
         } else {
             try {
-                Land land = new Land(Integer.parseInt(regNum.getText()), address.getText(),
-                        Integer.parseInt(area.getText()), user.getOwner());
+                RealEstate realEstate = new RealEstate(Integer.parseInt(regNum.getText()), address.getText(),
+                        Integer.parseInt(area.getText()), user.getOwner(), REBox.getValue());
 
-                land.setOwner(user.getOwner());
+                realEstate.setOwner(user.getOwner());
 
-                user.getOwner().addLand(land);
+                user.getOwner().addRE(realEstate);
 
                 usersDatabase.getUsersDataHM().replace(user.getUsername(), user);
 
                 SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
 
-                land = null;
+                realEstate = null;
 
             } catch (ArrayIndexOutOfBoundsException e) {
                 PopUpAlert alert = new PopUpAlert(Alert.AlertType.INFORMATION,
@@ -74,6 +76,10 @@ public class MakeLandController {
         }
         return false;
     }
+
+    //public boolean matchingLand(int currentRegNum) {
+
+    //}
 }
 
 /*
@@ -103,3 +109,4 @@ if(user.getIsOwner()) {
                 }
             }
  */
+

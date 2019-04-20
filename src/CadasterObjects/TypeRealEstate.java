@@ -1,13 +1,13 @@
 package CadasterObjects;
 
 public enum TypeRealEstate {
-    RESIDENTAL, COMERCIAL, INDUSTRIAL, FARM;
+    RESIDENTIAL, COMMERCIAL, INDUSTRIAL, FARM;
 
     public static TypeRealEstate fromString(String string) {
-        if (string.equals("RESIDENTAL")) {
-            return RESIDENTAL;
-        } else if (string.equals("COMERCIAL")) {
-            return COMERCIAL;
+        if (string.equals("RESIDENTIAL")) {
+            return RESIDENTIAL;
+        } else if (string.equals("COMMERCIAL")) {
+            return COMMERCIAL;
         } else if (string.equals("INDUSTRIAL")) {
             return INDUSTRIAL;
         }
@@ -15,10 +15,10 @@ public enum TypeRealEstate {
     }
 
     public static String toString(TypeRealEstate typeRealEstate) {
-        if (typeRealEstate == RESIDENTAL) {
-            return "RESIDENTAL";
-        } else if (typeRealEstate == COMERCIAL) {
-            return "COMERCIAL";
+        if (typeRealEstate == RESIDENTIAL) {
+            return "RESIDENTIAL";
+        } else if (typeRealEstate == COMMERCIAL) {
+            return "COMMERCIAL";
         } else if (typeRealEstate == INDUSTRIAL) {
             return "INDUSTRIAL";
         }

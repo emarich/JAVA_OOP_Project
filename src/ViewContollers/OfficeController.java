@@ -40,6 +40,17 @@ public class OfficeController extends GuestController {
         });
     }
 
+    //switch to make real estate formula
+    public void makeREClicked(MenuItem makeItem) {
+        makeItem.setOnAction(event -> {
+            try {
+                CheckUserStage checkUserStage = new CheckUserStage(usersDatabase, makeItem.getText());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
     public void changePromptText(ChoiceBox<String> userTypeBox, TextField textField) {
         if (userTypeBox.getValue().equals("owner")) {
             textField.setPromptText("Find owner");

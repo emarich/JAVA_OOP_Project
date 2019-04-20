@@ -116,6 +116,8 @@ public class OfficePrimaryScene extends FlowPane {
 
         officeController.makeLandClicked(makeLandItem);
 
+        officeController.makeREClicked(makeREItem);
+
         findChoiceBox.setOnAction(event -> {
             officeController.changePromptText(findChoiceBox, searchField);
         });

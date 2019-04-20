@@ -1,6 +1,8 @@
 package CadasterObjects;
 
+import Owners.City;
 import Owners.Owner;
+import Owners.Ownership;
 
 import java.io.Serializable;
 
@@ -12,7 +14,16 @@ public class RealEstate implements Serializable {
     private TypeRealEstate typeRealEstate;
     private Land land;
     private boolean haveLand = false;
-    //private Owner owner;
+    private Ownership owner;
+
+    public RealEstate(int regNum, String address, int area, Ownership owner, String typeRE) {
+        setRegisterNum(regNum);
+        this.address.setAddress(address);
+        setArea(area);
+        setTypeRealEstate(typeRE);
+    }
+
+    public RealEstate(){}
 
 
     //Getters and Setters-------------------------------------------------------
@@ -38,8 +49,18 @@ public class RealEstate implements Serializable {
         return area;
     }
 
-    public void setTypeRealEstate(TypeRealEstate typeRealEstate) {
-        this.typeRealEstate = typeRealEstate;
+    public void setTypeRealEstate(String type) {
+        if (type.equalsIgnoreCase(TypeRealEstate.RESIDENTIAL.toString())) {
+            typeRealEstate = TypeRealEstate.RESIDENTIAL;
+        } else if (type.equalsIgnoreCase(TypeRealEstate.COMMERCIAL.toString())) {
+            typeRealEstate = TypeRealEstate.COMMERCIAL;
+        } else if (type.equalsIgnoreCase(TypeRealEstate.INDUSTRIAL.toString())) {
+            typeRealEstate = TypeRealEstate.INDUSTRIAL;
+        } else if (type.equalsIgnoreCase(TypeRealEstate.FARM.toString())) {
+            typeRealEstate = TypeRealEstate.FARM;
+        } else {
+            typeRealEstate = TypeRealEstate.RESIDENTIAL;
+        }
     }
     public TypeRealEstate getTypeRealEstate() {
         return typeRealEstate;
@@ -57,6 +78,14 @@ public class RealEstate implements Serializable {
     }
     public boolean getHaveLand() {
         return haveLand;
+    }
+
+    public void setOwner(Ownership owner) {
+        this.owner = owner;
+    }
+
+    public Ownership getOwner() {
+        return owner;
     }
 
     //Getters and Setters-------------------------------------------------------

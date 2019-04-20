@@ -34,7 +34,7 @@ public class CheckUserStage extends FlowPane {
     }
 
     private void setScene(Stage stage) {
-        stage.setTitle("Registration formula");
+        stage.setTitle("Check owner");
         stage.setWidth(400);
         stage.setHeight(400);
         stage.setScene(new Scene(this, stage.getWidth(), stage.getHeight()));

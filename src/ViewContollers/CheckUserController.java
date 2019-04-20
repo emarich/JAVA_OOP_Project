@@ -7,6 +7,7 @@ import UserObject.User;
 import View.CheckUserStage;
 import View.MakeLandStage;
 import View.MakeOwnerScene;
+import View.MakeREStage;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -46,7 +47,7 @@ public class CheckUserController {
                         }
                     }
 
-                } else if (menuItemTxt.equals("Make land")) {
+                } else if (menuItemTxt.equalsIgnoreCase("Make land")) {
 
                     //check, if there exists owner object
                     if (currentUser.getIsOwner()) {
@@ -66,6 +67,26 @@ public class CheckUserController {
                             e.printStackTrace();
                         }
                     }
+                } else if (menuItemTxt.equalsIgnoreCase("Make real estate")) {
+                    //check, if there exists owner object
+                    if (currentUser.getIsOwner()) {
+                        //if owner exists...
+                        try {
+                            stage.close();
+                            MakeREStage makeREStage = new MakeREStage(currentUser, usersDatabase);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        try {
+                            PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR,
+                                    "User is not owner, at first, you must create it.");
+                            MakeOwnerScene makeOwnerScene = new MakeOwnerScene(currentUser, stage, usersDatabase);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
                 } else {
                     PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR,
                             "I can't find a path :(");

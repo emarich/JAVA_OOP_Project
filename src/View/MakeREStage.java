@@ -3,6 +3,8 @@ package View;
 import UserObject.Database;
 import UserObject.User;
 import ViewContollers.MakeLandController;
+import ViewContollers.MakeREController;
+import javafx.collections.FXCollections;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,25 +12,28 @@ import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
-public class MakeLandStage extends FlowPane {
+public class MakeREStage extends FlowPane {
     //View controller
-    private MakeLandController makeLandController;
+    private MakeREController makeREController;
 
     //New stage
     private Stage stage = new Stage();
 
     //For make owner scene
-    private Label regNumLabel = new Label("Enter register number of land:");
+    private Label regNumLabel = new Label("Enter register number of real estate:");
     private TextField regNum = new TextField();
     private Label addressLabel = new Label("Enter address:");
     private TextField address = new TextField();
     private Label areaLabel = new Label("Enter area:");
     private TextField area = new TextField();
+    private Label typeRE = new Label("Choose type:");
+    private ChoiceBox<String> realEastateTypeBox =
+            new ChoiceBox<>(FXCollections.observableArrayList( "Residential", "Commercial", "Industrial", "Farm"));
 
     private Button makeBtn = new Button("Make");
 
-    public MakeLandStage(User user, Database usersDatabase) throws Exception {
-        makeLandController = new MakeLandController(user, usersDatabase);
+    public MakeREStage(User user, Database usersDatabase) throws Exception {
+        makeREController = new MakeREController(user, usersDatabase);
 
         setScene(stage, user);
 
@@ -38,13 +43,13 @@ public class MakeLandStage extends FlowPane {
     }
 
     private void setScene(Stage stage, User user) {
-        stage.setTitle("Make land for "+user.getUsername());
+        stage.setTitle("Make real estate for "+user.getUsername());
         stage.setWidth(400);
-        stage.setHeight(400);
+        stage.setHeight(550);
         stage.setScene(new Scene(this, stage.getWidth(), stage.getHeight()));
 
         this.getChildren().addAll(regNumLabel, regNum, addressLabel, address,
-                areaLabel, area, makeBtn);
+                areaLabel, area, typeRE, realEastateTypeBox, makeBtn);
         this.setAlignment(Pos.CENTER);
         this.setOrientation(Orientation.VERTICAL);
         this.setVgap(20);
@@ -59,7 +64,8 @@ public class MakeLandStage extends FlowPane {
     public void sceneEvents () {
 
         makeBtn.setOnAction(event -> {
-            makeLandController.makeLandClicked(makeBtn, regNum, address, area, stage);
+            makeREController.makeLandClicked(makeBtn, regNum, address, area, realEastateTypeBox, stage);
         });
     }
 }
+
