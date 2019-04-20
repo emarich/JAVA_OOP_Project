@@ -118,6 +118,8 @@ public class OfficePrimaryScene extends FlowPane {
 
         officeController.makeREClicked(makeREItem);
 
+        officeController.printCadastre(textArea);
+
         findChoiceBox.setOnAction(event -> {
             officeController.changePromptText(findChoiceBox, searchField);
         });

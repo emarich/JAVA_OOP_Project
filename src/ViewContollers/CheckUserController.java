@@ -59,14 +59,9 @@ public class CheckUserController {
                             e.printStackTrace();
                         }
                     } else {
-                        try {
-                            PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR,
-                                    "User is not owner, at first, you must create it.");
-                            MakeOwnerScene makeOwnerScene = new MakeOwnerScene(currentUser, stage, usersDatabase);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        ownerObjectMissing(currentUser, stage, usersDatabase);
                     }
+
                 } else if (menuItemTxt.equalsIgnoreCase("Make real estate")) {
                     //check, if there exists owner object
                     if (currentUser.getIsOwner()) {
@@ -78,13 +73,7 @@ public class CheckUserController {
                             e.printStackTrace();
                         }
                     } else {
-                        try {
-                            PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR,
-                                    "User is not owner, at first, you must create it.");
-                            MakeOwnerScene makeOwnerScene = new MakeOwnerScene(currentUser, stage, usersDatabase);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        ownerObjectMissing(currentUser, stage, usersDatabase);
                     }
 
                 } else {
@@ -96,5 +85,15 @@ public class CheckUserController {
                 PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR, "Cannot find this user");
             }
         });
+    }
+
+    private void ownerObjectMissing(User user, Stage stage, Database usersDatabase) {
+        try {
+            PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR,
+                    "User is not owner, at first, you must create it.");
+            MakeOwnerScene makeOwnerScene = new MakeOwnerScene(user, stage, usersDatabase);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

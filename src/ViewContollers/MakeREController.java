@@ -64,7 +64,7 @@ public class MakeREController {
                     break;
                 }
                 if (!(usersDatabase.getUser(s).getOwner().getOwnedLands().isEmpty())) {
-                    for (int i = 0; i <= usersDatabase.getUser(s).getOwner().getOwnedLands().size(); i++) {
+                    for (int i = 0; i <= usersDatabase.getUser(s).getOwner().getOwnedRE().size(); i++) {
                         if (usersDatabase.getUser(s).getOwner().getOwnedLands().get(i).getRegisterNum() == currentRegNum) {
                             return true;
                         }
@@ -81,32 +81,4 @@ public class MakeREController {
 
     //}
 }
-
-/*
-if(user.getIsOwner()) {
-                Land land = new Land();
-                land.setRegisterNum(Integer.parseInt(regNum.getText()));
-                land.setCity(city.getText());
-                land.setArea(Integer.parseInt(area.getText()));
-
-                if(user.getOwner().getClass() == Owner.class) {
-                    land.setTypeLand(TypeLand.PUBLIC);
-                } else {
-                    land.setTypeLand(TypeLand.PRIVATE);
-                }
-
-                land.setOwner(user.getOwner());
-
-            } else {
-                PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR,
-                        "User is not owner, at first, you must create it.");
-                stage.close();
-
-                try {
-                    MakeOwnerScene makeOwnerScene = new MakeOwnerScene(user, stage);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
- */
 

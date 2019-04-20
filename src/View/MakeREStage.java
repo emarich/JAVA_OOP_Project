@@ -27,7 +27,7 @@ public class MakeREStage extends FlowPane {
     private Label areaLabel = new Label("Enter area:");
     private TextField area = new TextField();
     private Label typeRE = new Label("Choose type:");
-    private ChoiceBox<String> realEastateTypeBox =
+    private ChoiceBox<String> realEstateTypeBox =
             new ChoiceBox<>(FXCollections.observableArrayList( "Residential", "Commercial", "Industrial", "Farm"));
 
     private Button makeBtn = new Button("Make");
@@ -49,7 +49,7 @@ public class MakeREStage extends FlowPane {
         stage.setScene(new Scene(this, stage.getWidth(), stage.getHeight()));
 
         this.getChildren().addAll(regNumLabel, regNum, addressLabel, address,
-                areaLabel, area, typeRE, realEastateTypeBox, makeBtn);
+                areaLabel, area, typeRE, realEstateTypeBox, makeBtn);
         this.setAlignment(Pos.CENTER);
         this.setOrientation(Orientation.VERTICAL);
         this.setVgap(20);
@@ -62,9 +62,8 @@ public class MakeREStage extends FlowPane {
     }
 
     public void sceneEvents () {
-
         makeBtn.setOnAction(event -> {
-            makeREController.makeLandClicked(makeBtn, regNum, address, area, realEastateTypeBox, stage);
+            makeREController.makeLandClicked(makeBtn, regNum, address, area, realEstateTypeBox, stage);
         });
     }
 }

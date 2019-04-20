@@ -2,6 +2,7 @@ package ViewContollers;
 
 import Offices.CadastralOffice;
 import Offices.Office;
+import OtherFunctionality.PrintCadastreThread;
 import UserObject.Database;
 import View.CheckUserStage;
 import View.MakeLandStage;
@@ -57,5 +58,10 @@ public class OfficeController extends GuestController {
         } else if (userTypeBox.getValue().equals("street or city")){
             textField.setPromptText("Find street or city");
         }
+    }
+
+    public void  printCadastre(TextArea textArea) {
+        PrintCadastreThread t1 = new PrintCadastreThread(usersDatabase, "PrintThreadOffice", textArea);
+        t1.start();
     }
 }
