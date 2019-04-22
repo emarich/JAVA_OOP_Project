@@ -72,7 +72,7 @@ public abstract class Ownership implements Serializable {
         ownedRE.add(realEstate);
     }
 
-
+    //checks, if the phone number is correct
     public static boolean phoneNumberCheck(String phoneNumber) {
         char firstChar = phoneNumber.charAt(0);
         if (phoneNumber.matches("[0-9 ]+") || firstChar=='+' ) {
@@ -98,6 +98,7 @@ public abstract class Ownership implements Serializable {
         return true;
     }
 
+    //checks, if the email is correct
     public static boolean emailCheck(String usersEmail) {
         int count = 0;
 

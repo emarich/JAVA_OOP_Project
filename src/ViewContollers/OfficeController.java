@@ -59,9 +59,4 @@ public class OfficeController extends GuestController {
             textField.setPromptText("Find street or city");
         }
     }
-
-    public void  printCadastre(TextArea textArea) {
-        PrintCadastreThread t1 = new PrintCadastreThread(usersDatabase, "PrintThreadOffice", textArea);
-        t1.start();
-    }
 }

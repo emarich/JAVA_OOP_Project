@@ -60,6 +60,7 @@ public class Owner extends Ownership implements Serializable {
 
     //Getters and Setters-------------------------------------------------------
 
+    //checks, if the date of birth is in the valid format dd.MM.yyyy
     public static boolean isValidDateFormat(String date) {
         String format = "dd.MM.yyyy";
         Locale locale = Locale.GERMAN;

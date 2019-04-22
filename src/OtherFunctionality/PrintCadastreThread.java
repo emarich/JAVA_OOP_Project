@@ -42,7 +42,7 @@ public class PrintCadastreThread implements Runnable {
                 } else {
                     textArea.appendText("Nejaka chyba nastala.\n");
                 }
-                
+
                 textArea.appendText("LANDS:---------------------\n");
                 if (owner.getHaveLand()) {
                     Land land;

@@ -85,7 +85,6 @@ public class GuestPrimaryScene extends FlowPane {
         textArea.prefHeightProperty().bind(vBox.heightProperty());
         textArea.setEditable(false);
         textArea.setWrapText(true);
-        textArea.setText("You will see results there, if you will search for them...");
     }
 
     private void sceneEvents (Stage primaryStage, Database usersDatabse) {
@@ -97,6 +96,8 @@ public class GuestPrimaryScene extends FlowPane {
 
         //Sign in
         guestController.logOut(signInItem, primaryStage, usersDatabse);
+
+        guestController.printCadastre(textArea);
 
     }
 

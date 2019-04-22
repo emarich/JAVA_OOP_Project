@@ -101,8 +101,6 @@ public class OfficePrimaryScene extends FlowPane {
         textArea.prefHeightProperty().bind(vBox.heightProperty());
         textArea.setEditable(false);
         textArea.setWrapText(true);
-        textArea.setText("You will see results there, if you will search for them...");
-
 
     }
 
