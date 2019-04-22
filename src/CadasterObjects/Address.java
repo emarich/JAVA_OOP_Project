@@ -5,7 +5,7 @@ import com.sun.deploy.util.ArrayUtil;
 import java.io.Serializable;
 
 public class Address {
-    static boolean correctAddress(String address){ //checks, if address is in correct format
+    public static boolean correctAddress(String address){ //checks, if address is in correct format
         try {
             String[] outputAddress = new String[3];
             boolean bool = false;
@@ -64,7 +64,7 @@ public class Address {
                 finalElement = finalElement + element[i]+" ";
             }
 
-            if (x == outputAddress.length-2) { //or x==2
+            if (x == outputAddress.length-1) { //or x==2
                 finalAddress = finalAddress + finalElement;
                 break;
             }

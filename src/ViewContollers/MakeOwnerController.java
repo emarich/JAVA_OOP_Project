@@ -1,5 +1,6 @@
 package ViewContollers;
 
+import CadasterObjects.Address;
 import OtherFunctionality.PopUpAlert;
 import OtherFunctionality.SerializableUtility;
 import Owners.City;
@@ -23,11 +24,25 @@ public class MakeOwnerController {
     //if ownership = owner
     public void btnClicked (Stage stage, Button button, User user, TextField name, TextField date, TextField address) {
         button.setOnAction(event -> {
-            user.setOwner(new Owner(name.getText(), date.getText(), address.getText()));
-            user.setIsOwner(true);
-            usersDatabase.getUsersDataHM().replace(user.getUsername(), user);
-            SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
-            stage.close();
+            if ((name.getText() == null || name.getText().trim().isEmpty()) ||
+                    (date.getText() == null || date.getText().trim().isEmpty())||
+                    (address.getText() == null || address.getText().trim().isEmpty())) {
+                PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR,
+                        "All fields must be filled");
+
+            } else {
+                if (Owner.isValidDateFormat(date.getText()) && Address.correctAddress(address.getText())) {
+                    user.setOwner(new Owner(name.getText(), date.getText(), address.getText()));
+                    user.setIsOwner(true);
+                    usersDatabase.getUsersDataHM().replace(user.getUsername(), user);
+                    SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
+                    stage.close();
+                } else {
+                    PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING,
+                            "Date or address is in wrong format.");
+                }
+            }
+
         });
     }
 
