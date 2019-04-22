@@ -19,35 +19,12 @@ public class OfficeController extends GuestController {
         this.usersDatabase = usersDatabase;
 
     }
-
-
-    //switch to make owner formula stage
-    public void makeOwnerClicked (MenuItem makeOwnerItem) {
-        makeOwnerItem.setOnAction(event -> {
+    
+    //switch to makeStage
+    public void makeMenuItemClicked (MenuItem menuItem) {
+        menuItem.setOnAction(event -> {
             try {
-                CheckUserStage checkUserStage = new CheckUserStage(usersDatabase, makeOwnerItem.getText());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
-    //switch to make land formula
-    public void makeLandClicked(MenuItem makeLandItem) {
-        makeLandItem.setOnAction(event -> {
-            try {
-                CheckUserStage checkUserStage = new CheckUserStage(usersDatabase, makeLandItem.getText());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
-    //switch to make real estate formula
-    public void makeREClicked(MenuItem makeItem) {
-        makeItem.setOnAction(event -> {
-            try {
-                CheckUserStage checkUserStage = new CheckUserStage(usersDatabase, makeItem.getText());
+                CheckUserStage checkUserStage = new CheckUserStage(usersDatabase, menuItem.getId());
             } catch (Exception e) {
                 e.printStackTrace();
             }

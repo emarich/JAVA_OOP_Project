@@ -72,6 +72,9 @@ public class OfficePrimaryScene extends FlowPane {
         this.setHgap(20);
 
         //Menu bar
+        makeOwnerItem.setId("makeOwner");
+        makeLandItem.setId("makeLand");
+        makeREItem.setId("makeRE");
         menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
         menuBar.getMenus().addAll(officeMenu, citizensMenu, landMenu, realEstateMenu, loggedUserText);
 
@@ -112,11 +115,9 @@ public class OfficePrimaryScene extends FlowPane {
 
         officeController.logOut(signOutItem, primaryStage, usersData);
 
-        officeController.makeOwnerClicked(makeOwnerItem);
-
-        officeController.makeLandClicked(makeLandItem);
-
-        officeController.makeREClicked(makeREItem);
+        officeController.makeMenuItemClicked(makeOwnerItem);
+        officeController.makeMenuItemClicked(makeLandItem);
+        officeController.makeMenuItemClicked(makeREItem);
 
         officeController.printCadastre(textArea);
 

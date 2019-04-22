@@ -40,7 +40,7 @@ public class CheckUserController {
             User currentUser = usersDatabase.getUser(username.getText());
 
             //check, which menu button was clicked
-            if (menuItemTxt.equalsIgnoreCase("Make owner from user")) {
+            if (menuItemTxt.equalsIgnoreCase("makeOwner")) {
 
                 //check, if there exists owner object
                 if (currentUser.getIsOwner()) {
@@ -55,7 +55,7 @@ public class CheckUserController {
                     }
                 }
 
-            } else if (menuItemTxt.equalsIgnoreCase("Make land")) {
+            } else if (menuItemTxt.equalsIgnoreCase("makeLand")) {
 
                 //check, if there exists owner object
                 if (currentUser.getIsOwner()) {
@@ -70,7 +70,7 @@ public class CheckUserController {
                     ownerObjectMissing(currentUser, stage, usersDatabase);
                 }
 
-            } else if (menuItemTxt.equalsIgnoreCase("Make real estate")) {
+            } else if (menuItemTxt.equalsIgnoreCase("makeRE")) {
                 //check, if there exists owner object
                 if (currentUser.getIsOwner()) {
                     //if owner exists...
