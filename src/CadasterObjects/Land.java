@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Land implements Serializable {
     private int registerNum;
-    private Address address = new Address();
+    private String address;
     private int area;
     private TypeLand typeLand;
     //land can have more real estates
@@ -19,10 +19,11 @@ public class Land implements Serializable {
     private Ownership owner;
 
     public Land(int regNum, String address, int area, Ownership owner) {
-        setRegisterNum(regNum);
-        this.address.setAddress(address);
-        setArea(area);
+        this.registerNum = regNum;
+        this.address = address;
+        this.area = area;
         setTypeLand(owner);
+        this.owner = owner;
     }
 
     public Land(){}
@@ -37,11 +38,11 @@ public class Land implements Serializable {
         return registerNum;
     }
 
-    public Address getAddress() {
+    public String getAddress() {
         return address;
     }
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddress(String address) {
+        this.address = Address.setPerfectAddress(address);
     }
 
     public void setArea(int area) {
@@ -64,8 +65,8 @@ public class Land implements Serializable {
         return typeLand;
     }
 
-    /*public void setRealEstates(List<RealEstate> realEstates) {
-        this.realEstates = realEstates; } */
+    public void setRealEstates(List<RealEstate> realEstates) {
+        this.realEstates = realEstates; }
     public List<RealEstate> getRealEstates() {
         return realEstates;
     }
@@ -73,16 +74,17 @@ public class Land implements Serializable {
     public void setOwner(Ownership owner) {
         this.owner = owner;
     }
-
     public Ownership getOwner() {
         return owner;
     }
     //Getters and Setters-------------------------------------------------------
 
     public void addRealEstate(RealEstate realEstate) {
-        if (realEstate.getRegisterNum() == registerNum &&
-            realEstate.getAddress().getCity().equalsIgnoreCase(getAddress().getCity())) {
-            realEstates.add(realEstate);
+        if (realEstate.getRegisterNum() == registerNum) { //if register numbers are same
+            if (this.address.equalsIgnoreCase(realEstate.getAddress())) {
+                realEstates.add(realEstate);
+                haveRE = true;
+            }
         }
     }
 }

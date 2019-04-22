@@ -10,20 +10,25 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Locale;
 
 public class Owner extends Ownership implements Serializable {
 
 
     private String name;
-    private Date birthDate;
-    private DateFormat dateFormat = new SimpleDateFormat("dd.mm.yyyy");
-    private Address mutualAddress = new Address();
+    private String birthDate;
+    private String mutualAddress;
     //private double money = 100000;
 
     public Owner(String name, String date, String address){
-        setName(name);
-        setBirthDate(date);
-        mutualAddress.setAddress(address);
+        this.name = name;
+        this.birthDate = date;
+        setMutualAddress(address);
     }
 
     public Owner() {
@@ -38,72 +43,50 @@ public class Owner extends Ownership implements Serializable {
         return name;
     }
 
-    public void setBirthDate(String date) {
-        try {
-            birthDate = dateFormat.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
-
     public String getBirthDate() {
-        return dateFormat.format(birthDate);
+        return birthDate;
     }
 
-    public Address getMutualAddress() {
+    public String getMutualAddress() {
         return mutualAddress;
     }
-    public void setMutualAddress(Address address) {
-        this.mutualAddress = address;
+    public void setMutualAddress(String address) {
+        this.mutualAddress = Address.setPerfectAddress(address);
     }
 
-    /*public void setMoney(double money) {
-        this.money = money;
-    }
-    public double getMoney() {
-        return money;
-    }*/
 
     //Getters and Setters-------------------------------------------------------
-    //POUZIT INSTANCE OF
-    @Override
-    public void addLand(Land land) {
-            ownedLands.add(land);
-    }
 
-    public void linkLandandRE (boolean haveRealEstate, Land land) {
-        if (haveRealEstate) {
-            linkLandandRE(land);
-        } else {
-            System.out.println(getName()+" aren't owning real estate");
-        }
-    }
+    public static boolean isValidDateFormat(String date) {
+        String format = "dd.MM.yyyy";
+        Locale locale = Locale.GERMAN;
 
-    public void linkLandandRE (boolean haveLand, RealEstate RE) {
-        if (haveLand) {
-            linkLandandRE(RE);
-        } else {
-            System.out.println(getName()+" aren't owning land");
-        }
-    }
+        LocalDateTime ldt = null;
+        DateTimeFormatter fomatter = DateTimeFormatter.ofPattern(format, locale);
 
-    public void linkLandandRE (Land land) {
-        for (RealEstate RE : ownedRE) {
-            if (land.getRegisterNum() == RE.getRegisterNum() &&
-                land.getAddress().getCity().equalsIgnoreCase(RE.getAddress().getCity()))  {
-                RE.setLand(land);
-                land.addRealEstate(RE);
+        try {
+            ldt = LocalDateTime.parse(date, fomatter);
+            String result = ldt.format(fomatter);
+            return result.equals(date);
+        } catch (DateTimeParseException e) {
+            try {
+                LocalDate ld = LocalDate.parse(date, fomatter);
+                String result = ld.format(fomatter);
+                return result.equals(date);
+            } catch (DateTimeParseException exp) {
+                try {
+                    LocalTime lt = LocalTime.parse(date, fomatter);
+                    String result = lt.format(fomatter);
+                    return result.equals(date);
+                } catch (DateTimeParseException e2) {
+                    e2.printStackTrace();
+                }
             }
         }
+        return false;
     }
 
-    public void linkLandandRE (RealEstate RE) {
-        for (Land l : ownedLands) {
-            if (RE.getRegisterNum() == l.getRegisterNum() &&
-                RE.getAddress().getCity().equalsIgnoreCase(l.getAddress().getCity())) {
-                l.addRealEstate(RE);
-                RE.setLand(l);
-            }
-        }
-    }
 }

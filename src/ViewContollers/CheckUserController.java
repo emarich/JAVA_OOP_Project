@@ -8,6 +8,7 @@ import View.CheckUserStage;
 import View.MakeLandStage;
 import View.MakeOwnerScene;
 import View.MakeREStage;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -23,68 +24,74 @@ public class CheckUserController {
         menuItemTxt = text;
     }
 
+    public void actions(TextField username, Node node, Stage stage) {
+        if (node instanceof Button) {
+            ((Button)node).setOnAction(event -> checkUser(username, stage));
+        } else if (node instanceof TextField) {
+            ((TextField)node).setOnAction(event -> checkUser(username, stage));
+        }
+
+    }
+
     //check user, if he have already object Owner created
-    public void checkUser(TextField username, Button button, Stage stage) {
+    public void checkUser(TextField username, Stage stage) {
+        //check, if user exists
+        if(usersDatabase.existingUser(username.getText())) {
+            User currentUser = usersDatabase.getUser(username.getText());
 
-        button.setOnAction(event -> {
-            //check, if user exists
-            if(usersDatabase.existingUser(username.getText())) {
-                User currentUser = usersDatabase.getUser(username.getText());
+            //check, which menu button was clicked
+            if (menuItemTxt.equalsIgnoreCase("Make owner from user")) {
 
-                //check, which menu button was clicked
-                if (menuItemTxt.equalsIgnoreCase("Make owner from user")) {
-
-                    //check, if there exists owner object
-                    if (currentUser.getIsOwner()) {
-                        //if owner exists...
-                        PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR, "Owner already exists in this user");
-
-                    } else {
-                        try {
-                            MakeOwnerScene makeOwnerScene = new MakeOwnerScene(currentUser, stage, usersDatabase);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                } else if (menuItemTxt.equalsIgnoreCase("Make land")) {
-
-                    //check, if there exists owner object
-                    if (currentUser.getIsOwner()) {
-                        //if owner exists...
-                        try {
-                            stage.close();
-                            MakeLandStage makeLandStage = new MakeLandStage(currentUser, usersDatabase);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        ownerObjectMissing(currentUser, stage, usersDatabase);
-                    }
-
-                } else if (menuItemTxt.equalsIgnoreCase("Make real estate")) {
-                    //check, if there exists owner object
-                    if (currentUser.getIsOwner()) {
-                        //if owner exists...
-                        try {
-                            stage.close();
-                            MakeREStage makeREStage = new MakeREStage(currentUser, usersDatabase);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        ownerObjectMissing(currentUser, stage, usersDatabase);
-                    }
+                //check, if there exists owner object
+                if (currentUser.getIsOwner()) {
+                    //if owner exists...
+                    PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR, "Owner already exists in this user");
 
                 } else {
-                    PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR,
-                            "I can't find a path :(");
+                    try {
+                        MakeOwnerScene makeOwnerScene = new MakeOwnerScene(currentUser, stage, usersDatabase);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            } else if (menuItemTxt.equalsIgnoreCase("Make land")) {
+
+                //check, if there exists owner object
+                if (currentUser.getIsOwner()) {
+                    //if owner exists...
+                    try {
+                        stage.close();
+                        MakeLandStage makeLandStage = new MakeLandStage(currentUser, usersDatabase);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    ownerObjectMissing(currentUser, stage, usersDatabase);
+                }
+
+            } else if (menuItemTxt.equalsIgnoreCase("Make real estate")) {
+                //check, if there exists owner object
+                if (currentUser.getIsOwner()) {
+                    //if owner exists...
+                    try {
+                        stage.close();
+                        MakeREStage makeREStage = new MakeREStage(currentUser, usersDatabase);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    ownerObjectMissing(currentUser, stage, usersDatabase);
                 }
 
             } else {
-                PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR, "Cannot find this user");
+                PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR,
+                        "I can't find a path :(");
             }
-        });
+
+        } else {
+            PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR, "Cannot find this user");
+        }
     }
 
     private void ownerObjectMissing(User user, Stage stage, Database usersDatabase) {

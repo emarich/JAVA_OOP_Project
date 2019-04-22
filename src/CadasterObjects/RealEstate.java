@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class RealEstate implements Serializable {
     private int registerNum;
-    private Address address;
+    private String address;
     private int area;
     //real estate can be only in one land
     private TypeRealEstate typeRealEstate;
@@ -17,10 +17,11 @@ public class RealEstate implements Serializable {
     private Ownership owner;
 
     public RealEstate(int regNum, String address, int area, Ownership owner, String typeRE) {
-        setRegisterNum(regNum);
-        this.address.setAddress(address);
-        setArea(area);
+        this.registerNum = regNum;
+        this.address = address;
+        this.area = area;
         setTypeRealEstate(typeRE);
+        this.owner = owner;
     }
 
     public RealEstate(){}
@@ -35,11 +36,11 @@ public class RealEstate implements Serializable {
         return registerNum;
     }
 
-    public Address getAddress() {
+    public String getAddress() {
         return address;
     }
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddress(String address) {
+        this.address = Address.setPerfectAddress(address);
     }
 
     public void setArea(int area) {
@@ -89,5 +90,14 @@ public class RealEstate implements Serializable {
     }
 
     //Getters and Setters-------------------------------------------------------
+
+    public void addLand(Land land) {
+        if (land.getRegisterNum() == registerNum) { //if register numbers are same
+            if (this.address.equalsIgnoreCase(land.getAddress())) {
+                    this.land = land;
+                    haveLand = true;
+            }
+        }
+    }
 }
 

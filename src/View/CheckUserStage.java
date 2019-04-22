@@ -50,6 +50,7 @@ public class CheckUserStage extends FlowPane {
     }
 
     public void sceneEvents () {
-        checkUserController.checkUser(username, checkButton, stage);
+        checkUserController.actions(username, checkButton, stage);
+        checkUserController.actions(username, username, stage);
     }
 }

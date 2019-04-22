@@ -73,52 +73,62 @@ public abstract class Ownership implements Serializable {
     }
 
 
-    public void phoneNumberCheck(String phoneNumber) {
-        if (phoneNumber.matches("[0-9 ]+")) {
-            char firstChar = phoneNumber.charAt(0);
+    public static boolean phoneNumberCheck(String phoneNumber) {
+        char firstChar = phoneNumber.charAt(0);
+        if (phoneNumber.matches("[0-9 ]+") || firstChar=='+' ) {
 
-            if (phoneNumber.length() == 10) {
+            if (phoneNumber.length() == 10 || phoneNumber.length() == 12) {
                 if (firstChar != '0') {
                     System.out.println("Invalid format. \"0\" must be first");
+                    return false;
                 }
-            } else if (phoneNumber.length() == 13) {
+            } else if (phoneNumber.length() == 13 || phoneNumber.length() == 15) {
                 if (firstChar != '+') {
                     System.out.println("Invalid format. \"+\" must be first");
+                    return false;
                 }
             } else {
                 System.out.println("Invalid length");
+                return false;
             }
         } else {
             System.out.println("Invalid characters");
+            return false;
         }
+        return true;
     }
 
-    public void emailCheck(String usersEmail) {
+    public static boolean emailCheck(String usersEmail) {
         int count = 0;
 
-        if(!(usersEmail.length()>3 && usersEmail.length()<40)) {
+        if(!(usersEmail.length()>5 && usersEmail.length()<40)) {
             System.out.println("Inavlid length of email");
+            return false;
         }
 
-        if(email.contains("@")){
-            int a = email.indexOf("@");
+        if(usersEmail.contains("@")){
+            int a = usersEmail.indexOf("@");
 
             for(int i=a; i<usersEmail.length(); i++){
-                if(email.charAt(i)=='.'){
+                if(usersEmail.charAt(i)=='.'){
                     count += 1;
+                    i = usersEmail.length();
                 }
             }
-            if(count != 1){
-                System.out.println("Invalid position of special characters");
+            if(count == 0){
+                System.out.println("Invalid position of dot characters");
+                return false;
             }
         } else{
             System.out.println("No \"@\" symbol present");
+            return false;
         }
 
-        if(!(email.matches("[a-z _]+@.*"))) {
+        if(!(usersEmail.matches("[a-z _]+@.*"))) {
             System.out.println("Invalid characters");
+            return false;
         }
-
+        return true;
     }
 
 }
