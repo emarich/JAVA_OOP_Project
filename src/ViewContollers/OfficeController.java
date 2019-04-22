@@ -19,7 +19,7 @@ public class OfficeController extends GuestController {
         this.usersDatabase = usersDatabase;
 
     }
-    
+
     //switch to makeStage
     public void makeMenuItemClicked (MenuItem menuItem) {
         menuItem.setOnAction(event -> {
