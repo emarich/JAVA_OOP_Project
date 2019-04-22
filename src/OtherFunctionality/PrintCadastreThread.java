@@ -6,9 +6,7 @@ import Owners.City;
 import Owners.Owner;
 import Owners.Ownership;
 import UserObject.Database;
-import UserObject.User;
 import javafx.scene.control.TextArea;
-import javafx.scene.text.Text;
 
 
 public class PrintCadastreThread implements Runnable {

@@ -8,7 +8,7 @@ import javafx.scene.control.*;
 
 public class GuestController extends LogOut {
 
-    private Database usersDatabase;
+    protected Database usersDatabase;
 
     //Constructor
     public GuestController (Database usersDatabase) {

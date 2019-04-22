@@ -7,15 +7,17 @@ import UserObject.Database;
 import View.CheckUserStage;
 import View.MakeLandStage;
 import View.RegisterStage;
+import View.SignInScene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 public class OfficeController extends GuestController {
-    private Office office = new CadastralOffice();
 
-    private Database usersDatabase;
+    private Office office = new CadastralOffice();
 
     public OfficeController(Database usersDatabase) {
         this.usersDatabase = usersDatabase;
+
     }
 
 
@@ -51,5 +53,4 @@ public class OfficeController extends GuestController {
             }
         });
     }
-
 }

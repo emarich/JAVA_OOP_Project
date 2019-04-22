@@ -1,7 +1,6 @@
 package View;
 
 import OtherFunctionality.PopUpAlert;
-import OtherFunctionality.SerializableUtility;
 import UserObject.Database;
 import ViewContollers.SignInController;
 import javafx.collections.FXCollections;
@@ -15,7 +14,7 @@ import javafx.stage.Stage;
 
 
 public class SignInScene extends FlowPane {
-    private Database usersDatabase = new Database();
+    private Database usersDatabase;
 
     //View controller
     private SignInController signInController;
@@ -29,6 +28,7 @@ public class SignInScene extends FlowPane {
 
     //Constructor
     public SignInScene(Stage primaryStage, Database usersDatabase) throws Exception {
+        this.usersDatabase = usersDatabase;
 
         signInController = new SignInController(usersDatabase);
 
@@ -77,6 +77,7 @@ public class SignInScene extends FlowPane {
         signInController.switchRegisterStage(registerBtn);
     }
 
+    //asi prerobit
     private void checkDatabase(Database usersDatabase) {
         if (usersDatabase.getUsersDataHM().isEmpty()) {
             PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR,

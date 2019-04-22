@@ -1,7 +1,6 @@
 package ViewContollers;
 
 import OtherFunctionality.PopUpAlert;
-import OtherFunctionality.SerializableUtility;
 import UserObject.Database;
 import View.*;
 import javafx.scene.control.*;

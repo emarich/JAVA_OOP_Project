@@ -13,16 +13,16 @@ import javafx.stage.Stage;
 import java.util.HashMap;
 
 public class RegisterController {
-    private Database usersDatabase;
+    private static Database usersDatabase;
 
     //Constructor
-    public RegisterController (Database usersDatabase) {
-        this.usersDatabase = usersDatabase;
+    public RegisterController (Database usersData) {
+        usersDatabase = usersData;
     }
 
     public void registerUser(Stage stage, Button registerBtn, TextField username, TextField password, ChoiceBox<String> userType) {
         registerBtn.setOnAction(event -> {
-            //check if textfields are filled
+            //check if text fields are filled
             if((username.getText() == null || username.getText().trim().isEmpty()) ||
                     (password.getText() == null || password.getText().trim().isEmpty())) {
                 PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR, "Username and password fields must be filled");
@@ -43,5 +43,9 @@ public class RegisterController {
                 }
             }
         });
+    }
+
+    public static Database getNewData() {
+        return usersDatabase;
     }
 }

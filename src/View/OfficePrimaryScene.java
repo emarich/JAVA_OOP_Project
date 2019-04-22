@@ -1,6 +1,8 @@
 package View;
 
 import UserObject.Database;
+import ViewContollers.GuestController;
+import ViewContollers.LogOut;
 import ViewContollers.OfficeController;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
@@ -53,7 +55,7 @@ public class OfficePrimaryScene extends FlowPane {
 
         setScene(primaryStage, username);
 
-        sceneEvents(primaryStage);
+        sceneEvents(primaryStage, usersDatabase);
 
         primaryStage.show();
     }
@@ -104,11 +106,11 @@ public class OfficePrimaryScene extends FlowPane {
 
     }
 
-    public void sceneEvents(Stage primaryStage) {
+    public void sceneEvents(Stage primaryStage, Database usersData) {
 
         officeController.switchRegisterStage(addUserItem);
 
-        officeController.logOut(signOutItem, primaryStage, usersDatabase);
+        officeController.logOut(signOutItem, primaryStage, usersData);
 
         officeController.makeOwnerClicked(makeOwnerItem);
 
@@ -118,6 +120,7 @@ public class OfficePrimaryScene extends FlowPane {
 
         officeController.printCadastre(textArea);
 
+        //Change prompt text, when you select, what are you searching for
         findChoiceBox.setOnAction(event -> {
             officeController.changePromptText(findChoiceBox, searchField);
         });

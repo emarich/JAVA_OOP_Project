@@ -1,5 +1,6 @@
 package View;
 
+import OtherFunctionality.SerializableUtility;
 import UserObject.Database;
 import ViewContollers.GuestController;
 import javafx.collections.FXCollections;
@@ -89,10 +90,6 @@ public class GuestPrimaryScene extends FlowPane {
     }
 
     private void sceneEvents (Stage primaryStage, Database usersDatabse) {
-        //Change prompt text, when you select, what are you searching for
-        findChoiceBox.setOnAction(event -> {
-            guestController.changePromptText(findChoiceBox, searchField);
-        });
 
         //Register
         guestController.switchRegisterStage(registerItem);
@@ -102,6 +99,10 @@ public class GuestPrimaryScene extends FlowPane {
 
         guestController.printCadastre(textArea);
 
+        //Change prompt text, when you select, what are you searching for
+        findChoiceBox.setOnAction(event -> {
+            guestController.changePromptText(findChoiceBox, searchField);
+        });
     }
 
 
