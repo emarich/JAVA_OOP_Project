@@ -42,7 +42,7 @@ public class OfficePrimaryScene extends FlowPane {
     private TextArea textArea = new TextArea();
 
     private ChoiceBox<String> findChoiceBox =
-            new ChoiceBox<>(FXCollections.observableArrayList( "street or city", "owner"));
+            new ChoiceBox<>(FXCollections.observableArrayList( "address", "owner"));
 
 
     //Constructor
@@ -95,7 +95,7 @@ public class OfficePrimaryScene extends FlowPane {
         vBox.prefWidthProperty().bind(primaryStage.widthProperty());
         vBox.prefHeightProperty().bind(primaryStage.heightProperty().subtract(150));
 
-        searchField.setPromptText("Find land by street or city");
+        searchField.setPromptText("Find land or real estate by address");
         searchField.setMaxWidth(300);
 
         textArea.prefHeightProperty().bind(vBox.heightProperty());

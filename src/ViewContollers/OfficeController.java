@@ -52,11 +52,4 @@ public class OfficeController extends GuestController {
         });
     }
 
-    public void changePromptText(ChoiceBox<String> userTypeBox, TextField textField) {
-        if (userTypeBox.getValue().equals("owner")) {
-            textField.setPromptText("Find owner");
-        } else if (userTypeBox.getValue().equals("street or city")){
-            textField.setPromptText("Find street or city");
-        }
-    }
 }

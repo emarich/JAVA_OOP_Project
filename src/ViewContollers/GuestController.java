@@ -31,19 +31,12 @@ public class GuestController extends LogOut {
         });
     }
 
-    public void changePromptText(Menu findMenu, RadioMenuItem ownerMenuItem, RadioMenuItem streetMenuItem, TextField textField) {
-        findMenu.setOnShowing(event -> {
-            if (streetMenuItem.isSelected()) {
-                ownerMenuItem.setOnAction((ActionEvent) -> {
-                    textField.setPromptText("Find owner");
-                });
-            } else if (ownerMenuItem.isSelected()){
-                streetMenuItem.setOnAction((ActionEvent) -> {
-                    textField.setPromptText("Find street or city");
-                });
-            }        });
-
-
+    public void changePromptText(ChoiceBox<String> userTypeBox, TextField textField) {
+        if (userTypeBox.getValue().equals("owner")) {
+            textField.setPromptText("Find owner by name");
+        } else if (userTypeBox.getValue().equals("address")){
+            textField.setPromptText("Find land or real estate by address");
+        }
     }
 
     public void  printCadastre(TextArea textArea) {

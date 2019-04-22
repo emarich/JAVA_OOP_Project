@@ -2,6 +2,7 @@ package View;
 
 import UserObject.Database;
 import ViewContollers.GuestController;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -26,10 +27,7 @@ public class GuestPrimaryScene extends FlowPane {
     //Menu
     private MenuBar menuBar = new MenuBar();
 
-    private Menu findMenu = new Menu("Find...");
-    private ToggleGroup findGroup = new ToggleGroup();
-    private RadioMenuItem findStreetCity = new RadioMenuItem("street or city");
-    private RadioMenuItem findOwner = new RadioMenuItem("owner");
+    private Menu actualTimeDate = new Menu();
 
     private Menu register = new Menu("Register");
     private MenuItem registerItem = new MenuItem("Register user");
@@ -39,6 +37,9 @@ public class GuestPrimaryScene extends FlowPane {
     private TextField searchField = new TextField();
 
     private TextArea textArea = new TextArea();
+
+    private ChoiceBox<String> findChoiceBox =
+            new ChoiceBox<>(FXCollections.observableArrayList( "address", "owner"));
 
     //Constructor
     public GuestPrimaryScene(Stage primaryStage, Database usersDatabase) {
@@ -54,7 +55,7 @@ public class GuestPrimaryScene extends FlowPane {
     private void setScene(Stage primaryStage) {
         primaryStage.setScene(new Scene(this, primaryStage.getWidth(), primaryStage.getHeight()));
 
-        vBox.getChildren().addAll(searchField, textArea);
+        vBox.getChildren().addAll(searchField, findChoiceBox, textArea);
 
         this.getChildren().addAll(menuBar, vBox);
         this.setAlignment(Pos.TOP_LEFT);
@@ -64,11 +65,11 @@ public class GuestPrimaryScene extends FlowPane {
 
         //MenuBar
         menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
-        menuBar.getMenus().addAll(findMenu, register);
-        findStreetCity.setToggleGroup(findGroup);
-        findOwner.setToggleGroup(findGroup);
-        findMenu.getItems().addAll(findStreetCity, findOwner);
-        findStreetCity.setSelected(true);
+        menuBar.getMenus().addAll(register, actualTimeDate);
+
+       //Choice box
+        findChoiceBox.show();
+        findChoiceBox.getSelectionModel().selectFirst();
 
         register.getItems().addAll(registerItem, signInItem);
 
@@ -79,7 +80,7 @@ public class GuestPrimaryScene extends FlowPane {
         vBox.prefWidthProperty().bind(primaryStage.widthProperty());
         vBox.prefHeightProperty().bind(primaryStage.heightProperty().subtract(150));
 
-        searchField.setPromptText("Find street or city");
+        searchField.setPromptText("Find land or real estate by address");
         searchField.setMaxWidth(300);
 
         textArea.prefHeightProperty().bind(vBox.heightProperty());
@@ -89,7 +90,9 @@ public class GuestPrimaryScene extends FlowPane {
 
     private void sceneEvents (Stage primaryStage, Database usersDatabse) {
         //Change prompt text, when you select, what are you searching for
-        guestController.changePromptText(findMenu, findOwner, findStreetCity, searchField);
+        findChoiceBox.setOnAction(event -> {
+            guestController.changePromptText(findChoiceBox, searchField);
+        });
 
         //Register
         guestController.switchRegisterStage(registerItem);

@@ -17,12 +17,7 @@
       <change afterPath="$PROJECT_DIR$/../hra5/src/postavy/ZlyObor.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../hra5/src/stret/SledovatelStretu.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../hra5/src/stret/Stret.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/OtherFunctionality/PrintCadastreThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OtherFunctionality/PrintCadastreThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Owners/Owner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Owners/Owner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Owners/Ownership.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Owners/Ownership.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/GuestPrimaryScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/GuestPrimaryScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/MakeOwnerScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/MakeOwnerScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/OfficePrimaryScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/OfficePrimaryScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ViewContollers/GuestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ViewContollers/GuestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ViewContollers/OfficeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ViewContollers/OfficeController.java" afterDir="false" />
@@ -113,11 +108,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ViewContollers/OfficeController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="605">
+            <state relative-caret-position="299">
               <caret line="53" selection-start-line="53" selection-end-line="53" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ViewContollers/GuestController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="612">
+              <caret line="42" column="103" lean-forward="true" selection-start-line="42" selection-start-column="103" selection-end-line="42" selection-end-column="103" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/View/OfficePrimaryScene.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1428">
+              <caret line="97" column="71" selection-start-line="97" selection-start-column="71" selection-end-line="97" selection-end-column="71" />
             </state>
           </provider>
         </entry>
@@ -132,28 +145,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ViewContollers/GuestController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="42" column="19" lean-forward="true" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/View/GuestPrimaryScene.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="87" selection-start-line="87" selection-end-line="87" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/View/OfficePrimaryScene.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="44" selection-end-column="91" />
+            <state relative-caret-position="255">
+              <caret line="82" column="71" selection-start-line="82" selection-start-column="71" selection-end-line="82" selection-end-column="71" />
             </state>
           </provider>
         </entry>
@@ -282,8 +277,8 @@
         <option value="$PROJECT_DIR$/src/View/MakeOwnerScene.java" />
         <option value="$PROJECT_DIR$/src/ViewContollers/RegisterController.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
-        <option value="$PROJECT_DIR$/src/ViewContollers/GuestController.java" />
         <option value="$PROJECT_DIR$/src/ViewContollers/OfficeController.java" />
+        <option value="$PROJECT_DIR$/src/ViewContollers/GuestController.java" />
         <option value="$PROJECT_DIR$/src/View/GuestPrimaryScene.java" />
         <option value="$PROJECT_DIR$/src/View/OfficePrimaryScene.java" />
       </list>
@@ -524,12 +519,12 @@
       <workItem from="1555695031693" duration="9551000" />
       <workItem from="1555751642080" duration="19759000" />
       <workItem from="1555841948554" duration="33775000" />
-      <workItem from="1555935096011" duration="1877000" />
+      <workItem from="1555935096011" duration="2761000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="355138000" />
+    <option name="totallyTimeSpent" value="356022000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -544,7 +539,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.13892618" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.13892618" />
       <window_info id="Structure" order="1" weight="0.24966443" />
       <window_info id="Favorites" order="2" weight="0.32972324" />
       <window_info id="Designer" order="3" />
@@ -553,7 +548,7 @@
       <window_info id="UI Designer" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32719547" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.31586403" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.31586403" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3045326" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1208,16 +1203,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ViewContollers/GuestController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="42" column="19" lean-forward="true" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ViewContollers/OfficeController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="605">
+        <state relative-caret-position="299">
           <caret line="53" selection-start-line="53" selection-end-line="53" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1225,17 +1213,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/View/OfficePrimaryScene.java">
+    <entry file="file://$PROJECT_DIR$/src/ViewContollers/GuestController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="44" selection-end-column="91" />
+        <state relative-caret-position="612">
+          <caret line="42" column="103" lean-forward="true" selection-start-line="42" selection-start-column="103" selection-end-line="42" selection-end-column="103" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/View/GuestPrimaryScene.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="87" selection-start-line="87" selection-end-line="87" />
+        <state relative-caret-position="255">
+          <caret line="82" column="71" selection-start-line="82" selection-start-column="71" selection-end-line="82" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/View/OfficePrimaryScene.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1428">
+          <caret line="97" column="71" selection-start-line="97" selection-start-column="71" selection-end-line="97" selection-end-column="71" />
         </state>
       </provider>
     </entry>
