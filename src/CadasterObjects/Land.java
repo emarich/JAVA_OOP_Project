@@ -8,15 +8,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Land implements Serializable {
-    private int registerNum;
-    private String address;
-    private int area;
+public class Land extends CadasterObject implements Serializable {
     private TypeLand typeLand;
     //land can have more real estates
     private List<RealEstate> realEstates = new ArrayList<>();
     private boolean haveRE = false;
-    private Ownership owner;
 
     public Land(int regNum, String address, int area, Ownership owner) {
         this.registerNum = regNum;

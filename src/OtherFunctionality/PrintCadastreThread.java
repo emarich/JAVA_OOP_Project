@@ -1,11 +1,13 @@
 package OtherFunctionality;
 
+import CadasterObjects.CadasterObject;
 import CadasterObjects.Land;
 import CadasterObjects.RealEstate;
 import Owners.City;
 import Owners.Owner;
 import Owners.Ownership;
 import UserObject.Database;
+import ViewContollers.RegisterController;
 import javafx.scene.control.TextArea;
 
 
@@ -38,7 +40,7 @@ public class PrintCadastreThread implements Runnable {
                     textArea.appendText("|| Phone number: "+((City) owner).getPhoneNumber()+"\n");
                     textArea.appendText("|| Email: "+((City) owner).getEmail()+"\n");
                 } else {
-                    textArea.appendText("Nejaka chyba nastala.\n");
+                    textArea.appendText("Error: object Owner has different instance\n");
                 }
 
                 textArea.appendText("LANDS:---------------------\n");
@@ -84,19 +86,21 @@ public class PrintCadastreThread implements Runnable {
         }
     }
 
-    private void printFormula(Land land) {
-        textArea.appendText("\tRegister number: "+land.getRegisterNum());
-        textArea.appendText("\tAddress: "+land.getAddress());
-        textArea.appendText("\tType: "+land.getTypeLand());
-        textArea.appendText("\tArea: "+land.getArea());
-        textArea.appendText("---------------------------");
+    private void printFormula(CadasterObject cadasterObject) {
+        if (cadasterObject instanceof Land) {
+            textArea.appendText("\tRegister number: "+((Land)cadasterObject).getRegisterNum()+"\n");
+            textArea.appendText("\tAddress: "+((Land)cadasterObject).getAddress()+"\n");
+            textArea.appendText("\tType: "+((Land)cadasterObject).getTypeLand()+"\n");
+            textArea.appendText("\tArea: "+((Land)cadasterObject).getArea()+"\n");
+            textArea.appendText("\t---------------------------\n");
+        } else if (cadasterObject instanceof RealEstate) {
+            textArea.appendText("\tRegister number: "+((RealEstate)cadasterObject).getRegisterNum()+"\n");
+            textArea.appendText("\tAddress: "+((RealEstate)cadasterObject).getAddress()+"\n");
+            textArea.appendText("\tType: "+((RealEstate)cadasterObject).getTypeRealEstate()+"\n");
+            textArea.appendText("\tArea: "+((RealEstate)cadasterObject).getArea()+"\n");
+            textArea.appendText("\t---------------------------\n");
+        }
+
     }
 
-    private void printFormula(RealEstate realEstate) {
-        textArea.appendText("\tRegister number: "+realEstate.getRegisterNum());
-        textArea.appendText("\tAddress: "+realEstate.getAddress());
-        textArea.appendText("\tType: "+realEstate.getTypeRealEstate());
-        textArea.appendText("\tArea: "+realEstate.getArea());
-        textArea.appendText("---------------------------");
-    }
 }

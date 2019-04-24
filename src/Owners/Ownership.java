@@ -2,6 +2,8 @@ package Owners;
 
 import CadasterObjects.Land;
 import CadasterObjects.RealEstate;
+import OtherFunctionality.EmailFormatException;
+import OtherFunctionality.PhoneNumberFormatException;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -73,63 +75,53 @@ public abstract class Ownership implements Serializable {
     }
 
     //checks, if the phone number is correct
-    public static boolean phoneNumberCheck(String phoneNumber) {
+    public static void phoneNumberCheck(String phoneNumber) throws PhoneNumberFormatException {
         char firstChar = phoneNumber.charAt(0);
-        if (phoneNumber.matches("[0-9 ]+") || firstChar=='+' ) {
+        if (phoneNumber.matches("[0-9 +]+")) {
 
             if (phoneNumber.length() == 10 || phoneNumber.length() == 12) {
                 if (firstChar != '0') {
-                    System.out.println("Invalid format. \"0\" must be first");
-                    return false;
+                    throw new PhoneNumberFormatException("Invalid format. \"0\" must be first");
                 }
             } else if (phoneNumber.length() == 13 || phoneNumber.length() == 15) {
                 if (firstChar != '+') {
-                    System.out.println("Invalid format. \"+\" must be first");
-                    return false;
+                    throw new PhoneNumberFormatException("Invalid format. \"+\" must be first");
                 }
             } else {
-                System.out.println("Invalid length");
-                return false;
+                throw new PhoneNumberFormatException("Invalid length");
             }
         } else {
-            System.out.println("Invalid characters");
-            return false;
+            throw new PhoneNumberFormatException("Invalid characters");
         }
-        return true;
     }
 
     //checks, if the email is correct
-    public static boolean emailCheck(String usersEmail) {
-        int count = 0;
+    public static void emailCheck(String usersEmail) throws EmailFormatException {
+            int count = 0;
 
-        if(!(usersEmail.length()>5 && usersEmail.length()<40)) {
-            System.out.println("Inavlid length of email");
-            return false;
-        }
+            if(usersEmail.length()<5 || usersEmail.length()>80) {
+                throw new EmailFormatException("Invalid length of email");
+            }
 
-        if(usersEmail.contains("@")){
-            int a = usersEmail.indexOf("@");
+            if(usersEmail.contains("@")) {
+                int a = usersEmail.indexOf("@");
 
-            for(int i=a; i<usersEmail.length(); i++){
-                if(usersEmail.charAt(i)=='.'){
-                    count += 1;
-                    i = usersEmail.length();
+                for(int i=a; i<usersEmail.length(); i++){
+                    if(usersEmail.charAt(i)=='.'){
+                        count += 1;
+                        i = usersEmail.length();
+                    }
                 }
+                if(count == 0){
+                    throw new EmailFormatException("Invalid position of dot characters");
+                }
+            } else {
+                throw new EmailFormatException("No \"@\" symbol present");
             }
-            if(count == 0){
-                System.out.println("Invalid position of dot characters");
-                return false;
-            }
-        } else{
-            System.out.println("No \"@\" symbol present");
-            return false;
-        }
 
-        if(!(usersEmail.matches("[a-z _]+@.*"))) {
-            System.out.println("Invalid characters");
-            return false;
-        }
-        return true;
+            if(!(usersEmail.matches("[a-z0-9_]+@.*"))) {
+                throw new EmailFormatException("Invalid characters");
+            }
     }
 
 }

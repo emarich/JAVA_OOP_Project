@@ -7,7 +7,6 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
 public abstract class LogOut {
-    //private Database usersData = new Database();
 
     public void logOut(MenuItem signInBtn, Stage primaryStage, Database usersData) {
         signInBtn.setOnAction(e -> {

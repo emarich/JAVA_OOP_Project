@@ -26,7 +26,7 @@ public class MakeLandController {
     }
 
 
-    public void makeLandClicked(Button button, TextField regNum, TextField address, TextField area, Stage stage) {
+    public void makeLandClicked(TextField regNum, TextField address, TextField area, Stage stage) {
         if (existingRegNum(Integer.parseInt(regNum.getText()))) {
             PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR,
                     "Land under register number "+regNum.getText()+" is already registered.");
@@ -39,11 +39,15 @@ public class MakeLandController {
 
                 user.getOwner().addLand(land);
 
+                user.getOwner().setHaveLand(true);
+
                 usersDatabase.getUsersDataHM().replace(user.getUsername(), user);
 
                 SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
 
                 land = null;
+
+                stage.close();
 
             } catch (ArrayIndexOutOfBoundsException e) {
                 PopUpAlert alert = new PopUpAlert(Alert.AlertType.INFORMATION,
@@ -56,12 +60,12 @@ public class MakeLandController {
     public boolean existingRegNum(int currentRegNum) {
         try {
             for (String s : usersDatabase.getUsersDataHM().keySet()) {
-                System.out.println(s);
                 //if user is not owner, break for loop
                 if (!(usersDatabase.getUser(s).getIsOwner())) {
                     break;
                 }
                 if (!(usersDatabase.getUser(s).getOwner().getOwnedLands().isEmpty())) {
+                    System.out.println(s);
                     for (int i = 0; i <= usersDatabase.getUser(s).getOwner().getOwnedLands().size(); i++) {
                         if (usersDatabase.getUser(s).getOwner().getOwnedLands().get(i).getRegisterNum() == currentRegNum) {
                             return true;
@@ -75,31 +79,3 @@ public class MakeLandController {
         return false;
     }
 }
-
-/*
-if(user.getIsOwner()) {
-                Land land = new Land();
-                land.setRegisterNum(Integer.parseInt(regNum.getText()));
-                land.setCity(city.getText());
-                land.setArea(Integer.parseInt(area.getText()));
-
-                if(user.getOwner().getClass() == Owner.class) {
-                    land.setTypeLand(TypeLand.PUBLIC);
-                } else {
-                    land.setTypeLand(TypeLand.PRIVATE);
-                }
-
-                land.setOwner(user.getOwner());
-
-            } else {
-                PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR,
-                        "User is not owner, at first, you must create it.");
-                stage.close();
-
-                try {
-                    MakeOwnerScene makeOwnerScene = new MakeOwnerScene(user, stage);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
- */

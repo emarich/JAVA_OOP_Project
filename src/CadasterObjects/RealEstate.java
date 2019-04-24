@@ -1,20 +1,17 @@
 package CadasterObjects;
 
+import Offices.CadastralOffice;
 import Owners.City;
 import Owners.Owner;
 import Owners.Ownership;
 
 import java.io.Serializable;
 
-public class RealEstate implements Serializable {
-    private int registerNum;
-    private String address;
-    private int area;
-    //real estate can be only in one land
+public class RealEstate extends CadasterObject implements Serializable {
     private TypeRealEstate typeRealEstate;
+    //real estate can be only on one land
     private Land land;
     private boolean haveLand = false;
-    private Ownership owner;
 
     public RealEstate(int regNum, String address, int area, Ownership owner, String typeRE) {
         this.registerNum = regNum;
@@ -26,29 +23,7 @@ public class RealEstate implements Serializable {
 
     public RealEstate(){}
 
-
     //Getters and Setters-------------------------------------------------------
-
-    public void setRegisterNum(int registerNum) {
-        this.registerNum = registerNum;
-    }
-    public int getRegisterNum() {
-        return registerNum;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-    public void setAddress(String address) {
-        this.address = Address.setPerfectAddress(address);
-    }
-
-    public void setArea(int area) {
-        this.area = area;
-    }
-    public int getArea() {
-        return area;
-    }
 
     public void setTypeRealEstate(String type) {
         if (type.equalsIgnoreCase(TypeRealEstate.RESIDENTIAL.toString())) {
@@ -79,14 +54,6 @@ public class RealEstate implements Serializable {
     }
     public boolean getHaveLand() {
         return haveLand;
-    }
-
-    public void setOwner(Ownership owner) {
-        this.owner = owner;
-    }
-
-    public Ownership getOwner() {
-        return owner;
     }
 
     //Getters and Setters-------------------------------------------------------

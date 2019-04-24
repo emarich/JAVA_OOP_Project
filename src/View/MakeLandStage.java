@@ -38,7 +38,7 @@ public class MakeLandStage extends FlowPane {
     }
 
     private void setScene(Stage stage, User user) {
-        stage.setTitle("Make land for "+user.getUsername());
+        stage.setTitle("Make land for user"+user.getUsername());
         stage.setWidth(400);
         stage.setHeight(400);
         stage.setScene(new Scene(this, stage.getWidth(), stage.getHeight()));
@@ -59,7 +59,7 @@ public class MakeLandStage extends FlowPane {
     public void sceneEvents () {
 
         makeBtn.setOnAction(event -> {
-            makeLandController.makeLandClicked(makeBtn, regNum, address, area, stage);
+            makeLandController.makeLandClicked(regNum, address, area, stage);
         });
     }
 }
