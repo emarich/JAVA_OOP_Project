@@ -3,6 +3,7 @@ package ViewContollers;
 import CadasterObjects.Address;
 import CadasterObjects.Land;
 import CadasterObjects.TypeLand;
+import OtherFunctionality.AddressFormatException;
 import OtherFunctionality.PopUpAlert;
 import OtherFunctionality.SerializableUtility;
 import Owners.Owner;
@@ -32,6 +33,7 @@ public class MakeLandController {
                     "Land under register number "+regNum.getText()+" is already registered.");
         } else {
             try {
+                Address.correctAddress(address.getText());
                 Land land = new Land(Integer.parseInt(regNum.getText()), address.getText(),
                         Integer.parseInt(area.getText()), user.getOwner());
 
@@ -49,9 +51,17 @@ public class MakeLandController {
 
                 stage.close();
 
-            } catch (ArrayIndexOutOfBoundsException e) {
-                PopUpAlert alert = new PopUpAlert(Alert.AlertType.INFORMATION,
-                        "Please, write it in this format: \n (example) Hlavna 1, 801 01 Bratislava, Slovensko");
+            } catch (Exception e) {
+                if (e instanceof IndexOutOfBoundsException) {
+                    PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING,
+                            e.getMessage());
+                } else if (e instanceof AddressFormatException) {
+                    PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING,
+                            e.getMessage());
+                    alert.setHeaderText("Error: address");
+                } else {
+                    e.printStackTrace();
+                }
             }
         }
     }

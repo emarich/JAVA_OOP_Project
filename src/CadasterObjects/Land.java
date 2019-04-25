@@ -27,27 +27,6 @@ public class Land extends CadasterObject implements Serializable {
 
     //Getters and Setters-------------------------------------------------------
 
-    public void setRegisterNum(int registerNum) {
-        this.registerNum = registerNum;
-    }
-    public int getRegisterNum() {
-        return registerNum;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-    public void setAddress(String address) {
-        this.address = Address.setPerfectAddress(address);
-    }
-
-    public void setArea(int area) {
-        this.area = area;
-    }
-    public int getArea() {
-        return area;
-    }
-
     public void setTypeLand(Ownership owner) {
         if(owner instanceof City) {
             typeLand = TypeLand.PUBLIC;

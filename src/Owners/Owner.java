@@ -1,18 +1,9 @@
 package Owners;
 
 import CadasterObjects.Address;
-import CadasterObjects.Land;
-import CadasterObjects.RealEstate;
-import CadasterObjects.TypeLand;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Locale;
@@ -61,33 +52,21 @@ public class Owner extends Ownership implements Serializable {
     //Getters and Setters-------------------------------------------------------
 
     //checks, if the date of birth is in the valid format dd.MM.yyyy
-    public static boolean isValidDateFormat(String date) {
+    public static void isValidDateFormat(String date) throws DateTimeParseException {
         String format = "dd.MM.yyyy";
         Locale locale = Locale.GERMAN;
 
-        LocalDateTime ldt = null;
-        DateTimeFormatter fomatter = DateTimeFormatter.ofPattern(format, locale);
+        LocalDate ldt = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format, locale);
 
         try {
-            ldt = LocalDateTime.parse(date, fomatter);
-            String result = ldt.format(fomatter);
-            return result.equals(date);
+            ldt = LocalDate.parse(date, formatter);
         } catch (DateTimeParseException e) {
-            try {
-                LocalDate ld = LocalDate.parse(date, fomatter);
-                String result = ld.format(fomatter);
-                return result.equals(date);
-            } catch (DateTimeParseException exp) {
-                try {
-                    LocalTime lt = LocalTime.parse(date, fomatter);
-                    String result = lt.format(fomatter);
-                    return result.equals(date);
-                } catch (DateTimeParseException e2) {
-                    e2.printStackTrace();
-                }
-            }
+            System.out.println("Date has a wrong format.\n" +
+                    "Right format: dd.MM.yyyy");
+            throw e;
         }
-        return false;
+
     }
 
 }

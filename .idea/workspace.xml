@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/OtherFunctionality/EmailFormatException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/OtherFunctionality/PhoneNumberFormatException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/OtherFunctionality/AddressFormatException.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../hra5/.idea/vcs.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../hra5/src/gui/EnergiaBojovnikov.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../hra5/src/gui/StretGUI.java" afterDir="false" />
@@ -21,12 +20,9 @@
       <change afterPath="$PROJECT_DIR$/../hra5/src/stret/Stret.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Database.out" beforeDir="false" afterPath="$PROJECT_DIR$/Database.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CadasterObjects/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CadasterObjects/Address.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CadasterObjects/Land.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CadasterObjects/Land.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CadasterObjects/RealEstate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CadasterObjects/RealEstate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/OtherFunctionality/PrintCadastreThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OtherFunctionality/PrintCadastreThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Owners/Ownership.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Owners/Ownership.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/MakeLandStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/MakeLandStage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ViewContollers/LogOut.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ViewContollers/LogOut.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Owners/Owner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Owners/Owner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ViewContollers/MakeLandController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ViewContollers/MakeLandController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ViewContollers/MakeOwnerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ViewContollers/MakeOwnerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../hra2_2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hra2_2/.idea/workspace.xml" afterDir="false" />
@@ -102,59 +98,31 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/OtherFunctionality/EmailFormatException.java">
+        <entry file="file://$PROJECT_DIR$/src/CadasterObjects/Land.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="4" lean-forward="true" selection-start-line="3" selection-start-column="4" selection-end-line="6" selection-end-column="66" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ViewContollers/MakeOwnerController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="918">
-              <caret line="79" column="49" selection-start-line="79" selection-start-column="49" selection-end-line="79" selection-end-column="49" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="29" column="21" lean-forward="true" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
+            <state relative-caret-position="221">
+              <caret line="28" selection-start-line="28" selection-end-line="28" />
               <folding>
-                <element signature="e#935#936#0" expanded="true" />
-                <element signature="e#963#964#0" expanded="true" />
+                <element signature="method#setRealEstates#0;class#Land#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/View/MakeOwnerScene.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ViewContollers/MakeLandController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="56" column="88" selection-start-line="56" selection-start-column="88" selection-end-line="56" selection-end-column="88" />
+            <state relative-caret-position="573">
+              <caret line="49" column="28" lean-forward="true" selection-start-line="49" selection-start-column="28" selection-end-line="49" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/OtherFunctionality/PhoneNumberFormatException.java">
+        <entry file="file://$PROJECT_DIR$/src/CadasterObjects/Address.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ViewContollers/OfficeController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="539">
-              <caret line="32" column="1" selection-start-line="32" selection-start-column="1" selection-end-line="32" selection-end-column="1" />
+            <state relative-caret-position="205">
+              <caret line="34" column="46" selection-start-line="34" selection-start-column="46" selection-end-line="34" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -162,14 +130,31 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ViewContollers/MakeOwnerController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="55" column="24" selection-start-line="55" selection-start-column="24" selection-end-line="55" selection-end-column="59" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Owners/Ownership.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="94" column="9" selection-start-line="94" selection-start-column="9" selection-end-line="94" selection-end-column="9" />
+            <state relative-caret-position="962">
+              <caret line="92" column="16" selection-start-line="92" selection-start-column="16" selection-end-line="92" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Owners/Owner.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="273">
+              <caret line="46" column="4" lean-forward="true" selection-start-line="46" selection-start-column="4" selection-end-line="48" selection-end-column="5" />
               <folding>
-                <element signature="e#1215#1216#0" expanded="true" />
-                <element signature="e#1248#1249#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -203,8 +188,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/View/UserPrimaryStage.java" />
-        <option value="$PROJECT_DIR$/src/ViewContollers/LogOutScene.java" />
         <option value="$PROJECT_DIR$/src/CadasterObjects/Cadastre.java" />
         <option value="$PROJECT_DIR$/src/CadasterObjects/TypeLand.java" />
         <option value="$PROJECT_DIR$/src/ViewContollers/OfficeContoller.java" />
@@ -229,7 +212,6 @@
         <option value="$PROJECT_DIR$/src/OtherFunctionality/LongestCommonSubstring.java" />
         <option value="$PROJECT_DIR$/src/OtherFunctionality/FindSubstring.java" />
         <option value="$PROJECT_DIR$/src/Offices/GeodesyOffice.java" />
-        <option value="$PROJECT_DIR$/src/Owners/Owner.java" />
         <option value="$PROJECT_DIR$/src/ViewContollers/SignInController.java" />
         <option value="$PROJECT_DIR$/src/View/SignInScene.java" />
         <option value="$PROJECT_DIR$/src/View/RegisterStage.java" />
@@ -240,28 +222,32 @@
         <option value="$PROJECT_DIR$/src/ViewContollers/CheckUserController.java" />
         <option value="$PROJECT_DIR$/src/View/OfficePrimaryScene.java" />
         <option value="$PROJECT_DIR$/src/ViewContollers/OfficeController.java" />
-        <option value="$PROJECT_DIR$/src/CadasterObjects/Address.java" />
         <option value="$PROJECT_DIR$/src/View/MakeLandStage.java" />
-        <option value="$PROJECT_DIR$/src/ViewContollers/MakeLandController.java" />
         <option value="$PROJECT_DIR$/src/OtherFunctionality/EmailFormatException.java" />
         <option value="$PROJECT_DIR$/src/ViewContollers/LogOut.java" />
-        <option value="$PROJECT_DIR$/src/CadasterObjects/Land.java" />
         <option value="$PROJECT_DIR$/src/CadasterObjects/RealEstate.java" />
         <option value="$PROJECT_DIR$/src/CadasterObjects/CadasterObject.java" />
         <option value="$PROJECT_DIR$/src/OtherFunctionality/PrintCadastreThread.java" />
         <option value="$PROJECT_DIR$/src/OtherFunctionality/PhoneNumberFormatException.java" />
         <option value="$PROJECT_DIR$/src/View/MakeOwnerScene.java" />
         <option value="$PROJECT_DIR$/src/Owners/Ownership.java" />
-        <option value="$PROJECT_DIR$/src/ViewContollers/MakeOwnerController.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/OtherFunctionality/DateFormatException.java" />
+        <option value="$PROJECT_DIR$/src/OtherFunctionality/AddressFormatException.java" />
+        <option value="$PROJECT_DIR$/src/Owners/Owner.java" />
+        <option value="$PROJECT_DIR$/src/CadasterObjects/Address.java" />
+        <option value="$PROJECT_DIR$/src/ViewContollers/MakeLandController.java" />
+        <option value="$PROJECT_DIR$/src/ViewContollers/MakeOwnerController.java" />
+        <option value="$PROJECT_DIR$/src/CadasterObjects/Land.java" />
       </list>
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
-    <option name="width" value="1310" />
-    <option name="height" value="1040" />
+    <option name="y" value="-10" />
+    <option name="width" value="1100" />
+    <option name="height" value="1890" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectReloadState">
@@ -354,9 +340,9 @@
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556094118306" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556210518322" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../helloWorld" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -494,12 +480,13 @@
       <workItem from="1555841948554" duration="33775000" />
       <workItem from="1555935096011" duration="14917000" />
       <workItem from="1556021238056" duration="8987000" />
-      <workItem from="1556085990255" duration="8278000" />
+      <workItem from="1556085990255" duration="10933000" />
+      <workItem from="1556176636162" duration="10880000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="385443000" />
+    <option name="totallyTimeSpent" value="398978000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -514,7 +501,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.14295302" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.14832215" />
       <window_info id="Structure" order="1" weight="0.24966443" />
       <window_info id="Favorites" order="2" weight="0.32972324" />
       <window_info id="Designer" order="3" />
@@ -523,7 +510,7 @@
       <window_info id="UI Designer" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32719547" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3186969" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3186969" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3045326" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -551,7 +538,7 @@
       <window_info anchor="right" id="Theme Preview" order="10" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.1409396" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.14630872" />
       <window_info id="Structure" order="1" weight="0.24966443" />
       <window_info id="Favorites" order="2" weight="0.32972324" />
       <window_info id="Designer" order="3" />
@@ -560,7 +547,7 @@
       <window_info id="UI Designer" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32719547" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3186969" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3186969" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3045326" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -657,20 +644,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/javafx-src.zip!/javafx/scene/ParallelCamera.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="73" selection-start-line="73" selection-end-line="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/javafx-src.zip!/javafx/scene/layout/Region.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="2943" selection-start-line="2943" selection-end-line="2943" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/javafx-src.zip!/javafx/scene/input/InputEvent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
@@ -798,13 +771,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/OtherFunctionality/FindSubstring.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -833,16 +799,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-34">
           <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CadasterObjects/Address.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="74" selection-start-line="74" selection-end-line="74" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -989,38 +945,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ViewContollers/MakeLandController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="43" column="53" selection-start-line="43" selection-start-column="53" selection-end-line="43" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Owners/Owner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="89" column="21" selection-start-line="89" selection-start-column="21" selection-end-line="89" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#999#1000#0" expanded="true" />
-            <element signature="e#1031#1032#0" expanded="true" />
-            <element signature="e#1061#1062#0" expanded="true" />
-            <element signature="e#1088#1089#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/View/OfficePrimaryScene.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1785">
           <caret line="117" selection-start-line="117" selection-end-line="117" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/View/MakeLandStage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="61" column="75" selection-start-line="61" selection-start-column="75" selection-end-line="61" selection-end-column="75" />
         </state>
       </provider>
     </entry>
@@ -1062,34 +990,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CadasterObjects/RealEstate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="56" column="5" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CadasterObjects/CadasterObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="38" column="80" selection-start-line="38" selection-start-column="80" selection-end-line="38" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CadasterObjects/Land.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-340">
-          <caret line="10" column="66" selection-start-line="10" selection-start-column="66" selection-end-line="10" selection-end-column="66" />
-          <folding>
-            <element signature="method#setRealEstates#0;class#Land#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/OtherFunctionality/PrintCadastreThread.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="467">
           <caret line="105" column="1" lean-forward="true" selection-start-line="105" selection-start-column="1" selection-end-line="105" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ViewContollers/OfficeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="11" column="26" lean-forward="true" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1103,13 +1017,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ViewContollers/OfficeController.java">
+    <entry file="file://$PROJECT_DIR$/src/View/MakeOwnerScene.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="32" column="1" selection-start-line="32" selection-start-column="1" selection-end-line="32" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="212">
+          <caret line="56" column="88" selection-start-line="56" selection-start-column="88" selection-end-line="56" selection-end-column="88" />
         </state>
       </provider>
     </entry>
@@ -1124,35 +1035,103 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/OtherFunctionality/EmailFormatException.java">
+    <entry file="file://$PROJECT_DIR$/src/OtherFunctionality/DateFormatException.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="4" lean-forward="true" selection-start-line="3" selection-start-column="4" selection-end-line="6" selection-end-column="66" />
+        <state relative-caret-position="34">
+          <caret line="2" column="51" selection-start-line="2" selection-start-column="51" selection-end-line="2" selection-end-column="51" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/View/MakeOwnerScene.java">
+    <entry file="file://$PROJECT_DIR$/src/OtherFunctionality/FindSubstring.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="56" column="88" selection-start-line="56" selection-start-column="88" selection-end-line="56" selection-end-column="88" />
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/OtherFunctionality/EmailFormatException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/OtherFunctionality/AddressFormatException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="53" selection-start-line="2" selection-start-column="53" selection-end-line="2" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CadasterObjects/Address.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="34" column="46" selection-start-line="34" selection-start-column="46" selection-end-line="34" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ViewContollers/MakeOwnerController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="79" column="49" selection-start-line="79" selection-start-column="49" selection-end-line="79" selection-end-column="49" />
+        <state relative-caret-position="476">
+          <caret line="55" column="24" selection-start-line="55" selection-start-column="24" selection-end-line="55" selection-end-column="59" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Owners/Ownership.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="94" column="9" selection-start-line="94" selection-start-column="9" selection-end-line="94" selection-end-column="9" />
+        <state relative-caret-position="962">
+          <caret line="92" column="16" selection-start-line="92" selection-start-column="16" selection-end-line="92" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Owners/Owner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="46" column="4" lean-forward="true" selection-start-line="46" selection-start-column="4" selection-end-line="48" selection-end-column="5" />
           <folding>
-            <element signature="e#1215#1216#0" expanded="true" />
-            <element signature="e#1248#1249#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CadasterObjects/RealEstate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="647">
+          <caret line="56" column="5" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CadasterObjects/CadasterObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="38" column="80" selection-start-line="38" selection-start-column="80" selection-end-line="38" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CadasterObjects/Land.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+          <folding>
+            <element signature="method#setRealEstates#0;class#Land#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/View/MakeLandStage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="37" column="5" lean-forward="true" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ViewContollers/MakeLandController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="573">
+          <caret line="49" column="28" lean-forward="true" selection-start-line="49" selection-start-column="28" selection-end-line="49" selection-end-column="28" />
         </state>
       </provider>
     </entry>
