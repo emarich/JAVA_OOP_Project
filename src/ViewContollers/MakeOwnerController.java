@@ -20,9 +20,11 @@ import java.time.format.DateTimeParseException;
 
 public class MakeOwnerController {
     private Database usersDatabase;
+    private final DataObserver dataObserver;
 
-    public MakeOwnerController(Database usersDatabase) {
+    public MakeOwnerController(Database usersDatabase, DataObserver textArea) {
         this.usersDatabase = usersDatabase;
+        this.dataObserver = textArea;
     }
 
     //if ownership = owner
@@ -42,6 +44,10 @@ public class MakeOwnerController {
                     user.setIsOwner(true);
                     usersDatabase.getUsersDataHM().replace(user.getUsername(), user);
                     SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
+
+                    dataObserver.setUsersDatabase(usersDatabase);
+                    dataObserver.update();
+
                     stage.close();
 
                 } catch (Exception e) {
@@ -67,7 +73,7 @@ public class MakeOwnerController {
     }
 
     // if ownership = city
-    public void btnClicked (Stage stage, Button button, User user, TextField phoneNum, TextField email) { //treba otestovat!!!!!!!!!!!!
+    public void btnClicked (Stage stage, Button button, User user, TextField phoneNum, TextField email) {
             button.setOnAction(event -> {
                 if ((phoneNum.getText() == null || phoneNum.getText().trim().isEmpty()) ||
                         (email.getText() == null || email.getText().trim().isEmpty())) {
@@ -82,6 +88,10 @@ public class MakeOwnerController {
                         user.setIsOwner(true);
                         usersDatabase.getUsersDataHM().put(user.getUsername(), user);
                         SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
+
+                        dataObserver.setUsersDatabase(usersDatabase);
+                        dataObserver.update();
+
                         stage.close();
                     } catch (Exception e) {
                         if (e instanceof EmailFormatException) {

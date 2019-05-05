@@ -39,15 +39,12 @@ public class MakeLandController {
         } else {
             try {
                 Address.correctAddress(address.getText());
+
                 Land land = new Land(Integer.parseInt(regNum.getText()), address.getText(),
                         Integer.parseInt(area.getText()), user.getOwner());
-
                 land.setOwner(user.getOwner());
-
                 user.getOwner().addLand(land);
-
                 user.getOwner().setHaveLand(true);
-
                 usersDatabase.getUsersDataHM().replace(user.getUsername(), user);
 
                 SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
@@ -55,7 +52,6 @@ public class MakeLandController {
                 land = null;
 
                 dataObserver.setUsersDatabase(usersDatabase);
-
                 dataObserver.update();
 
                 stage.close();

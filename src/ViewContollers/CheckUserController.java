@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 public class CheckUserController {
     private Database usersDatabase;
     private String menuItemTxt;
-    private DataObserver textArea;
+    private final DataObserver textArea; //be aware
 
     public CheckUserController (Database usersDatabase, String text, DataObserver textArea) {
         this.usersDatabase = usersDatabase;
@@ -41,7 +41,7 @@ public class CheckUserController {
         //check, if user exists
         if(usersDatabase.existingUser(username.getText())) {
             User currentUser = usersDatabase.getUser(username.getText());
-
+//_______________________________________________________makeOwner
             //check, which menu button was clicked
             if (menuItemTxt.equalsIgnoreCase("makeOwner")) {
 
@@ -57,7 +57,7 @@ public class CheckUserController {
                         e.printStackTrace();
                     }
                 }
-
+//_______________________________________________________makeLand
             } else if (menuItemTxt.equalsIgnoreCase("makeLand")) {
 
                 //check, if there exists owner object
@@ -72,7 +72,7 @@ public class CheckUserController {
                 } else {
                     ownerObjectMissing(currentUser, stage, usersDatabase);
                 }
-
+//_______________________________________________________makeRE
             } else if (menuItemTxt.equalsIgnoreCase("makeRE")) {
                 //check, if there exists owner object
                 if (currentUser.getIsOwner()) {
@@ -86,7 +86,7 @@ public class CheckUserController {
                 } else {
                     ownerObjectMissing(currentUser, stage, usersDatabase);
                 }
-
+//_______________________________________________________If cannot find ID
             } else {
                 PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR,
                         "I can't find a path :(");

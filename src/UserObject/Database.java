@@ -51,6 +51,7 @@ public class Database implements Serializable {
         for (String u : usersData.keySet()) {
             usersData.remove(u);
         }
+        SerializableUtility.saveUsers(usersData);
     }
 
     public void changeUsername(String oldUsername, String newUsername ) {

@@ -16,7 +16,6 @@ public class MakeOwnerScene extends FlowPane {
     //View controller
     private MakeOwnerController makeOwnerController;
 
-
     //For make city scene
     private Label phoneLabel = new Label("Set phone number:");
     private TextField phoneNum = new TextField();
@@ -34,7 +33,7 @@ public class MakeOwnerScene extends FlowPane {
     private Button makeBtn = new Button("Make");
 
     public MakeOwnerScene(User user, Stage stage, Database usersDatabase, DataObserver textArea) throws Exception {
-        makeOwnerController = new MakeOwnerController(usersDatabase);
+        makeOwnerController = new MakeOwnerController(usersDatabase, textArea);
 
         setScene(stage, user);
     }

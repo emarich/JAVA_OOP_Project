@@ -1,5 +1,6 @@
 package View;
 
+import OtherFunctionality.DataObserver;
 import UserObject.Database;
 import ViewContollers.RegisterController;
 import javafx.collections.FXCollections;
@@ -35,6 +36,16 @@ public class RegisterStage extends FlowPane {
         register.show();
     }
 
+    public RegisterStage(Database usersDatabase, DataObserver textArea) throws Exception {
+        registerController = new RegisterController(usersDatabase, textArea);
+
+        setScene(register);
+
+        sceneEvents();
+
+        register.show();
+    }
+
     private void setScene(Stage register) {
         register.setTitle("Registration formula");
         register.setWidth(400);
@@ -58,7 +69,6 @@ public class RegisterStage extends FlowPane {
     }
 
     public void sceneEvents () {
-
         registerController.registerUser(register, registerBtn, username, password,
                 userTypeBox);
     }

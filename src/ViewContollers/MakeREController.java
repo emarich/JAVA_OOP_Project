@@ -4,6 +4,8 @@ import CadasterObjects.Address;
 import CadasterObjects.Land;
 import CadasterObjects.RealEstate;
 import CadasterObjects.TypeLand;
+import OtherFunctionality.AddressFormatException;
+import OtherFunctionality.DataObserver;
 import OtherFunctionality.PopUpAlert;
 import OtherFunctionality.SerializableUtility;
 import Owners.Owner;
@@ -21,10 +23,12 @@ import javafx.stage.Stage;
 public class MakeREController {
     private Database usersDatabase;
     private User user;
+    private final DataObserver dataObserver;
 
-    public MakeREController(User user, Database usersDatabase) {
+    public MakeREController(User user, Database usersDatabase, DataObserver textArea) {
         this.usersDatabase = usersDatabase;
         this.user = user;
+        this.dataObserver = textArea;
     }
 
 
@@ -34,22 +38,34 @@ public class MakeREController {
                     "Real estate under register number "+regNum.getText()+" is already registered.");
         } else {
             try {
+                Address.correctAddress(address.getText());
+
                 RealEstate realEstate = new RealEstate(Integer.parseInt(regNum.getText()), address.getText(),
                         Integer.parseInt(area.getText()), user.getOwner(), REBox.getValue());
-
                 realEstate.setOwner(user.getOwner());
-
                 user.getOwner().addRE(realEstate);
-
+                user.getOwner().setHaveRealEstate(true);
                 usersDatabase.getUsersDataHM().replace(user.getUsername(), user);
 
                 SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
 
                 realEstate = null;
 
-            } catch (ArrayIndexOutOfBoundsException e) {
-                PopUpAlert alert = new PopUpAlert(Alert.AlertType.INFORMATION,
-                        "Please, write it in this format: \n (example) Hlavna 1, 801 01 Bratislava, Slovensko");
+                dataObserver.setUsersDatabase(usersDatabase);
+                dataObserver.update();
+
+                stage.close();
+            } catch (Exception e) {
+                if (e instanceof IndexOutOfBoundsException) {
+                    PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING,
+                            e.getMessage());
+                } else if (e instanceof AddressFormatException) {
+                    PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING,
+                            e.getMessage());
+                    alert.setHeaderText("Error: address");
+                } else {
+                    e.printStackTrace();
+                }
             }
         }
     }

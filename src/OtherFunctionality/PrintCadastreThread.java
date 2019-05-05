@@ -16,12 +16,14 @@ public class PrintCadastreThread implements Runnable {
     private Database usersDatabase;
     private String tName;
     private TextArea textArea;
-    private volatile boolean running = true;
+    private volatile boolean running;
+    private Ownership owner;
 
     public PrintCadastreThread (Database database, String name, TextArea textArea1) {
         usersDatabase = database;
         tName = name;
         textArea = textArea1;
+        running = true;
         System.out.println("|Creating "+ tName);
     }
 
@@ -36,7 +38,7 @@ public class PrintCadastreThread implements Runnable {
         while (running) {
             try {
                 System.out.println("|Running "+ tName);
-                Ownership owner;
+
                 for (String s : usersDatabase.getUsersDataHM().keySet()) {
                     owner = usersDatabase.getUser(s).getOwner();
 
@@ -58,6 +60,9 @@ public class PrintCadastreThread implements Runnable {
                             Land land;
                             for (int i = 0; i < owner.getOwnedLands().size(); i++) {
                                 land = owner.getOwnedLands().get(i);
+                                if (land == null) {
+                                    continue;
+                                }
                                 printFormula(land);
                             }
                             land = null;
@@ -70,6 +75,9 @@ public class PrintCadastreThread implements Runnable {
                             RealEstate realEstate;
                             for (int i = 0; i < owner.getOwnedRE().size(); i++) {
                                 realEstate = owner.getOwnedRE().get(i);
+                                if (realEstate == null) {
+                                    continue;
+                                }
                                 printFormula(realEstate);
                             }
                             realEstate = null;
@@ -85,14 +93,13 @@ public class PrintCadastreThread implements Runnable {
                     textArea.appendText("---------------------------\n");
                     textArea.appendText("---------------------------\n");
                 }
-                try {
-                    this.stopThread();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+
+                running = false;
+                stopThread();
+
             } catch (Exception e) {
                 running = false;
-                e.printStackTrace();
+                System.out.println("||||Whole running thread catching expression");
             }
         }
     }
@@ -106,8 +113,11 @@ public class PrintCadastreThread implements Runnable {
         }
     }
 
-    private void printFormula(CadasterObject cadasterObject) {
+    private void printFormula(CadasterObject cadasterObject) throws NullPointerException {
         try {
+            if (cadasterObject == null) {
+                throw  new NullPointerException();
+            }
             if (cadasterObject instanceof Land) {
                 textArea.appendText("\tRegister number: "+((Land)cadasterObject).getRegisterNum()+"\n");
                 textArea.appendText("\tAddress: "+((Land)cadasterObject).getAddress()+"\n");
@@ -122,14 +132,14 @@ public class PrintCadastreThread implements Runnable {
                 textArea.appendText("\t---------------------------\n");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("||||Printing catching expression");
+            running = false;
         }
 
     }
 
-    public void stopThread() throws InterruptedException {
+    public void stopThread() throws InterruptedException, NullPointerException {
         System.out.println("|Killing "+tName);
-        running = false;
         printThread.join();
     }
 }

@@ -101,7 +101,7 @@ public class GuestPrimaryScene extends FlowPane {
         textArea.update();
 
         //Register
-        guestController.switchRegisterStage(registerItem);
+        guestController.switchRegisterStage(registerItem, textArea);
 
         //Sign in
         guestController.logOut(signInItem, primaryStage, usersDatabase);

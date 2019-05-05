@@ -21,10 +21,10 @@ public class GuestController extends LogOut {
     }
 
     //switch to register formula
-    public void switchRegisterStage(MenuItem registerBtn) {
+    public void switchRegisterStage(MenuItem registerBtn, DataObserver textArea) {
         registerBtn.setOnAction(e -> {
             try {
-                RegisterStage registerStage = new RegisterStage(usersDatabase);
+                RegisterStage registerStage = new RegisterStage(usersDatabase, textArea);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }

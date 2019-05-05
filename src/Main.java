@@ -17,7 +17,6 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         //usersDatabase.deleteAllUsers();
-        //SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
         usersDatabase.setUsersDataHM(SerializableUtility.loadUsers());
 
         primaryStage.setWidth(600);

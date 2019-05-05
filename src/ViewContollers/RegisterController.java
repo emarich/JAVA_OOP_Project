@@ -1,23 +1,26 @@
 package ViewContollers;
 
+import OtherFunctionality.DataObserver;
 import OtherFunctionality.PopUpAlert;
-import OtherFunctionality.SerializableUtility;
 import UserObject.Database;
-import UserObject.User;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.util.HashMap;
-
 public class RegisterController {
     private static Database usersDatabase;
+    private final DataObserver dataObserver;
 
     //Constructor
     public RegisterController (Database usersData) {
         usersDatabase = usersData;
+        dataObserver = null;
+    }
+    public RegisterController (Database usersData, DataObserver texArea) {
+        usersDatabase = usersData;
+        dataObserver = texArea;
     }
 
     public void registerUser(Stage stage, Button registerBtn, TextField username, TextField password, ChoiceBox<String> userType) {
@@ -36,6 +39,12 @@ public class RegisterController {
 
                     } else {
                         usersDatabase.addUser(username.getText(), password.getText(), userType.getValue());
+
+                        if (dataObserver != null) {
+                            dataObserver.setUsersDatabase(usersDatabase);
+                            dataObserver.update();
+                        }
+
                         stage.close();
                     }
                 } catch (NullPointerException e) {
@@ -43,9 +52,5 @@ public class RegisterController {
                 }
             }
         });
-    }
-
-    public static Database getNewData() {
-        return usersDatabase;
     }
 }

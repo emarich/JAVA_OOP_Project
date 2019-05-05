@@ -113,15 +113,13 @@ public class OfficePrimaryScene extends FlowPane {
         textArea.setUsersDatabase(usersDatabase);
         textArea.update();
 
-        officeController.switchRegisterStage(addUserItem);
+        officeController.switchRegisterStage(addUserItem, textArea);
 
         officeController.logOut(signOutItem, primaryStage, usersDatabase);
 
         officeController.makeMenuItemClicked(makeOwnerItem, textArea);
         officeController.makeMenuItemClicked(makeLandItem, textArea);
         officeController.makeMenuItemClicked(makeREItem, textArea);
-
-        //officeController.printCadastre(textArea);
 
         //Change prompt text, when you select, what are you searching for
         findChoiceBox.setOnAction(event -> {

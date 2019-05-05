@@ -34,7 +34,7 @@ public class MakeREStage extends FlowPane {
     private Button makeBtn = new Button("Make");
 
     public MakeREStage(User user, Database usersDatabase, DataObserver textArea) throws Exception {
-        makeREController = new MakeREController(user, usersDatabase);
+        makeREController = new MakeREController(user, usersDatabase, textArea);
 
         setScene(stage, user);
 
