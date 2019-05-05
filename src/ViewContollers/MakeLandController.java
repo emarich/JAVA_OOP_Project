@@ -4,6 +4,7 @@ import CadasterObjects.Address;
 import CadasterObjects.Land;
 import CadasterObjects.TypeLand;
 import OtherFunctionality.AddressFormatException;
+import OtherFunctionality.DataObserver;
 import OtherFunctionality.PopUpAlert;
 import OtherFunctionality.SerializableUtility;
 import Owners.Owner;
@@ -16,16 +17,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.util.LinkedList;
+import java.util.List;
+
 //refactor later
 public class MakeLandController {
     private Database usersDatabase;
     private User user;
+    private final DataObserver dataObserver;
 
-    public MakeLandController(User user, Database usersDatabase) {
+    public MakeLandController(User user, Database usersDatabase, DataObserver textArea) {
         this.usersDatabase = usersDatabase;
         this.user = user;
+        this.dataObserver = textArea;
     }
-
 
     public void makeLandClicked(TextField regNum, TextField address, TextField area, Stage stage) {
         if (existingRegNum(Integer.parseInt(regNum.getText()))) {
@@ -48,6 +53,10 @@ public class MakeLandController {
                 SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
 
                 land = null;
+
+                dataObserver.setUsersDatabase(usersDatabase);
+
+                dataObserver.update();
 
                 stage.close();
 
@@ -76,11 +85,11 @@ public class MakeLandController {
                 }
                 if (!(usersDatabase.getUser(s).getOwner().getOwnedLands().isEmpty())) {
                     System.out.println(s);
-                    for (int i = 0; i <= usersDatabase.getUser(s).getOwner().getOwnedLands().size(); i++) {
+                    /*for (int i = 0; i <= usersDatabase.getUser(s).getOwner().getOwnedLands().size(); i++) {
                         if (usersDatabase.getUser(s).getOwner().getOwnedLands().get(i).getRegisterNum() == currentRegNum) {
                             return true;
                         }
-                    }
+                    }*/
                 }
             }
         } catch (NullPointerException e) {

@@ -1,5 +1,6 @@
 package View;
 
+import OtherFunctionality.DataObserver;
 import UserObject.Database;
 import ViewContollers.GuestController;
 import ViewContollers.LogOut;
@@ -41,7 +42,7 @@ public class OfficePrimaryScene extends FlowPane {
     //Text fields
     private TextField searchField = new TextField();
 
-    private TextArea textArea = new TextArea();
+    private final DataObserver textArea = new DataObserver();
 
     private ChoiceBox<String> findChoiceBox =
             new ChoiceBox<>(FXCollections.observableArrayList( "address", "owner"));
@@ -55,7 +56,7 @@ public class OfficePrimaryScene extends FlowPane {
 
         setScene(primaryStage, username);
 
-        sceneEvents(primaryStage, usersDatabase);
+        sceneEvents(primaryStage);
 
         primaryStage.show();
     }
@@ -106,20 +107,21 @@ public class OfficePrimaryScene extends FlowPane {
         textArea.prefHeightProperty().bind(vBox.heightProperty());
         textArea.setEditable(false);
         textArea.setWrapText(true);
-
     }
 
-    public void sceneEvents(Stage primaryStage, Database usersData) {
+    public void sceneEvents(Stage primaryStage) {
+        textArea.setUsersDatabase(usersDatabase);
+        textArea.update();
 
         officeController.switchRegisterStage(addUserItem);
 
-        officeController.logOut(signOutItem, primaryStage, usersData);
+        officeController.logOut(signOutItem, primaryStage, usersDatabase);
 
-        officeController.makeMenuItemClicked(makeOwnerItem);
-        officeController.makeMenuItemClicked(makeLandItem);
-        officeController.makeMenuItemClicked(makeREItem);
+        officeController.makeMenuItemClicked(makeOwnerItem, textArea);
+        officeController.makeMenuItemClicked(makeLandItem, textArea);
+        officeController.makeMenuItemClicked(makeREItem, textArea);
 
-        officeController.printCadastre(textArea);
+        //officeController.printCadastre(textArea);
 
         //Change prompt text, when you select, what are you searching for
         findChoiceBox.setOnAction(event -> {

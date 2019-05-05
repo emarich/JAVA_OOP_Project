@@ -1,5 +1,6 @@
 package ViewContollers;
 
+import OtherFunctionality.DataObserver;
 import OtherFunctionality.PopUpAlert;
 import OtherFunctionality.SerializableUtility;
 import UserObject.Database;
@@ -18,23 +19,25 @@ import javafx.stage.Stage;
 public class CheckUserController {
     private Database usersDatabase;
     private String menuItemTxt;
+    private DataObserver textArea;
 
-    public CheckUserController (Database usersDatabase, String text) {
+    public CheckUserController (Database usersDatabase, String text, DataObserver textArea) {
         this.usersDatabase = usersDatabase;
         menuItemTxt = text;
+        this.textArea = textArea;
     }
 
     public void actions(TextField username, Node node, Stage stage) {
         if (node instanceof Button) {
-            ((Button)node).setOnAction(event -> checkUser(username, stage));
+            ((Button)node).setOnAction(event -> checkUser(username, stage, textArea));
         } else if (node instanceof TextField) {
-            ((TextField)node).setOnAction(event -> checkUser(username, stage));
+            ((TextField)node).setOnAction(event -> checkUser(username, stage, textArea));
         }
 
     }
 
     //check user, if he have already object Owner created
-    public void checkUser(TextField username, Stage stage) {
+    public void checkUser(TextField username, Stage stage, DataObserver textArea) {
         //check, if user exists
         if(usersDatabase.existingUser(username.getText())) {
             User currentUser = usersDatabase.getUser(username.getText());
@@ -49,7 +52,7 @@ public class CheckUserController {
 
                 } else {
                     try {
-                        MakeOwnerScene makeOwnerScene = new MakeOwnerScene(currentUser, stage, usersDatabase);
+                        MakeOwnerScene makeOwnerScene = new MakeOwnerScene(currentUser, stage, usersDatabase, textArea);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -62,7 +65,7 @@ public class CheckUserController {
                     //if owner exists...
                     try {
                         stage.close();
-                        MakeLandStage makeLandStage = new MakeLandStage(currentUser, usersDatabase);
+                        MakeLandStage makeLandStage = new MakeLandStage(currentUser, usersDatabase, textArea);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -76,7 +79,7 @@ public class CheckUserController {
                     //if owner exists...
                     try {
                         stage.close();
-                        MakeREStage makeREStage = new MakeREStage(currentUser, usersDatabase);
+                        MakeREStage makeREStage = new MakeREStage(currentUser, usersDatabase, textArea);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -98,7 +101,7 @@ public class CheckUserController {
         try {
             PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR,
                     "User is not owner, at first, you must create it.");
-            MakeOwnerScene makeOwnerScene = new MakeOwnerScene(user, stage, usersDatabase);
+            MakeOwnerScene makeOwnerScene = new MakeOwnerScene(user, stage, usersDatabase, textArea);
         } catch (Exception e) {
             e.printStackTrace();
         }

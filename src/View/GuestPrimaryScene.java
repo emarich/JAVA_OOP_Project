@@ -1,5 +1,6 @@
 package View;
 
+import OtherFunctionality.DataObserver;
 import OtherFunctionality.SerializableUtility;
 import UserObject.Database;
 import ViewContollers.GuestController;
@@ -23,6 +24,8 @@ public class GuestPrimaryScene extends FlowPane {
     //Controller
     private GuestController guestController;
 
+    private Database usersDatabase;
+
     private VBox vBox = new VBox();
 
     //Menu
@@ -37,7 +40,7 @@ public class GuestPrimaryScene extends FlowPane {
     //Text fields
     private TextField searchField = new TextField();
 
-    private TextArea textArea = new TextArea();
+    private DataObserver textArea = new DataObserver();
 
     private ChoiceBox<String> findChoiceBox =
             new ChoiceBox<>(FXCollections.observableArrayList( "address", "owner"));
@@ -46,15 +49,18 @@ public class GuestPrimaryScene extends FlowPane {
     public GuestPrimaryScene(Stage primaryStage, Database usersDatabase) {
         guestController = new GuestController(usersDatabase);
 
+        this.usersDatabase = usersDatabase;
+
         setScene(primaryStage);
 
-        sceneEvents(primaryStage, usersDatabase);
+        sceneEvents(primaryStage);
 
         primaryStage.show();
     }
 
     private void setScene(Stage primaryStage) {
         primaryStage.setScene(new Scene(this, primaryStage.getWidth(), primaryStage.getHeight()));
+
 
         vBox.getChildren().addAll(searchField, findChoiceBox, textArea);
 
@@ -84,20 +90,21 @@ public class GuestPrimaryScene extends FlowPane {
         searchField.setPromptText("Find land or real estate by address");
         searchField.setMaxWidth(300);
 
+
         textArea.prefHeightProperty().bind(vBox.heightProperty());
         textArea.setEditable(false);
         textArea.setWrapText(true);
     }
 
-    private void sceneEvents (Stage primaryStage, Database usersDatabse) {
+    private void sceneEvents (Stage primaryStage) {
+        textArea.setUsersDatabase(usersDatabase);
+        textArea.update();
 
         //Register
         guestController.switchRegisterStage(registerItem);
 
         //Sign in
-        guestController.logOut(signInItem, primaryStage, usersDatabse);
-
-        guestController.printCadastre(textArea);
+        guestController.logOut(signInItem, primaryStage, usersDatabase);
 
         //Change prompt text, when you select, what are you searching for
         findChoiceBox.setOnAction(event -> {

@@ -1,5 +1,6 @@
 package View;
 
+import OtherFunctionality.DataObserver;
 import UserObject.Database;
 import UserObject.User;
 import ViewContollers.MakeLandController;
@@ -27,8 +28,8 @@ public class MakeLandStage extends FlowPane {
 
     private Button makeBtn = new Button("Make");
 
-    public MakeLandStage(User user, Database usersDatabase) throws Exception {
-        makeLandController = new MakeLandController(user, usersDatabase);
+    public MakeLandStage(User user, Database usersDatabase, DataObserver textArea) throws Exception {
+        makeLandController = new MakeLandController(user, usersDatabase, textArea);
 
         setScene(stage, user);
 
@@ -56,8 +57,7 @@ public class MakeLandStage extends FlowPane {
         makeBtn.setPrefWidth(280);
     }
 
-    public void sceneEvents () {
-
+    private void sceneEvents () {
         makeBtn.setOnAction(event -> {
             makeLandController.makeLandClicked(regNum, address, area, stage);
         });

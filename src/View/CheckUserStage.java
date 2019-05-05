@@ -1,5 +1,6 @@
 package View;
 
+import OtherFunctionality.DataObserver;
 import UserObject.Database;
 import ViewContollers.CheckUserController;
 import ViewContollers.MakeOwnerController;
@@ -23,8 +24,8 @@ public class CheckUserStage extends FlowPane {
     private TextField username = new TextField();
     private Button checkButton = new Button("Check user");
 
-    public CheckUserStage(Database usersDatabase, String text) throws Exception {
-        checkUserController = new CheckUserController(usersDatabase, text);
+    public CheckUserStage(Database usersDatabase, String text, DataObserver textArea) throws Exception {
+        checkUserController = new CheckUserController(usersDatabase, text, textArea);
 
         setScene(stage);
 

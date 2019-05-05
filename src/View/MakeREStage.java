@@ -1,5 +1,6 @@
 package View;
 
+import OtherFunctionality.DataObserver;
 import UserObject.Database;
 import UserObject.User;
 import ViewContollers.MakeLandController;
@@ -32,7 +33,7 @@ public class MakeREStage extends FlowPane {
 
     private Button makeBtn = new Button("Make");
 
-    public MakeREStage(User user, Database usersDatabase) throws Exception {
+    public MakeREStage(User user, Database usersDatabase, DataObserver textArea) throws Exception {
         makeREController = new MakeREController(user, usersDatabase);
 
         setScene(stage, user);

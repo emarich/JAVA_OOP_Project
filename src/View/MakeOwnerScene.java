@@ -1,5 +1,6 @@
 package View;
 
+import OtherFunctionality.DataObserver;
 import UserObject.Database;
 import UserObject.User;
 import ViewContollers.MakeOwnerController;
@@ -32,7 +33,7 @@ public class MakeOwnerScene extends FlowPane {
 
     private Button makeBtn = new Button("Make");
 
-    public MakeOwnerScene(User user, Stage stage, Database usersDatabase) throws Exception {
+    public MakeOwnerScene(User user, Stage stage, Database usersDatabase, DataObserver textArea) throws Exception {
         makeOwnerController = new MakeOwnerController(usersDatabase);
 
         setScene(stage, user);

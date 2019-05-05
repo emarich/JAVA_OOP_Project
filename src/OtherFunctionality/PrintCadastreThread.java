@@ -16,6 +16,7 @@ public class PrintCadastreThread implements Runnable {
     private Database usersDatabase;
     private String tName;
     private TextArea textArea;
+    private volatile boolean running = true;
 
     public PrintCadastreThread (Database database, String name, TextArea textArea1) {
         usersDatabase = database;
@@ -24,83 +25,112 @@ public class PrintCadastreThread implements Runnable {
         System.out.println("Creating "+ tName);
     }
 
+    public void setTextArea(TextArea textArea) {
+        this.textArea = textArea;
+    }
+    public Thread getPrintThread() {
+        return printThread;
+    }
+
     public void run() {
-        System.out.println("Running "+ tName);
-        Ownership owner;
-        for (String s : usersDatabase.getUsersDataHM().keySet()) {
-            owner = usersDatabase.getUser(s).getOwner();
+        while (running) {
+            try {
+                System.out.println("Running "+ tName);
+                Ownership owner;
+                for (String s : usersDatabase.getUsersDataHM().keySet()) {
+                    owner = usersDatabase.getUser(s).getOwner();
 
-            textArea.appendText("\n|| Username: "+s+" \n");
+                    textArea.appendText("\n|| Username: "+s+" \n");
 
-            if (usersDatabase.getUser(s).getIsOwner()) {
-                if (owner instanceof Owner) {
-                    textArea.appendText("|| Name: "+((Owner) owner).getName()+"\n");
-                    textArea.appendText("|| Mutual address: "+((Owner) owner).getMutualAddress()+"\n");
-                } else if (owner instanceof City){
-                    textArea.appendText("|| Phone number: "+((City) owner).getPhoneNumber()+"\n");
-                    textArea.appendText("|| Email: "+((City) owner).getEmail()+"\n");
-                } else {
-                    textArea.appendText("Error: object Owner has different instance\n");
-                }
+                    if (usersDatabase.getUser(s).getIsOwner()) {
+                        if (owner instanceof Owner) {
+                            textArea.appendText("|| Name: "+((Owner) owner).getName()+"\n");
+                            textArea.appendText("|| Mutual address: "+((Owner) owner).getMutualAddress()+"\n");
+                        } else if (owner instanceof City){
+                            textArea.appendText("|| Phone number: "+((City) owner).getPhoneNumber()+"\n");
+                            textArea.appendText("|| Email: "+((City) owner).getEmail()+"\n");
+                        } else {
+                            textArea.appendText("Error: object Owner has different instance\n");
+                        }
 
-                textArea.appendText("LANDS:---------------------\n");
-                if (owner.getHaveLand()) {
-                    Land land;
-                    for (int i = 0; i < owner.getOwnedLands().size(); i++) {
-                        land = owner.getOwnedLands().get(i);
-                        printFormula(land);
+                        textArea.appendText("LANDS:---------------------\n");
+                        if (owner.getHaveLand()) {
+                            Land land;
+                            for (int i = 0; i < owner.getOwnedLands().size(); i++) {
+                                land = owner.getOwnedLands().get(i);
+                                printFormula(land);
+                            }
+                            land = null;
+                        } else {
+                            textArea.appendText("...none...\n");
+                        }
+
+                        textArea.appendText("REAL ESTATES:--------------\n");
+                        if (owner.getHaveRealEstate()) {
+                            RealEstate realEstate;
+                            for (int i = 0; i < owner.getOwnedRE().size(); i++) {
+                                realEstate = owner.getOwnedRE().get(i);
+                                printFormula(realEstate);
+                            }
+                            realEstate = null;
+                        } else {
+                            textArea.appendText("...none...\n");
+                        }
+                    } else {
+                        textArea.appendText("User "+s+" doesn't have any property.\n");
                     }
-                    land = null;
-                } else {
-                    textArea.appendText("...none...\n");
-                }
 
-                textArea.appendText("REAL ESTATES:--------------\n");
-                if (owner.getHaveRealEstate()) {
-                    RealEstate realEstate;
-                    for (int i = 0; i < owner.getOwnedRE().size(); i++) {
-                        realEstate = owner.getOwnedRE().get(i);
-                        printFormula(realEstate);
-                    }
-                    realEstate = null;
-                } else {
-                    textArea.appendText("...none...\n");
+                    textArea.appendText("---------------------------\n");
+                    textArea.appendText("---------------------------\n");
+                    textArea.appendText("---------------------------\n");
+                    textArea.appendText("---------------------------\n");
                 }
-            } else {
-                textArea.appendText("User "+s+" doesn't have any property.\n");
+                try {
+                    this.stopThread();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } catch (Exception e) {
+                running = false;
+                e.printStackTrace();
             }
-
-            textArea.appendText("---------------------------\n");
-            textArea.appendText("---------------------------\n");
-            textArea.appendText("---------------------------\n");
-            textArea.appendText("---------------------------\n");
         }
-
     }
 
     public void start() {
         System.out.println("Starting "+ tName);
         if (printThread == null) {
-            printThread = new Thread(this, tName);
+            printThread = new Thread(this);
+            printThread.setName(tName);
+            System.out.println("Starting new thread "+ tName);
             printThread.start();
         }
     }
 
     private void printFormula(CadasterObject cadasterObject) {
-        if (cadasterObject instanceof Land) {
-            textArea.appendText("\tRegister number: "+((Land)cadasterObject).getRegisterNum()+"\n");
-            textArea.appendText("\tAddress: "+((Land)cadasterObject).getAddress()+"\n");
-            textArea.appendText("\tType: "+((Land)cadasterObject).getTypeLand()+"\n");
-            textArea.appendText("\tArea: "+((Land)cadasterObject).getArea()+"\n");
-            textArea.appendText("\t---------------------------\n");
-        } else if (cadasterObject instanceof RealEstate) {
-            textArea.appendText("\tRegister number: "+((RealEstate)cadasterObject).getRegisterNum()+"\n");
-            textArea.appendText("\tAddress: "+((RealEstate)cadasterObject).getAddress()+"\n");
-            textArea.appendText("\tType: "+((RealEstate)cadasterObject).getTypeRealEstate()+"\n");
-            textArea.appendText("\tArea: "+((RealEstate)cadasterObject).getArea()+"\n");
-            textArea.appendText("\t---------------------------\n");
+        try {
+            if (cadasterObject instanceof Land) {
+                textArea.appendText("\tRegister number: "+((Land)cadasterObject).getRegisterNum()+"\n");
+                textArea.appendText("\tAddress: "+((Land)cadasterObject).getAddress()+"\n");
+                textArea.appendText("\tType: "+((Land)cadasterObject).getTypeLand()+"\n");
+                textArea.appendText("\tArea: "+((Land)cadasterObject).getArea()+"\n");
+                textArea.appendText("\t---------------------------\n");
+            } else if (cadasterObject instanceof RealEstate) {
+                textArea.appendText("\tRegister number: "+((RealEstate)cadasterObject).getRegisterNum()+"\n");
+                textArea.appendText("\tAddress: "+((RealEstate)cadasterObject).getAddress()+"\n");
+                textArea.appendText("\tType: "+((RealEstate)cadasterObject).getTypeRealEstate()+"\n");
+                textArea.appendText("\tArea: "+((RealEstate)cadasterObject).getArea()+"\n");
+                textArea.appendText("\t---------------------------\n");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
 
+    public void stopThread() throws InterruptedException {
+        System.out.println("Killing "+tName);
+        running = false;
+        printThread.join();
+    }
 }

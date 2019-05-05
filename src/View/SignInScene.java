@@ -77,9 +77,8 @@ public class SignInScene extends FlowPane {
         signInController.switchRegisterStage(registerBtn);
     }
 
-    //asi prerobit
     private void checkDatabase(Database usersDatabase) {
-        if (usersDatabase.getUsersDataHM().isEmpty()) {
+        if (usersDatabase.getUsersDataHM() == null || usersDatabase.getUsersDataHM().isEmpty()) {
             PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR,
                     "Users not found." +
                             "\nPlease register.");

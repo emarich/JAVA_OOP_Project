@@ -2,6 +2,7 @@ package ViewContollers;
 
 import Offices.CadastralOffice;
 import Offices.Office;
+import OtherFunctionality.DataObserver;
 import OtherFunctionality.PrintCadastreThread;
 import UserObject.Database;
 import View.CheckUserStage;
@@ -17,14 +18,13 @@ public class OfficeController extends GuestController {
 
     public OfficeController(Database usersDatabase) {
         this.usersDatabase = usersDatabase;
-
     }
 
     //switch to makeStage
-    public void makeMenuItemClicked (MenuItem menuItem) {
+    public void makeMenuItemClicked (MenuItem menuItem, DataObserver textArea) {
         menuItem.setOnAction(event -> {
             try {
-                CheckUserStage checkUserStage = new CheckUserStage(usersDatabase, menuItem.getId());
+                CheckUserStage checkUserStage = new CheckUserStage(usersDatabase, menuItem.getId(), textArea);
             } catch (Exception e) {
                 e.printStackTrace();
             }

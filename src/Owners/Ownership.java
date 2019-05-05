@@ -78,12 +78,21 @@ public abstract class Ownership implements Serializable {
     public static void phoneNumberCheck(String phoneNumber) throws PhoneNumberFormatException {
         char firstChar = phoneNumber.charAt(0);
         if (phoneNumber.matches("[0-9 +]+")) {
+            int count = 0;
+            for (int i = 0; i < phoneNumber.length(); i++) {
+                if (Character.isDigit(phoneNumber.charAt(i))) {
+                    count++;
+                }
+            }
+            if (phoneNumber.charAt(0)== '+') {
+                count++;
+            }
 
-            if (phoneNumber.length() == 10 || phoneNumber.length() == 12) {
+            if (count == 10) {
                 if (firstChar != '0') {
                     throw new PhoneNumberFormatException("Invalid format. \"0\" must be first");
                 }
-            } else if (phoneNumber.length() == 13 || phoneNumber.length() == 15) {
+            } else if (count == 13) {
                 if (firstChar != '+') {
                     throw new PhoneNumberFormatException("Invalid format. \"+\" must be first");
                 }

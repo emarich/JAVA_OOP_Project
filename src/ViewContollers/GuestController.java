@@ -1,5 +1,6 @@
 package ViewContollers;
 
+import OtherFunctionality.DataObserver;
 import OtherFunctionality.PrintCadastreThread;
 import OtherFunctionality.SerializableUtility;
 import UserObject.Database;
@@ -7,7 +8,6 @@ import View.RegisterStage;
 import javafx.scene.control.*;
 
 public class GuestController extends LogOut {
-
     protected Database usersDatabase;
 
     //Constructor
@@ -39,9 +39,6 @@ public class GuestController extends LogOut {
         }
     }
 
-    public void  printCadastre(TextArea textArea) {
-        PrintCadastreThread t1 = new PrintCadastreThread(usersDatabase, "PrintThreadOffice", textArea);
-        t1.start();
-    }
+
 
 }
