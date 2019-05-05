@@ -22,7 +22,7 @@ public class PrintCadastreThread implements Runnable {
         usersDatabase = database;
         tName = name;
         textArea = textArea1;
-        System.out.println("Creating "+ tName);
+        System.out.println("|Creating "+ tName);
     }
 
     public void setTextArea(TextArea textArea) {
@@ -35,7 +35,7 @@ public class PrintCadastreThread implements Runnable {
     public void run() {
         while (running) {
             try {
-                System.out.println("Running "+ tName);
+                System.out.println("|Running "+ tName);
                 Ownership owner;
                 for (String s : usersDatabase.getUsersDataHM().keySet()) {
                     owner = usersDatabase.getUser(s).getOwner();
@@ -98,11 +98,10 @@ public class PrintCadastreThread implements Runnable {
     }
 
     public void start() {
-        System.out.println("Starting "+ tName);
+        System.out.println("|Starting "+ tName);
         if (printThread == null) {
             printThread = new Thread(this);
             printThread.setName(tName);
-            System.out.println("Starting new thread "+ tName);
             printThread.start();
         }
     }
@@ -129,7 +128,7 @@ public class PrintCadastreThread implements Runnable {
     }
 
     public void stopThread() throws InterruptedException {
-        System.out.println("Killing "+tName);
+        System.out.println("|Killing "+tName);
         running = false;
         printThread.join();
     }

@@ -2,7 +2,9 @@ package CadasterObjects;
 
 import Owners.Ownership;
 
-public abstract class CadasterObject {
+import java.io.Serializable;
+
+public abstract class CadasterObject implements Serializable {
     protected int registerNum;
     protected String address;
     protected int area;
