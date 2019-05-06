@@ -64,7 +64,7 @@ public class MakeREStage extends FlowPane {
 
     public void sceneEvents () {
         makeBtn.setOnAction(event -> {
-            makeREController.makeLandClicked(makeBtn, regNum, address, area, realEstateTypeBox, stage);
+            makeREController.makeREClicked(regNum, address, area, realEstateTypeBox, stage);
         });
     }
 }

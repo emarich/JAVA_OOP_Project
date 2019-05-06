@@ -1,5 +1,7 @@
 package CadasterObjects;
 
+import OtherFunctionality.FindSubstring;
+import OtherFunctionality.WrongLandformInputException;
 import Owners.City;
 import Owners.Owner;
 import Owners.Ownership;
@@ -10,16 +12,19 @@ import java.util.List;
 
 public class Land extends CadasterObject implements Serializable {
     private TypeLand typeLand;
+    private Landform landform;
     //land can have more real estates
     private List<RealEstate> realEstates = new ArrayList<>();
     private boolean haveRE = false;
 
-    public Land(int regNum, String address, int area, Ownership owner) {
+    public Land(int regNum, String address, int area, Ownership owner, String form) throws WrongLandformInputException {
         this.registerNum = regNum;
         this.address = address;
         this.area = area;
         setTypeLand(owner);
         this.owner = owner;
+        setLandform(form);
+
     }
 
     public Land(){}
@@ -40,6 +45,21 @@ public class Land extends CadasterObject implements Serializable {
         return typeLand;
     }
 
+    public void setLandform(String form) throws WrongLandformInputException {
+        for (Landform l : Landform.values()) {
+            if (FindSubstring.findExact(l.getShortName(), form)) {
+                landform = l;
+                break;
+            }
+        }
+        if (landform == null) {
+            throw new WrongLandformInputException("Error: landform input");
+        }
+    }
+    public Landform getLandform() {
+        return landform;
+    }
+
     public void setRealEstates(List<RealEstate> realEstates) {
         this.realEstates = realEstates; }
     public List<RealEstate> getRealEstates() {
@@ -51,6 +71,10 @@ public class Land extends CadasterObject implements Serializable {
     }
     public Ownership getOwner() {
         return owner;
+    }
+
+    public boolean getHaveRE() {
+        return haveRE;
     }
     //Getters and Setters-------------------------------------------------------
 

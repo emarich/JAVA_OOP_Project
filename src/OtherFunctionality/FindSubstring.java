@@ -2,7 +2,7 @@ package OtherFunctionality;
 
 public class FindSubstring { //find if there is concrete substring in string
 
-    static public boolean find(String str1, String str2) {
+    static public boolean findExact(String str1, String str2) {
         String longestSubstring = "";
         String substring;
         str1 = str1.toLowerCase();
@@ -29,7 +29,7 @@ public class FindSubstring { //find if there is concrete substring in string
             }
         }
 
-        if (str1.contains(longestSubstring) || str2.contains(longestSubstring)) {
+        if (str1.equals(longestSubstring) && str2.contains(longestSubstring)) {
             return true;
         }
 

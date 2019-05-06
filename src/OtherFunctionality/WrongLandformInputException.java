@@ -1,8 +1,8 @@
 package OtherFunctionality;
 
-public class WrongLandformInput extends Exception {
-    public WrongLandformInput() { super(); }
-    public WrongLandformInput(String message) { super(message); }
-    public WrongLandformInput(String message, Throwable cause) { super(message, cause); }
-    public WrongLandformInput(Throwable cause) { super(cause); }
+public class WrongLandformInputException extends Exception {
+    public WrongLandformInputException() { super(); }
+    public WrongLandformInputException(String message) { super(message); }
+    public WrongLandformInputException(String message, Throwable cause) { super(message, cause); }
+    public WrongLandformInputException(Throwable cause) { super(cause); }
 }

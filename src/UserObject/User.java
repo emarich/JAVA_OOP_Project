@@ -4,19 +4,22 @@ import Offices.CadastralOffice;
 import Offices.Office;
 import Owners.Owner;
 import Owners.Ownership;
+import Requests.Request;
 import javafx.fxml.FXML;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class User implements Serializable {
     private String username;
     private String password;
     private UserType userType;
 
-    private Ownership owner;
+    private Ownership owner = null;
     private boolean isOwner = false;
 
-
+    private List<Request> requests = new ArrayList<>();
 
     public User(String username, String password, String userType) {
         setUsername(username);

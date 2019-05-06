@@ -8,21 +8,20 @@ import java.io.Serializable;
 public class Address {
     public static void correctAddress(String address) throws AddressFormatException { //checks, if address is in correct format
         String[] outputAddress = new String[3];
+        boolean bool = false;
         try {
-            boolean bool = false;
             outputAddress = address.split(","); //splits string to street, city and state string
 
             for (int i = 0; i < 3; i++) {
-                if (outputAddress[i] == null) { //if there is nothing in one of the strings
+                if (outputAddress[i] == null || outputAddress[i].isEmpty()) { //if there is nothing in one of the strings
                     throw new AddressFormatException("You must enter street, city and state");
                 }
 
                 //checks if the characters is a letter or number, if it is letter, it will return true
-                for (int j = 0; j < outputAddress[i].length(); j++) {
-                    if (Character.isLetter(outputAddress[i].charAt(j)) ||
-                        Character.isDigit(outputAddress[i].charAt(j))) {
-                        bool = true;
-                    }
+                if (outputAddress[i].matches(".*\\w.*")) {
+                    bool = true;
+                } else {
+                    bool = false;
                 }
 
                 if (!bool) {
@@ -30,7 +29,6 @@ public class Address {
                 }
             }
             outputAddress = null;
-
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new AddressFormatException("Please, write it in this format:\n(example) Hlavna 1, 801 01 Bratislava, Slovensko");
         }
@@ -41,9 +39,10 @@ public class Address {
         String finalElement = ""; //one element of the address
 
         String[] outputAddress = new String[3];
-        outputAddress = address.split(",", 3); //splits string to street, city and state string
+        outputAddress = address.split(","); //splits string to street, city and state string
 
-        for(int x = 0; x < outputAddress.length; ++x) { //or x<3
+        for(int x = 0; x < 3; x++) {
+            outputAddress[x] = outputAddress[x].trim();
 
             String[] element = outputAddress[x].split("\\s+"); //get element in array
             int count = 0;
@@ -63,12 +62,12 @@ public class Address {
                     break;
                 }
 
-                finalElement = finalElement + element[i]+" ";
+                finalElement = finalElement + element[i]+ " ";
             }
 
-            if (x == outputAddress.length-1) { //or x==2
+            if (x == 2) {
                 finalAddress = finalAddress + finalElement;
-                break;
+                return  finalAddress;
             }
 
             finalAddress = finalAddress + finalElement+",";
