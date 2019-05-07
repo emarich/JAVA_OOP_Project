@@ -1,4 +1,4 @@
-package OtherFunctionality;
+package MyExceptions;
 
 public class WrongLandformInputException extends Exception {
     public WrongLandformInputException() { super(); }

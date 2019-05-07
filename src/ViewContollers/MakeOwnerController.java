@@ -1,19 +1,18 @@
 package ViewContollers;
 
 import CadasterObjects.Address;
+import MyExceptions.AddressFormatException;
+import MyExceptions.EmailFormatException;
+import MyExceptions.PhoneNumberFormatException;
 import OtherFunctionality.*;
 import Owners.City;
 import Owners.Owner;
 import Owners.Ownership;
 import UserObject.Database;
 import UserObject.User;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
 import java.time.format.DateTimeParseException;

@@ -1,9 +1,6 @@
 package CadasterObjects;
 
-import OtherFunctionality.AddressFormatException;
-import com.sun.deploy.util.ArrayUtil;
-
-import java.io.Serializable;
+import MyExceptions.AddressFormatException;
 
 public class Address {
     public static void correctAddress(String address) throws AddressFormatException { //checks, if address is in correct format

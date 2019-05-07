@@ -1,4 +1,4 @@
-package OtherFunctionality;
+package MyExceptions;
 
 public class EmailFormatException extends Exception {
     public EmailFormatException() { super(); }

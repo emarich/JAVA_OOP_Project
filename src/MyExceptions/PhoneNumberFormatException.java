@@ -1,4 +1,4 @@
-package OtherFunctionality;
+package MyExceptions;
 
 public class PhoneNumberFormatException extends Exception {
     public PhoneNumberFormatException() { super(); }

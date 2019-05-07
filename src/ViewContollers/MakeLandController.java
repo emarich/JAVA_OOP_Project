@@ -2,8 +2,10 @@ package ViewContollers;
 
 import CadasterObjects.Address;
 import CadasterObjects.Land;
+import MyExceptions.AddressFormatException;
+import MyExceptions.SameRegNumException;
+import MyExceptions.WrongLandformInputException;
 import OtherFunctionality.*;
-import Owners.Ownership;
 import UserObject.Database;
 import UserObject.User;
 import javafx.scene.control.Alert;
@@ -30,7 +32,7 @@ public class MakeLandController {
             Land land = new Land(Integer.parseInt(regNum.getText()), address.getText(),
                     Integer.parseInt(area.getText()), user.getOwner(), landBox.getValue());
 
-            user.getOwner().existingRegNum(land);
+            CadastreSearch.compareRegNum(land, usersDatabase);
 
             land.setOwner(user.getOwner());
             user.getOwner().addLand(land);

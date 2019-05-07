@@ -1,4 +1,4 @@
-package OtherFunctionality;
+package MyExceptions;
 
 public class AddressFormatException extends Exception {
     public AddressFormatException() { super(); }

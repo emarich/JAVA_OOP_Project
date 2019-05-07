@@ -1,18 +1,12 @@
 package Owners;
 
-import CadasterObjects.CadasterObject;
 import CadasterObjects.Land;
 import CadasterObjects.RealEstate;
-import OtherFunctionality.EmailFormatException;
-import OtherFunctionality.FindSubstring;
-import OtherFunctionality.PhoneNumberFormatException;
-import OtherFunctionality.SameRegNumException;
-import UserObject.Database;
-import UserObject.User;
+import MyExceptions.EmailFormatException;
+import MyExceptions.PhoneNumberFormatException;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public abstract class Ownership implements Serializable {
@@ -136,105 +130,6 @@ public abstract class Ownership implements Serializable {
             if(!(usersEmail.matches("[a-z0-9_]+@.*"))) {
                 throw new EmailFormatException("Invalid characters");
             }
-    }
-
-
-    public void existingRegNum(Land land) throws SameRegNumException {
-        int seekingNum = land.getRegisterNum();
-
-        if (this.haveLand) {
-            for (Land l : this.getOwnedLands()) {
-                if (l.getRegisterNum() == seekingNum) {
-                    compareAddress(land, l, seekingNum);
-                }
-            }
-        }
-    }
-
-    public void existingRegNum(RealEstate realEstate)  throws SameRegNumException{
-        int seekingNum = realEstate.getRegisterNum();
-
-        if (this.haveRealEstate) {
-            for (RealEstate re : this.getOwnedRE()) {
-                if (re.getRegisterNum() == seekingNum) {
-                    compareAddress(realEstate, re, seekingNum);
-                }
-            }
-        }
-    }
-
-    private void compareAddress(CadasterObject newObject, CadasterObject current, int regNum) throws SameRegNumException {
-        String[] outputAddress = new String[3];
-        //newObject
-        outputAddress = newObject.getAddress().split(",");// get whole address
-        String newStreet = outputAddress[0].trim(); // get street
-        String newTown = outputAddress[1].trim(); // get town
-        //current
-        outputAddress = current.getAddress().split(","); // get whole address
-        String currentStreet = outputAddress[0].trim(); // get street
-        String currentTown = outputAddress[1].trim(); // get town
-
-        if (newObject instanceof Land && current instanceof RealEstate) {
-            if (FindSubstring.findExact(newStreet, currentStreet) &&
-                    FindSubstring.findExact(newTown, currentTown)) {
-                ((Land) newObject).addRealEstate((RealEstate) current);
-                System.out.println("LAND has new real estate.");
-            }
-        } else if (newObject instanceof RealEstate && current instanceof Land) {
-            if (FindSubstring.findExact(newStreet, currentStreet) &&
-                    FindSubstring.findExact(newTown, currentTown)) {
-                ((RealEstate) newObject).addLand((Land) current);
-                System.out.println("REAL ESTATE has new land.");
-            }
-        }
-
-        if (newObject instanceof Land && current instanceof Land) {
-            if (FindSubstring.findExact(newTown, currentTown)) {
-                throw new SameRegNumException("Land: "+regNum+" already exists in "+newTown);
-            }
-        } else if (newObject instanceof RealEstate && current instanceof RealEstate) {
-            if (FindSubstring.findExact(newTown, currentTown)) {
-                throw new SameRegNumException("Real estate: "+regNum+" already exists in "+newTown);
-            }
-        } else {
-            System.out.println("Cadastre objects are different");
-        }
-    }
-
-    public void compareRegNum(CadasterObject object, Database database)  throws SameRegNumException{
-        int seekingNum = object.getRegisterNum(); //actual reg number of object
-        String[] inputAddress = object.getAddress().split(","); //actual address of object
-
-        User user;
-        Ownership owner;
-
-        for (String u : database.getUsersDataHM().keySet()) {
-            user = database.getUser(u); //get user
-
-            if (user.getIsOwner()) {
-                owner = user.getOwner();
-
-                    if (owner.getHaveLand()) {
-                        for (Land l : owner.getOwnedLands()) { //get users lands
-                            if (l.getRegisterNum() == seekingNum) {
-                                compareAddress(object, l, seekingNum); //throws error
-                            }
-                        }
-                    }
-
-                    if (owner.getHaveRealEstate()) {
-                        for (RealEstate re : owner.getOwnedRE()) { //get users lands
-                            if (re.getRegisterNum() == seekingNum) {
-                                compareAddress(object, re, seekingNum); //throws error
-                            }
-                        }
-                    }
-
-            }
-
-        }
-
-
     }
 
 }

@@ -1,7 +1,7 @@
 package CadasterObjects;
 
 import OtherFunctionality.FindSubstring;
-import OtherFunctionality.WrongLandformInputException;
+import MyExceptions.WrongLandformInputException;
 import Owners.City;
 import Owners.Owner;
 import Owners.Ownership;

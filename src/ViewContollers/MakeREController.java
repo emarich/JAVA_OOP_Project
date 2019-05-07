@@ -1,17 +1,13 @@
 package ViewContollers;
 
 import CadasterObjects.Address;
-import CadasterObjects.Land;
 import CadasterObjects.RealEstate;
-import CadasterObjects.TypeLand;
+import MyExceptions.AddressFormatException;
+import MyExceptions.SameRegNumException;
 import OtherFunctionality.*;
-import Owners.Owner;
-import Owners.Ownership;
 import UserObject.Database;
 import UserObject.User;
-import View.MakeOwnerScene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -36,7 +32,7 @@ public class MakeREController {
             RealEstate realEstate = new RealEstate(Integer.parseInt(regNum.getText()), address.getText(),
                     Integer.parseInt(area.getText()), user.getOwner(), REBox.getValue());
 
-            user.getOwner().existingRegNum(realEstate);
+            CadastreSearch.compareRegNum(realEstate, usersDatabase);
 
             realEstate.setOwner(user.getOwner());
             user.getOwner().addRE(realEstate);

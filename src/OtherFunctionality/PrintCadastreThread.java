@@ -98,8 +98,12 @@ public class PrintCadastreThread implements Runnable {
                 stopThread();
 
             } catch (Exception e) {
+                //TRYING
                 running = false;
+                printThread = null;
+                textArea.setText("");
                 System.out.println("||||Whole running thread catching expression");
+                this.start();
             }
         }
     }
@@ -133,8 +137,13 @@ public class PrintCadastreThread implements Runnable {
                 textArea.appendText("\t-----------------------------\n");
             }
         } catch (Exception e) {
+            //TRYING
+            running = false;
+            printThread = null;
+            textArea.setText("");
             System.out.println("||||Printing catching expression");
             running = false;
+            this.start();
         }
 
     }

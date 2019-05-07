@@ -1,9 +1,11 @@
 package OtherFunctionality;
 
+import UserObject.Database;
 import UserObject.User;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.function.Consumer;
 
 public class SerializableUtility {
     //serializing hash map
@@ -29,6 +31,11 @@ public class SerializableUtility {
             System.out.println("Loading from Database.out");
             return usersData;
         } catch (IOException | ClassNotFoundException i) {
+            try {
+                new FileWriter("Database.out", false).close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             i.printStackTrace();
         }
         return null ;
