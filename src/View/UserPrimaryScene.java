@@ -1,8 +1,10 @@
 package View;
 
+import OtherFunctionality.DataObserver;
 import UserObject.Database;
 import ViewContollers.GuestController;
 import ViewContollers.UserController;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -13,14 +15,17 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class UserPrimaryScene extends FlowPane{
-    UserController userController;
+    //Controller
+    private UserController userController;
+
+    private Database usersDatabase;
 
     private VBox vBox = new VBox();
 
     //Menu
     private MenuBar menuBar = new MenuBar();
 
-    private Menu userMenu = new Menu("User");
+    private Menu userMenu = new Menu();
     private MenuItem accountItem = new MenuItem("Account");
     private MenuItem propertyItem = new MenuItem("Property");
     private MenuItem signOutItem = new MenuItem("Sign out");
@@ -33,24 +38,30 @@ public class UserPrimaryScene extends FlowPane{
     //Text fields
     private TextField searchField = new TextField();
 
-    private TextArea textArea = new TextArea();
+    private DataObserver textArea = new DataObserver();
+
+    private ChoiceBox<String> findChoiceBox =
+            new ChoiceBox<>(FXCollections.observableArrayList( "address", "owner"));
 
     //Constructor
     public UserPrimaryScene(Stage primaryStage, String username, Database usersDatabase) {
-        userController = new UserController(usersDatabase);
+        userController = new UserController(usersDatabase, username);
 
-        setScene(primaryStage);
+        this.usersDatabase = usersDatabase;
 
-        sceneEvents(primaryStage, usersDatabase);
+        setScene(primaryStage, username);
+
+        sceneEvents(primaryStage);
 
         primaryStage.show();
     }
 
-    //upravit do controlleru
-    private void setScene(Stage primaryStage) {
+    private void setScene(Stage primaryStage, String username) {
         primaryStage.setScene(new Scene(this, primaryStage.getWidth(), primaryStage.getHeight()));
 
-        this.getChildren().addAll(menuBar, textArea);
+        vBox.getChildren().addAll(searchField, findChoiceBox, textArea);
+
+        this.getChildren().addAll(menuBar, vBox);
         this.setAlignment(Pos.TOP_LEFT);
         this.setOrientation(Orientation.VERTICAL);
         this.setVgap(20);
@@ -59,25 +70,40 @@ public class UserPrimaryScene extends FlowPane{
         //MenuBar
         menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
         menuBar.getMenus().addAll(userMenu, requestsMenu);
+        userMenu.setText("User: "+username);
         userMenu.getItems().addAll(accountItem, propertyItem, signOutItem);
 
         requestsMenu.getItems().addAll(sendRequestItem,pendingItem, acceptedItem);
 
+        //Choice box
+        findChoiceBox.show();
+        findChoiceBox.getSelectionModel().selectFirst();
+
         //VBox - textField, textArea
-        vBox.getChildren().addAll(textArea);
         vBox.setSpacing(10);
         vBox.setAlignment(Pos.TOP_LEFT);
         vBox.setPadding(new Insets(5, 30, 30, 10));
         vBox.prefWidthProperty().bind(primaryStage.widthProperty());
-        //vBox.prefHeightProperty().bind(primaryStage.heightProperty().subtract(150));
+        vBox.prefHeightProperty().bind(primaryStage.heightProperty().subtract(150));
 
-        //textArea.prefHeightProperty().bind(vBox.heightProperty());
+        searchField.setPromptText("Find land or real estate by address");
+        searchField.setMaxWidth(300);
+
+        textArea.prefHeightProperty().bind(vBox.heightProperty());
         textArea.setEditable(false);
         textArea.setWrapText(true);
-        textArea.setText("There will be username, password and user type... maybe");
     }
 
-    public void sceneEvents(Stage primaryStage, Database usersDatabase) {
-        userController.switchSignInScene(signOutItem, primaryStage);
+    private void sceneEvents(Stage primaryStage) {
+        textArea.setUsersDatabase(usersDatabase);
+        textArea.update();
+
+        userController.logOut(signOutItem, primaryStage, usersDatabase);
+
+        findChoiceBox.setOnAction(event -> {
+            userController.changePromptText(findChoiceBox, searchField);
+        });
+
+        userController.newRequestClicked(sendRequestItem);
     }
 }

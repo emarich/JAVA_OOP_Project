@@ -15,11 +15,6 @@ public class CadastralOffice extends Office implements Serializable {
         return usersDatabase;
     }
 
-    //will be implement in officeControllers
-    public void makeOwnerFromUser (String username, String name, String birthdate, String address) {
-        usersDatabase.getUser(username).setOwner(new Owner(name, birthdate, address));
-    }
-
     //edit!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     /*public void makeLand (String username, int regNum, String city, int area, String typeLand) {
         Land tmpLand = new Land(regNum, city, area, typeLand);

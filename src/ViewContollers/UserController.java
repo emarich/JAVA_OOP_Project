@@ -1,24 +1,34 @@
 package ViewContollers;
 
+import OtherFunctionality.DataObserver;
 import UserObject.Database;
+import View.CheckUserStage;
+import View.NewRequestStage;
 import View.SignInScene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class UserController {
+public class UserController extends GuestController{
     private Database usersDatabase;
+    private String username;
 
-    public UserController(Database usersDatabase) {
+    //Constructor
+    public UserController(Database usersDatabase, String username) {
         this.usersDatabase = usersDatabase;
+        this.username = username;
     }
 
-    public void switchSignInScene(MenuItem signBtn, Stage primaryStage) {
-        signBtn.setOnAction(e -> {
+    //switch to makeStage
+    public void newRequestClicked (MenuItem menuItem) {
+        menuItem.setOnAction(event -> {
             try {
-                SignInScene signInScene = new SignInScene(primaryStage, usersDatabase);
-            } catch (Exception e1) {
-                e1.printStackTrace();
+                NewRequestStage newRequestStage = new NewRequestStage(usersDatabase.getUser(username), usersDatabase);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
     }
+
 }

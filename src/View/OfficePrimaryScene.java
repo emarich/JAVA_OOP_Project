@@ -109,7 +109,7 @@ public class OfficePrimaryScene extends FlowPane {
         textArea.setWrapText(true);
     }
 
-    public void sceneEvents(Stage primaryStage) {
+    private void sceneEvents(Stage primaryStage) {
         textArea.setUsersDatabase(usersDatabase);
         textArea.update();
 

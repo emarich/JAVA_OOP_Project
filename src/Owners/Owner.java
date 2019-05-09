@@ -1,6 +1,7 @@
 package Owners;
 
 import CadasterObjects.Address;
+import UserObject.UserType;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -10,14 +11,16 @@ import java.util.Locale;
 
 public class Owner extends Ownership implements Serializable {
 
-
     private String name;
     private String birthDate;
     private String mutualAddress;
+    private String ownerID;
+    private Gender gender;
     //private double money = 100000;
 
-    public Owner(String name, String date, String address){
+    public Owner(String name, String gender, String date, String address){
         this.name = name;
+        setGender(gender);
         this.birthDate = date;
         setMutualAddress(address);
     }
@@ -32,6 +35,13 @@ public class Owner extends Ownership implements Serializable {
     }
     public String getName() {
         return name;
+    }
+
+    public void setGender(String gender) {
+        this.gender = Gender.fromString(gender);
+    }
+    public Gender getGender() {
+        return gender;
     }
 
     public void setBirthDate(String birthDate) {
@@ -50,6 +60,13 @@ public class Owner extends Ownership implements Serializable {
 
 
     //Getters and Setters-------------------------------------------------------
+
+    public void generateID() {
+        String[] IDN = new String[10];
+
+
+    }
+
 
     //checks, if the date of birth is in the valid format dd.MM.yyyy
     public static void isValidDateFormat(String date) throws DateTimeParseException {

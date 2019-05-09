@@ -31,8 +31,6 @@ public class GuestPrimaryScene extends FlowPane {
     //Menu
     private MenuBar menuBar = new MenuBar();
 
-    private Menu actualTimeDate = new Menu();
-
     private Menu register = new Menu("Register");
     private MenuItem registerItem = new MenuItem("Register user");
     private MenuItem signInItem = new MenuItem("Sign in");
@@ -72,7 +70,7 @@ public class GuestPrimaryScene extends FlowPane {
 
         //MenuBar
         menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
-        menuBar.getMenus().addAll(register, actualTimeDate);
+        menuBar.getMenus().addAll(register);
 
        //Choice box
         findChoiceBox.show();

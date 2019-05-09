@@ -12,6 +12,7 @@ import UserObject.Database;
 import UserObject.User;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -27,7 +28,7 @@ public class MakeOwnerController {
     }
 
     //if ownership = owner
-    public void btnClicked (Stage stage, Button button, User user, TextField name, TextField date, TextField address) {
+    public void btnClicked (Stage stage, Button button, User user, TextField name, ChoiceBox<String> gender, TextField date, TextField address) {
         button.setOnAction(event -> {
             if ((name.getText() == null || name.getText().trim().isEmpty()) ||
                     (date.getText() == null || date.getText().trim().isEmpty())||
@@ -39,7 +40,7 @@ public class MakeOwnerController {
                 try {
                     Owner.isValidDateFormat(date.getText());
                     Address.correctAddress(address.getText());
-                    user.setOwner(new Owner(name.getText(), date.getText(), address.getText()));
+                    user.setOwner(new Owner(name.getText(), gender.getValue(), date.getText(), address.getText()));
                     user.setIsOwner(true);
                     usersDatabase.getUsersDataHM().replace(user.getUsername(), user);
                     SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
