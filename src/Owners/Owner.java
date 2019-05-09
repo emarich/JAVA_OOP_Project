@@ -1,13 +1,13 @@
 package Owners;
 
 import CadasterObjects.Address;
-import UserObject.UserType;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.Locale;
+import java.util.Random;
 
 public class Owner extends Ownership implements Serializable {
 
@@ -23,6 +23,7 @@ public class Owner extends Ownership implements Serializable {
         setGender(gender);
         this.birthDate = date;
         setMutualAddress(address);
+        generateID();
     }
 
     public Owner() {
@@ -58,13 +59,40 @@ public class Owner extends Ownership implements Serializable {
         this.mutualAddress = Address.setPerfectAddress(address);
     }
 
+    public String getOwnerID() {
+        return ownerID;
+    }
 
+    public void setOwnerID(String ownerID) {
+        this.ownerID = ownerID;
+    }
     //Getters and Setters-------------------------------------------------------
 
-    public void generateID() {
-        String[] IDN = new String[10];
+    private void generateID() {
+        String[] idn = new String[11];
 
+        idn[0] = String.valueOf(birthDate.charAt(8));
+        idn[1] = String.valueOf(birthDate.charAt(9));
+        String tmp =  String.valueOf(birthDate.charAt(3));
+        if (gender.toString().equals("FEMALE")) {
+            int foo = Integer.parseInt(tmp) + 5;
+            tmp = String.valueOf(foo);
+            idn[2] = tmp;
+        } else {
+            idn[2] = tmp;
+        }
+        idn[3] = String.valueOf(birthDate.charAt(4));
+        idn[4] = String.valueOf(birthDate.charAt(0));
+        idn[5] = String.valueOf(birthDate.charAt(1));
+        idn[6] = "/";
 
+        Random rand = new Random();
+        for (int i = 7; i < 11; i++) {
+            idn[i] = String.format("%d", rand.nextInt(10));
+            System.out.println(idn[i]);
+        }
+
+        ownerID = String.join(",", idn);
     }
 
 

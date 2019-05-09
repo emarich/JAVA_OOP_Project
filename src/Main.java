@@ -22,6 +22,7 @@ public class Main extends Application{
     public void start(Stage primaryStage) throws Exception {
         //usersDatabase.deleteAllUsers();
         usersDatabase.setUsersDataHM(SerializableUtility.loadUsers());
+
         for (String s : usersDatabase.getUsersDataHM().keySet()) {
             User user = usersDatabase.getUser(s);
             if (user.getIsOwner()) {
