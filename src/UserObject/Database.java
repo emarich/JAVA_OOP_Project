@@ -1,9 +1,13 @@
 package UserObject;
 
 import OtherFunctionality.SerializableUtility;
+import Owners.Owner;
+import Owners.Ownership;
 import javafx.scene.control.Alert;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Database implements Serializable {
     //users are saving to this
@@ -76,6 +80,17 @@ public class Database implements Serializable {
         }
     }
 
-
+    public List<Owner> findOwnerByName(String name) {
+        List<Owner> owners = new ArrayList<>();
+        for (String s : usersData.keySet()) {
+            Ownership owner = getUser(s).getOwner();
+            if (owner instanceof Owner) {
+                if (((Owner) owner).getName().equalsIgnoreCase(name)) {
+                    owners.add((Owner) owner);
+                }
+            }
+        }
+        return owners;
+    }
 
 }

@@ -4,6 +4,7 @@ import CadasterObjects.Address;
 import CadasterObjects.RealEstate;
 import MyExceptions.AddressFormatException;
 import MyExceptions.SameRegNumException;
+import MyExceptions.WrongInputException;
 import OtherFunctionality.*;
 import UserObject.Database;
 import UserObject.User;
@@ -27,6 +28,9 @@ public class MakeREController {
 
     public void makeREClicked(TextField regNum, TextField address, TextField area, ChoiceBox<String> REBox, Stage stage) {
         try {
+            if (!((Integer.parseInt(regNum.getText()) >= 1000) && (Integer.parseInt(regNum.getText()) <= 9999))) {
+                throw new WrongInputException("Register number must have 4 digits.");
+            }
             Address.correctAddress(address.getText());
 
             RealEstate realEstate = new RealEstate(Integer.parseInt(regNum.getText()), address.getText(),
@@ -60,6 +64,10 @@ public class MakeREController {
                     PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING,
                             e.getMessage());
                     alert.setHeaderText("Error: same register number");
+                } else if (e instanceof WrongInputException) {
+                    PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING,
+                            e.getMessage());
+                    alert.setHeaderText("Error: register number format");
                 } else {
                     e.printStackTrace();
                 }

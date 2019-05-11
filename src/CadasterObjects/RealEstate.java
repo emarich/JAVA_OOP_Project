@@ -18,7 +18,7 @@ public class RealEstate extends CadasterObject implements Serializable {
         this.address = address;
         this.area = area;
         setTypeRealEstate(typeRE);
-        this.owner = owner;
+        setOwner(owner);
     }
 
     public RealEstate(){}
@@ -65,6 +65,11 @@ public class RealEstate extends CadasterObject implements Serializable {
                     haveLand = true;
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+", "+this.typeRealEstate.toString();
     }
 }
 

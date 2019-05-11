@@ -3,12 +3,15 @@ package CadasterObjects;
 import Owners.Ownership;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class CadasterObject implements Serializable {
     protected int registerNum;
     protected String address;
     protected int area;
-    protected Ownership owner;
+    protected List<Ownership> owners = new ArrayList<>();
+    //protected Ownership owner;
 
     //Getters and Setters-------------------------------------------------------
     public void setRegisterNum(int registerNum) {
@@ -33,10 +36,19 @@ public abstract class CadasterObject implements Serializable {
     }
 
     public void setOwner(Ownership owner) {
-        this.owner = owner;
+        this.owners.add(owner);
+        //this.owner = owner;
     }
     public Ownership getOwner() {
-        return owner;
+        return owners.get(0);
+    }
+
+    public List<Ownership> getOwners() {
+        return owners;
     }
     //Getters and Setters-------------------------------------------------------
+
+    public String toString() {
+        return (this.registerNum+", "+this.address);
+    }
 }

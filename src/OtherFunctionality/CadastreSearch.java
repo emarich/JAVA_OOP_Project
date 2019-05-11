@@ -31,6 +31,18 @@ public class CadastreSearch {
         } else if (newObject instanceof RealEstate && current instanceof Land) {
             if (FindSubstring.findExact(newStreet, currentStreet) &&
                     FindSubstring.findExact(newTown, currentTown)) {
+                System.out.println(((Land)current).getHaveRE());
+                if (((Land) current).getHaveRE()) {
+                    int lastRegNum = ((Land) current).getLastRE().getRegisterNum();
+                    System.out.println(lastRegNum % 10);
+                    if (lastRegNum % 10 == 9) {
+                        throw new SameRegNumException("Land: " + regNum + " can't have more real estates");
+                    } else {
+                        newObject.setRegisterNum(lastRegNum+1);
+                    }
+                } else {
+                    newObject.setRegisterNum(newObject.getRegisterNum()*10);
+                }
                 ((RealEstate) newObject).addLand((Land) current);
                 ((Land) current).addRealEstate((RealEstate) newObject);
                 System.out.println("REAL ESTATE has new land.");
@@ -41,18 +53,11 @@ public class CadastreSearch {
             if (FindSubstring.findExact(newTown, currentTown)) {
                 throw new SameRegNumException("Land: "+regNum+" already exists in "+newTown);
             }
-        } else if (newObject instanceof RealEstate && current instanceof RealEstate) {
-            if (FindSubstring.findExact(newTown, currentTown)) {
-                throw new SameRegNumException("Real estate: "+regNum+" already exists in "+newTown);
-            }
-        } else {
-            System.out.println("Cadastre objects are different");
         }
     }
 
     public static void compareRegNum(CadasterObject object, Database database)  throws SameRegNumException{
         int seekingNum = object.getRegisterNum(); //actual reg number of object
-        String[] inputAddress = object.getAddress().split(","); //actual address of object
 
         User user;
         Ownership owner;
@@ -71,18 +76,27 @@ public class CadastreSearch {
                     }
                 }
 
-                if (owner.getHaveRealEstate()) {
-                    for (RealEstate re : owner.getOwnedRE()) { //get users lands
-                        if (re.getRegisterNum() == seekingNum) {
-                            compareAddress(object, re, seekingNum); //throws error
+                if (object instanceof Land) {
+                    if (owner.getHaveRealEstate()) {
+                        for (RealEstate re : owner.getOwnedRE()) { //get users lands
+                            if (re.getRegisterNum() > 9999) {
+                                int currRegNum = re.getRegisterNum()/10;
+                                if (currRegNum == seekingNum) {
+                                    compareAddress(object, re, seekingNum); //throws error
+                                }
+                            } else if (re.getRegisterNum() == seekingNum) {
+                                compareAddress(object, re, seekingNum); //throws error
+                            }
                         }
                     }
+                } else {
+                    object.setRegisterNum(object.getRegisterNum()*10);
                 }
 
             }
 
         }
-
-
     }
+
+    //concrete search
 }

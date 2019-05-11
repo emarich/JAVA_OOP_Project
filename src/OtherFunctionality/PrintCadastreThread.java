@@ -47,7 +47,6 @@ public class PrintCadastreThread implements Runnable {
                     if (usersDatabase.getUser(s).getIsOwner()) {
                         if (owner instanceof Owner) {
                             textArea.appendText("|| Name: "+((Owner) owner).getName()+"\n");
-                            textArea.appendText("|| Gender: "+((Owner) owner).getGender()+"\n");
                             textArea.appendText("|| Mutual address: "+((Owner) owner).getMutualAddress()+"\n");
                         } else if (owner instanceof City){
                             textArea.appendText("|| Phone number: "+((City) owner).getPhoneNumber()+"\n");
@@ -104,7 +103,7 @@ public class PrintCadastreThread implements Runnable {
                 printThread = null;
                 textArea.setText("");
                 System.out.println("||||Whole running thread catching expression");
-                this.start();
+                //this.start();
             }
         }
     }

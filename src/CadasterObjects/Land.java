@@ -22,7 +22,7 @@ public class Land extends CadasterObject implements Serializable {
         this.address = address;
         this.area = area;
         setTypeLand(owner);
-        this.owner = owner;
+        setOwner(owner);
         setLandform(form);
 
     }
@@ -66,24 +66,24 @@ public class Land extends CadasterObject implements Serializable {
         return realEstates;
     }
 
-    public void setOwner(Ownership owner) {
-        this.owner = owner;
-    }
-    public Ownership getOwner() {
-        return owner;
-    }
-
     public boolean getHaveRE() {
         return haveRE;
     }
     //Getters and Setters-------------------------------------------------------
 
     public void addRealEstate(RealEstate realEstate) {
-        if (realEstate.getRegisterNum() == registerNum) { //if register numbers are same
-            if (this.address.equalsIgnoreCase(realEstate.getAddress())) {
-                realEstates.add(realEstate);
-                haveRE = true;
-            }
-        }
+         //if register numbers are same
+        realEstates.add(realEstate);
+        haveRE = true;
+    }
+
+    public RealEstate getLastRE() {
+        int size = realEstates.size();
+        return realEstates.get(size-1);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+", "+this.landform;
     }
 }

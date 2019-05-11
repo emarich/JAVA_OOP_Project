@@ -34,7 +34,6 @@ public class MakeLandController {
 
             CadastreSearch.compareRegNum(land, usersDatabase);
 
-            land.setOwner(user.getOwner());
             user.getOwner().addLand(land);
             user.getOwner().setHaveLand(true);
             usersDatabase.getUsersDataHM().replace(user.getUsername(), user);

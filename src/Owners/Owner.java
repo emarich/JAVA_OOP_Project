@@ -62,10 +62,6 @@ public class Owner extends Ownership implements Serializable {
     public String getOwnerID() {
         return ownerID;
     }
-
-    public void setOwnerID(String ownerID) {
-        this.ownerID = ownerID;
-    }
     //Getters and Setters-------------------------------------------------------
 
     private void generateID() {
@@ -89,10 +85,9 @@ public class Owner extends Ownership implements Serializable {
         Random rand = new Random();
         for (int i = 7; i < 11; i++) {
             idn[i] = String.format("%d", rand.nextInt(10));
-            System.out.println(idn[i]);
         }
 
-        ownerID = String.join(",", idn);
+        ownerID = String.join("", idn);
     }
 
 
