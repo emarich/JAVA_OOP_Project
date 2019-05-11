@@ -1,6 +1,5 @@
 package View;
 
-import CadasterObjects.CadasterObject;
 import CadasterObjects.Land;
 import CadasterObjects.RealEstate;
 import Owners.Owner;
@@ -12,8 +11,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -30,7 +27,6 @@ import javafx.stage.Stage;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Observable;
 
 public class NewRequestStage extends FlowPane {
     //in new thread
@@ -64,7 +60,7 @@ public class NewRequestStage extends FlowPane {
     private Label requestTypeLabel = new Label("Type of request: ");
     private ChoiceBox<String> requestBox =
             new ChoiceBox<>(FXCollections.observableArrayList(
-                    RequestType.BUY.getDescription(), RequestType.GIVE.getDescription(),
+                    RequestType.SALE.getDescription(), RequestType.GIVE.getDescription(),
                     RequestType.EXCHANGE.getDescription(),RequestType.MARRIAGE.getDescription(),
                     RequestType.BUILD.getDescription(), RequestType.DEMOLITION.getDescription(),
                     RequestType.TERRAIN.getDescription()));

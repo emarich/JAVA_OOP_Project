@@ -59,7 +59,7 @@ public class RealEstate extends CadasterObject implements Serializable {
     //Getters and Setters-------------------------------------------------------
 
     public void addLand(Land land) {
-        if (land.getRegisterNum() == registerNum) { //if register numbers are same
+        if (land.getRegisterNum() == registerNum/10) { //if register numbers are same
             if (this.address.equalsIgnoreCase(land.getAddress())) {
                     this.land = land;
                     haveLand = true;

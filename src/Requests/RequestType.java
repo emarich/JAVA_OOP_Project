@@ -1,7 +1,7 @@
 package Requests;
 
 public enum  RequestType {
-    BUY("Buy property"),
+    SALE("Sale property"),
     GIVE("Give property"),
     EXCHANGE("Exchange properties"),
     MARRIAGE("Marriage contract"),

@@ -7,38 +7,27 @@ import Owners.City;
 import Owners.Owner;
 import Owners.Ownership;
 import UserObject.Database;
-import ViewContollers.RegisterController;
-import javafx.scene.control.TextArea;
 
+public class PrintCadastre {
 
-public class PrintCadastreThread implements Runnable {
-    private Thread printThread;
     private Database usersDatabase;
-    private String tName;
     private DataObserver textArea;
     private volatile boolean running;
     private Ownership owner;
 
-    public PrintCadastreThread (Database database, String name, DataObserver textArea1) {
+    public PrintCadastre (Database database, DataObserver textArea1) {
         usersDatabase = database;
-        tName = name;
         textArea = textArea1;
         running = true;
-        System.out.println("|Creating "+ tName);
     }
 
     public void setTextArea(DataObserver textArea) {
         this.textArea = textArea;
     }
-    public Thread getPrintThread() {
-        return printThread;
-    }
 
-    public void run() {
+    public void print() {
         while (running) {
             try {
-                System.out.println("|Running " + tName);
-
                 for (String s : usersDatabase.getUsersDataHM().keySet()) {
                     owner = usersDatabase.getUser(s).getOwner();
 
@@ -95,31 +84,19 @@ public class PrintCadastreThread implements Runnable {
                 }
 
                 running = false;
-                stopThread();
 
             } catch (Exception e) {
                 //TRYING
                 running = false;
-                printThread = null;
                 textArea.setText("");
                 System.out.println("||||Whole running thread catching expression");
                 //this.start();
             } catch (Throwable throwable) {
                 //TRYING
                 running = false;
-                printThread = null;
                 textArea.setText("");
                 System.out.println("||||Whole running thread catching throwable");
             }
-        }
-    }
-
-    public void start() {
-        System.out.println("|Starting "+ tName);
-        if (printThread == null) {
-            printThread = new Thread(this);
-            printThread.setName(tName);
-            printThread.start();
         }
     }
 
@@ -145,16 +122,10 @@ public class PrintCadastreThread implements Runnable {
         } catch (Exception e) {
             //TRYING
             running = false;
-            printThread = null;
             textArea.setText("");
             System.out.println("||||Printing catching expression");
             running = false;
         }
 
-    }
-
-    public void stopThread() throws InterruptedException, NullPointerException {
-        System.out.println("|Killing "+tName);
-        printThread.join();
     }
 }

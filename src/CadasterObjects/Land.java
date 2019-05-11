@@ -24,7 +24,6 @@ public class Land extends CadasterObject implements Serializable {
         setTypeLand(owner);
         setOwner(owner);
         setLandform(form);
-
     }
 
     public Land(){}

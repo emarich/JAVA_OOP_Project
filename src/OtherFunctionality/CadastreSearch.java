@@ -10,8 +10,54 @@ import UserObject.User;
 
 public class CadastreSearch {
 
+    public static void compareRegNum(CadasterObject object, Database database)  throws SameRegNumException{
+        int seekingNum = object.getRegisterNum(); //actual reg number of object
+
+        User user;
+        Ownership owner;
+
+        for (String u : database.getUsersDataHM().keySet()) {
+            user = database.getUser(u); //get user
+
+            if (user.getIsOwner()) {
+                owner = user.getOwner();
+
+                if (owner.getHaveLand()) {
+                    for (Land l : owner.getOwnedLands()) { //get users lands
+                        if (l.getRegisterNum() == seekingNum) {
+                            compareAddress(object, l, seekingNum); //throws error
+                        }
+                    }
+                }
+
+                if (object instanceof Land) {
+                    if (owner.getHaveRealEstate()) {
+                        for (RealEstate re : owner.getOwnedRE()) { //get users lands
+                            if (re.getRegisterNum() > 9999) {
+                                int currRegNum = re.getRegisterNum()/10;
+                                if (currRegNum == seekingNum) {
+                                    compareAddress(object, re, seekingNum); //throws error
+                                }
+                            } else if (re.getRegisterNum() == seekingNum) {
+                                compareAddress(object, re, seekingNum); //throws error
+                            }
+                        }
+                    }
+
+                }
+
+                if (object instanceof RealEstate) {
+                    if (object.getRegisterNum() < 9999) {
+                        object.setRegisterNum(object.getRegisterNum()*10);
+                    }
+                }
+            }
+
+        }
+    }
+
     private static void compareAddress(CadasterObject newObject, CadasterObject current, int regNum) throws SameRegNumException {
-        String[] outputAddress = new String[3];
+        String[] outputAddress;
         //newObject
         outputAddress = newObject.getAddress().split(",");// get whole address
         String newStreet = outputAddress[0].trim(); // get street
@@ -56,47 +102,6 @@ public class CadastreSearch {
         }
     }
 
-    public static void compareRegNum(CadasterObject object, Database database)  throws SameRegNumException{
-        int seekingNum = object.getRegisterNum(); //actual reg number of object
-
-        User user;
-        Ownership owner;
-
-        for (String u : database.getUsersDataHM().keySet()) {
-            user = database.getUser(u); //get user
-
-            if (user.getIsOwner()) {
-                owner = user.getOwner();
-
-                if (owner.getHaveLand()) {
-                    for (Land l : owner.getOwnedLands()) { //get users lands
-                        if (l.getRegisterNum() == seekingNum) {
-                            compareAddress(object, l, seekingNum); //throws error
-                        }
-                    }
-                }
-
-                if (object instanceof Land) {
-                    if (owner.getHaveRealEstate()) {
-                        for (RealEstate re : owner.getOwnedRE()) { //get users lands
-                            if (re.getRegisterNum() > 9999) {
-                                int currRegNum = re.getRegisterNum()/10;
-                                if (currRegNum == seekingNum) {
-                                    compareAddress(object, re, seekingNum); //throws error
-                                }
-                            } else if (re.getRegisterNum() == seekingNum) {
-                                compareAddress(object, re, seekingNum); //throws error
-                            }
-                        }
-                    }
-                } else {
-                    object.setRegisterNum(object.getRegisterNum()*10);
-                }
-
-            }
-
-        }
-    }
 
     //concrete search
 }
