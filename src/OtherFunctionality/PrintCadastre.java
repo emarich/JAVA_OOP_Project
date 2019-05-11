@@ -7,19 +7,33 @@ import Owners.City;
 import Owners.Owner;
 import Owners.Ownership;
 import UserObject.Database;
+import UserObject.User;
+import javafx.scene.control.TextArea;
 
-public class PrintCadastre {
+import javax.jws.soap.SOAPBinding;
+import java.io.Serializable;
+
+public class PrintCadastre implements Serializable {
 
     private Database usersDatabase;
     private DataObserver textArea;
+    private TextArea basicTextArea;
     private volatile boolean running;
     private Ownership owner;
+    private User user;
 
     public PrintCadastre (Database database, DataObserver textArea1) {
         usersDatabase = database;
         textArea = textArea1;
         running = true;
     }
+
+    public PrintCadastre(User user, TextArea textArea1) {
+        this.user = user;
+        basicTextArea = textArea1;
+        running = true;
+    }
+
 
     public void setTextArea(DataObserver textArea) {
         this.textArea = textArea;
@@ -52,7 +66,7 @@ public class PrintCadastre {
                                 if (land == null) {
                                     continue;
                                 }
-                                printFormula(land);
+                                printFormula(land, textArea);
                             }
                             land = null;
                         } else {
@@ -67,7 +81,7 @@ public class PrintCadastre {
                                 if (realEstate == null) {
                                     continue;
                                 }
-                                printFormula(realEstate);
+                                printFormula(realEstate, textArea);
                             }
                             realEstate = null;
                         } else {
@@ -100,7 +114,7 @@ public class PrintCadastre {
         }
     }
 
-    private void printFormula(CadasterObject cadasterObject) throws NullPointerException {
+    private void printFormula(CadasterObject cadasterObject, TextArea textArea) throws NullPointerException {
         try {
             if (cadasterObject == null) {
                 throw  new NullPointerException();
@@ -128,4 +142,69 @@ public class PrintCadastre {
         }
 
     }
+
+    public void printUserProperty() {
+        try {
+            basicTextArea.appendText("\n|| Username: " + user.getUsername() + " \n");
+
+            if (user.getIsOwner()) {
+                owner = user.getOwner();
+                if (owner instanceof Owner) {
+                    basicTextArea.appendText("|| Name: " + ((Owner) owner).getName() + "\n");
+                    basicTextArea.appendText("|| Mutual address: " + ((Owner) owner).getMutualAddress() + "\n");
+                } else if (owner instanceof City) {
+                    basicTextArea.appendText("|| Phone number: " + ((City) owner).getPhoneNumber() + "\n");
+                    basicTextArea.appendText("|| Email: " + ((City) owner).getEmail() + "\n");
+                } else {
+                    basicTextArea.appendText("Error: object Owner has different instance\n");
+                }
+
+                basicTextArea.appendText("LANDS:-------------------------\n");
+                if (owner.getHaveLand()) {
+                    Land land;
+                    for (int i = 0; i < owner.getOwnedLands().size(); i++) {
+                        land = owner.getOwnedLands().get(i);
+                        if (land == null) {
+                            continue;
+                        }
+                        printFormula(land, basicTextArea);
+                    }
+                    land = null;
+                } else {
+                    textArea.appendText("...none...\n");
+                }
+
+                basicTextArea.appendText("REAL ESTATES:------------------\n");
+                if (owner.getHaveRealEstate()) {
+                    RealEstate realEstate;
+                    for (int i = 0; i < owner.getOwnedRE().size(); i++) {
+                        realEstate = owner.getOwnedRE().get(i);
+                        if (realEstate == null) {
+                            continue;
+                        }
+                        printFormula(realEstate, basicTextArea);
+                    }
+                    realEstate = null;
+                } else {
+                    basicTextArea.appendText("...none...\n");
+                }
+            } else {
+                basicTextArea.appendText("User " + user.getUsername() + " doesn't have any property.\n");
+            }
+
+            basicTextArea.appendText("-------------------------------\n");
+            basicTextArea.appendText("-------------------------------\n");
+            basicTextArea.appendText("-------------------------------\n");
+            basicTextArea.appendText("-------------------------------\n");
+
+            running = false;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                running = false;
+                basicTextArea.setText("");
+                System.out.println("||||Whole running thread catching expression");
+            }
+        }
+
 }

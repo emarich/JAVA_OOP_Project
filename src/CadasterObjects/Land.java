@@ -1,5 +1,6 @@
 package CadasterObjects;
 
+import MyExceptions.WrongInputException;
 import OtherFunctionality.FindSubstring;
 import MyExceptions.WrongLandformInputException;
 import Owners.City;
@@ -83,6 +84,6 @@ public class Land extends CadasterObject implements Serializable {
 
     @Override
     public String toString() {
-        return super.toString()+", "+this.landform;
+        return super.toString()+"; "+this.landform;
     }
 }

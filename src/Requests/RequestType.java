@@ -1,10 +1,12 @@
 package Requests;
 
-public enum  RequestType {
+import MyExceptions.WrongInputException;
+
+import java.io.Serializable;
+
+public enum  RequestType implements Serializable {
     SALE("Sale property"),
     GIVE("Give property"),
-    EXCHANGE("Exchange properties"),
-    MARRIAGE("Marriage contract"),
     BUILD("Build permission"),
     DEMOLITION("Demolition permission"),
     TERRAIN("Terrain treatment");
@@ -18,4 +20,16 @@ public enum  RequestType {
     private RequestType(String shortName) {
         this.description = shortName;
     }
+
+    public static RequestType getRequestFromAttribute(String m) throws WrongInputException {
+        switch (m) {
+            case "Sale property": return SALE;
+            case "Give property": return GIVE;
+            case "Build permission": return BUILD;
+            case "Demolition permission": return DEMOLITION;
+            case "Terrain treatment": return TERRAIN;
+        }
+        throw new WrongInputException("Request cannot found by attribute "+m);
+    }
+
 }

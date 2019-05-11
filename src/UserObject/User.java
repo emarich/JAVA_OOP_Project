@@ -21,6 +21,7 @@ public class User implements Serializable {
 
     private List<Request> requests = new ArrayList<>();
 
+
     public User(String username, String password, String userType) {
         setUsername(username);
         setPassword(password);
@@ -64,6 +65,14 @@ public class User implements Serializable {
     }
     public boolean getIsOwner() {
         return isOwner;
+    }
+
+    public void addRequest(Request request) {
+        this.requests.add(request);
+    }
+
+    public List<Request> getRequests() {
+        return requests;
     }
 
     //Getters and Setters-------------------------------------------------------

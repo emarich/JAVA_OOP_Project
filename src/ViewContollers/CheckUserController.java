@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 public class CheckUserController {
     private Database usersDatabase;
     private String menuItemTxt;
-    private final DataObserver textArea; //be aware
+    private final DataObserver textArea;
 
     public CheckUserController (Database usersDatabase, String text, DataObserver textArea) {
         this.usersDatabase = usersDatabase;

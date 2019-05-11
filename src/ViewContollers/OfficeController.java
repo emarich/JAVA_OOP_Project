@@ -3,14 +3,9 @@ package ViewContollers;
 import Offices.CadastralOffice;
 import Offices.Office;
 import OtherFunctionality.DataObserver;
-import OtherFunctionality.PrintCadastreThread;
 import UserObject.Database;
-import View.CheckUserStage;
-import View.MakeLandStage;
-import View.RegisterStage;
-import View.SignInScene;
+import View.*;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 
 public class OfficeController extends GuestController {
 
@@ -25,6 +20,16 @@ public class OfficeController extends GuestController {
         menuItem.setOnAction(event -> {
             try {
                 CheckUserStage checkUserStage = new CheckUserStage(usersDatabase, menuItem.getId(), textArea);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public void makeMenuItemClicked (MenuItem menuItem, String office) {
+        menuItem.setOnAction(event -> {
+            try {
+                RequestsStage officeRequestsStage = new RequestsStage(usersDatabase.getUser(office));
             } catch (Exception e) {
                 e.printStackTrace();
             }

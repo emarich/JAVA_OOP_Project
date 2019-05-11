@@ -30,9 +30,8 @@ public class DataObserver extends TextArea implements Observer {
             System.out.println(l.getRegisterNum()+"\n");
         }*/
         this.setText("");
-        //printCadastreThread = new PrintCadastreThread(usersDatabase, "PrintThread", this);
-        //printCadastreThread.start();
         printCadastre = new PrintCadastre(usersDatabase, this);
         printCadastre.print();
+        printCadastre = null;
     }
 }

@@ -1,5 +1,6 @@
 package CadasterObjects;
 
+import MyExceptions.WrongInputException;
 import Offices.CadastralOffice;
 import Owners.City;
 import Owners.Owner;
@@ -69,7 +70,7 @@ public class RealEstate extends CadasterObject implements Serializable {
 
     @Override
     public String toString() {
-        return super.toString()+", "+this.typeRealEstate.toString();
+        return super.toString()+"; "+this.typeRealEstate;
     }
 }
 

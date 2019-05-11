@@ -104,6 +104,8 @@ public class UserPrimaryScene extends FlowPane{
             userController.changePromptText(findChoiceBox, searchField);
         });
 
+        userController.propertyClicked(propertyItem);
+
         userController.newRequestClicked(sendRequestItem);
     }
 }

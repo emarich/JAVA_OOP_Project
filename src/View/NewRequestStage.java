@@ -1,7 +1,10 @@
 package View;
 
+import CadasterObjects.CadasterObject;
 import CadasterObjects.Land;
 import CadasterObjects.RealEstate;
+import MyExceptions.WrongInputException;
+import OtherFunctionality.PopUpAlert;
 import Owners.Owner;
 import Requests.RequestType;
 import UserObject.Database;
@@ -33,6 +36,8 @@ public class NewRequestStage extends FlowPane {
     //View controller
     private NewRequestController newRequestController;
     private Database usersDatabase;
+    private User requestingUser;
+    private User otherUser;
 
     //New stage
     private Stage stage = new Stage();
@@ -61,12 +66,10 @@ public class NewRequestStage extends FlowPane {
     private ChoiceBox<String> requestBox =
             new ChoiceBox<>(FXCollections.observableArrayList(
                     RequestType.SALE.getDescription(), RequestType.GIVE.getDescription(),
-                    RequestType.EXCHANGE.getDescription(),RequestType.MARRIAGE.getDescription(),
                     RequestType.BUILD.getDescription(), RequestType.DEMOLITION.getDescription(),
                     RequestType.TERRAIN.getDescription()));
 
     private ListView<String> propertyBox = new ListView<>();
-    private ListView<String> selected = new ListView<>();
     private ObservableList<String> propertyList = FXCollections.observableArrayList();
 
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -76,14 +79,19 @@ public class NewRequestStage extends FlowPane {
     private Button sendBtn = new Button("Send");
 
     public NewRequestStage(User user, Database usersDatabase) throws Exception {
-        newRequestController = new NewRequestController(user, usersDatabase);
-        this.usersDatabase = usersDatabase;
+        try {
+            requestingUser = user;
+            newRequestController = new NewRequestController(user, usersDatabase);
+            this.usersDatabase = usersDatabase;
 
-        setScene(stage, user);
+            setScene(stage, user);
 
-        sceneEvents();
+            sceneEvents();
 
-        stage.show();
+            stage.show();
+        } catch (WrongInputException e) {
+            PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR, e.getMessage());
+        }
     }
 
 
@@ -96,56 +104,40 @@ public class NewRequestStage extends FlowPane {
         vBox.setSpacing(20);
 
         propertyBox.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        propertyBox.setPrefHeight(100);
 
+        //prevents sending requests from user, that is not owner
         if (user.getOwner() instanceof Owner) {
             for (String s : usersDatabase.getUsersDataHM().keySet()) {
+                //set officies to choice box, from where you can choose, to which offices will be send that request
                 if (usersDatabase.getUser(s).getUserType().toString().equalsIgnoreCase("OFFICE")) {
                     officeList.add(usersDatabase.getUser(s).getUsername());
                 }
             }
+
             officeBox.setItems(officeList);
             officeBox.getSelectionModel().selectFirst();
-
-            //propertyBox.setPrefHeight(100);
 
             HBox hBox1 = new HBox();
             HBox hBox2 = new HBox();
             hBox1.getChildren().addAll(proposer1, address1, idText1);
             hBox2.getChildren().addAll(proposer2, address2, idText2);
 
-            proposer1.textProperty().addListener((observable, oldValue, newValue) -> {
-                Owner owner = (Owner) user.getOwner();
-                if (newValue.equalsIgnoreCase((owner).getName())) {
-                    address1.setItems(FXCollections.observableArrayList((owner).getMutualAddress()));
-                    idText1.setText((owner).getOwnerID());
-                    if (!(owner.getOwnedLands().isEmpty()) || owner.getOwnedLands()!=null){
-                        for (Land l : owner.getOwnedLands()) {
-                            propertyList.add(l.toString());
-                        }
-                    }
-                    if (!(owner.getOwnedRE().isEmpty()) || owner.getOwnedRE()!=null){
-                        for (RealEstate l : owner.getOwnedRE()) {
-                            propertyList.add(l.toString());
-                        }
-                    }
-                    if (propertyList.size() > 0) {
-                        propertyBox.getItems().setAll(propertyList);
-                    }
-
-                } else {
-                    address1.setItems(FXCollections.observableArrayList(""));
-                    idText1.setText("");
-                }
-            });
+            proposer1.setEditable(false);
+            proposer1.setText(((Owner) user.getOwner()).getName());
+            address1.getItems().add(((Owner) user.getOwner()).getMutualAddress());
+            address1.getSelectionModel().selectFirst();
+            idText1.setText(((Owner) user.getOwner()).getOwnerID());
+            propertyBox.getItems().setAll(newRequestController.setPropertyList((Owner) user.getOwner(), propertyList));
 
             proposer2.textProperty().addListener((observable, oldValue, newValue) -> {
                 List<Owner> ownerByName = usersDatabase.findOwnerByName(newValue);
-                System.out.println(ownerByName.size());
                 if (ownerByName.size() == 1) {
                     if (newValue.equalsIgnoreCase(ownerByName.get(0).getName())) {
                         address2.setItems(FXCollections.observableArrayList((ownerByName.get(0)).getMutualAddress()));
                         idText2.setText((ownerByName.get(0)).getOwnerID());
                     }
+
                 } else if (ownerByName.size() > 1) {
                     for (Owner o : ownerByName) {
                         addressList.add((o).getMutualAddress());
@@ -162,16 +154,51 @@ public class NewRequestStage extends FlowPane {
                             }
                         }
                     });
+
                 } else  {
                     address2.setItems(FXCollections.observableArrayList(""));
                     idText2.setText("");
                 }
+                nameTextfield.setText(newValue);
             });
 
-            propertyBox.addEventFilter(MouseEvent.MOUSE_PRESSED, evt -> {
-                Node node = evt.getPickResult().getIntersectedNode();
+            requestBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+                public void changed(ObservableValue ov, Number value, Number new_value)
+                {
+                    if (requestBox.getItems().get((int) new_value).equalsIgnoreCase("Build permission") ||
+                            requestBox.getItems().get((int) new_value).equalsIgnoreCase("Demolition permission") ||
+                            requestBox.getItems().get((int) new_value).equalsIgnoreCase("Terrain treatment")) {
 
-                // go up from the target node until a list cell is found or it's clear
+                        vBox.getChildren().clear();
+                        vBox.getChildren().addAll(officeLabel, officeBox, textDeposit, requestTypeLabel, requestBox,
+                                proposersLabel, hBox1, hBox2, favorLabel, nameTextfield, propertyBox, footer, sendBtn);
+                        vBox.getChildren().removeAll(hBox2, favorLabel, nameTextfield);
+
+                        if ( requestBox.getItems().get((int) new_value).equalsIgnoreCase("Demolition permission")) {
+                            propertyList.clear();
+                            propertyBox.getItems().setAll(newRequestController.setPropertyList((Owner) user.getOwner(),
+                                    "realEstate", propertyList));
+                        } else {
+                            propertyList.clear();
+                            propertyBox.getItems().setAll(newRequestController.setPropertyList((Owner) user.getOwner(),
+                                    "land", propertyList));
+                        }
+                    } else {
+                        vBox.getChildren().clear();
+                        vBox.getChildren().addAll(officeLabel, officeBox, textDeposit, requestTypeLabel, requestBox,
+                                proposersLabel, hBox1, hBox2, favorLabel, nameTextfield, propertyBox, footer, sendBtn);
+                    }
+
+                }
+            });
+
+
+
+            //list view... able to click multiple cells without ctrl
+            propertyBox.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> {
+                Node node = mouseEvent.getPickResult().getIntersectedNode();
+
+                // go up from target node until list cell is found or it is clear
                 // it was not a cell that was clicked
                 while (node != null && node != propertyBox && !(node instanceof ListCell)) {
                     node = node.getParent();
@@ -181,7 +208,7 @@ public class NewRequestStage extends FlowPane {
                 // handle event instead of using standard handling
                 if (node instanceof ListCell) {
                     // prevent further handling
-                    evt.consume();
+                    mouseEvent.consume();
 
                     ListCell cell = (ListCell) node;
                     ListView lv = cell.getListView();
@@ -202,7 +229,7 @@ public class NewRequestStage extends FlowPane {
             });
 
 
-            proposer1.setPromptText("Name Surname (you)");
+            proposer1.setPromptText("Name Surname (YOU)");
             proposer2.setPromptText("Not necessary, left it blank");
             idText1.setEditable(false);
             idText1.setPromptText("ID will pop up there");
@@ -210,12 +237,10 @@ public class NewRequestStage extends FlowPane {
             idText2.setEditable(false);
             address1.setPrefWidth(100);
             address2.setPrefWidth(100);
+            nameTextfield.setEditable(false);
 
-            nameTextfield.setPromptText("Name Surname");
-
-
-            vBox.getChildren().addAll(officeLabel, officeBox, textDeposit, proposersLabel, hBox1, hBox2,
-                    favorLabel, nameTextfield, requestTypeLabel, requestBox, propertyBox, footer, sendBtn);
+            vBox.getChildren().addAll(officeLabel, officeBox, textDeposit, requestTypeLabel, requestBox,
+                    proposersLabel, hBox1, hBox2, favorLabel, nameTextfield, propertyBox, footer, sendBtn);
         }
 
         this.getChildren().addAll(vBox);
@@ -225,11 +250,47 @@ public class NewRequestStage extends FlowPane {
 
         officeBox.setPrefWidth(280);
         textDeposit.setFont(Font.font("Verdana", FontWeight.BOLD, 30));
-
         sendBtn.setPrefWidth(280);
     }
 
-    private void sceneEvents () {
+    private void sceneEvents() throws WrongInputException {
+        sendBtn.setOnAction(event -> {
+            if (vBox.getChildren().size() == 13) {
+                if ((idText1.getText() == null || idText1.getText().trim().isEmpty()) ||
+                        (idText2.getText() == null || idText2.getText().trim().isEmpty()) ||
+                        (address2.getValue() == null || address2.getValue().isEmpty()) ||
+                        (requestBox.getValue() == null || requestBox.getValue().isEmpty()) ||
+                        (propertyBox.getSelectionModel().getSelectedItems() == null || propertyBox.getSelectionModel().getSelectedItems().isEmpty())) {
+                    PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING, "Everything must be filled");
 
+                } else {
+                    try {
+                        newRequestController.sendRequest(usersDatabase.getUser(officeBox.getValue()),
+                                usersDatabase.findUserByOwner(usersDatabase.findOwnerByID(idText2.getText())),
+                                RequestType.getRequestFromAttribute(requestBox.getValue()), propertyList, stage);
+
+                    } catch (WrongInputException e) {
+                        PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR, e.getMessage());
+                    }
+                }
+            } else if (vBox.getChildren().size() == 10) {
+                if ((requestBox.getValue() == null || requestBox.getValue().isEmpty()) ||
+                        (propertyBox.getSelectionModel().getSelectedItems() == null || propertyBox.getSelectionModel().getSelectedItems().isEmpty())) {
+                    PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING, "Everything must be filled");
+
+                } else {
+                    try {
+                        newRequestController.sendRequest(usersDatabase.getUser(officeBox.getValue()),
+                                RequestType.getRequestFromAttribute(requestBox.getValue()), propertyList, stage);
+
+                    } catch (WrongInputException e) {
+                        PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR, e.getMessage());
+                    }
+                }
+            } else {
+                System.out.println("New request error");
+            }
+
+        });
     }
 }

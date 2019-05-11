@@ -93,4 +93,28 @@ public class Database implements Serializable {
         return owners;
     }
 
+    public Owner findOwnerByID(String id) {
+        for (String s : usersData.keySet()) {
+            Ownership owner = getUser(s).getOwner();
+            if (owner instanceof Owner) {
+                if (((Owner) owner).getOwnerID().equalsIgnoreCase(id)) {
+                    return (Owner) owner;
+                }
+            }
+        }
+        return null;
+    }
+
+    public User findUserByOwner(Owner o) {
+        for (String s : usersData.keySet()) {
+            Ownership owner = getUser(s).getOwner();
+            if (owner instanceof Owner) {
+                if (((Owner) owner) == o) {
+                    return getUser(s);
+                }
+            }
+        }
+        return null;
+    }
+
 }

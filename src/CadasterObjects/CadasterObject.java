@@ -1,5 +1,7 @@
 package CadasterObjects;
 
+import MyExceptions.WrongInputException;
+import OtherFunctionality.CadastreSearch;
 import Owners.Ownership;
 
 import java.io.Serializable;
@@ -46,9 +48,10 @@ public abstract class CadasterObject implements Serializable {
     public List<Ownership> getOwners() {
         return owners;
     }
+
     //Getters and Setters-------------------------------------------------------
 
     public String toString() {
-        return (this.registerNum+", "+this.address);
+        return (this.registerNum+"; "+this.address);
     }
 }

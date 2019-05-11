@@ -1,7 +1,6 @@
 package ViewContollers;
 
 import OtherFunctionality.DataObserver;
-import OtherFunctionality.PrintCadastreThread;
 import OtherFunctionality.SerializableUtility;
 import UserObject.Database;
 import View.RegisterStage;

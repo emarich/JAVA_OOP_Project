@@ -23,27 +23,6 @@ public class Main extends Application{
         //usersDatabase.deleteAllUsers();
         usersDatabase.setUsersDataHM(SerializableUtility.loadUsers());
 
-        for (String s : usersDatabase.getUsersDataHM().keySet()) {
-            User user = usersDatabase.getUser(s);
-            if (user.getIsOwner()) {
-                Ownership owner = user.getOwner();
-                if (owner.getHaveLand()) {
-                    for (Land l : owner.getOwnedLands()) {
-                        if (l.getHaveRE()) {
-                            System.out.println(l.getRegisterNum()+" land "+l.getHaveRE());
-                        }
-                    }
-                }
-                if (owner.getHaveRealEstate()) {
-                    for (RealEstate l : owner.getOwnedRE()) {
-                        if (l.getHaveLand()) {
-                            System.out.println(l.getRegisterNum()+" re "+l.getHaveLand());
-                        }
-                    }
-                }
-            }
-        }
-
         primaryStage.setWidth(600);
         primaryStage.setHeight(600);
         primaryStage.setTitle("ECO - Electronic Cadastral Office");

@@ -37,7 +37,6 @@ public class OfficePrimaryScene extends FlowPane {
     private MenuItem makeREItem = new MenuItem("Make real estate");
     private Menu realEstateMenu = new Menu("Real Estates");
 
-    private Menu loggedUserText = new Menu();
 
     //Text fields
     private TextField searchField = new TextField();
@@ -56,7 +55,7 @@ public class OfficePrimaryScene extends FlowPane {
 
         setScene(primaryStage, username);
 
-        sceneEvents(primaryStage);
+        sceneEvents(primaryStage, username);
 
         primaryStage.show();
     }
@@ -77,7 +76,7 @@ public class OfficePrimaryScene extends FlowPane {
         makeLandItem.setId("makeLand");
         makeREItem.setId("makeRE");
         menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
-        menuBar.getMenus().addAll(officeMenu, citizensMenu, landMenu, realEstateMenu, loggedUserText);
+        menuBar.getMenus().addAll(officeMenu, citizensMenu, landMenu, realEstateMenu);
 
         citizensMenu.getItems().add(addUserItem);
         citizensMenu.getItems().add(makeOwnerItem);
@@ -85,10 +84,9 @@ public class OfficePrimaryScene extends FlowPane {
         landMenu.getItems().add(makeLandItem);
         realEstateMenu.getItems().add(makeREItem);
 
+        officeMenu.setText("User: "+username);
         officeMenu.getItems().addAll(requestItem);
-
-        loggedUserText.setText("User: "+username);
-        loggedUserText.getItems().addAll(signOutItem);
+        officeMenu.getItems().addAll(signOutItem);
 
         //ChoiceBox
         findChoiceBox.show();
@@ -109,7 +107,8 @@ public class OfficePrimaryScene extends FlowPane {
         textArea.setWrapText(true);
     }
 
-    private void sceneEvents(Stage primaryStage) {
+
+    private void sceneEvents(Stage primaryStage, String username) {
         textArea.setUsersDatabase(usersDatabase);
         textArea.update();
 
@@ -120,6 +119,7 @@ public class OfficePrimaryScene extends FlowPane {
         officeController.makeMenuItemClicked(makeOwnerItem, textArea);
         officeController.makeMenuItemClicked(makeLandItem, textArea);
         officeController.makeMenuItemClicked(makeREItem, textArea);
+        officeController.makeMenuItemClicked(requestItem, username);
 
         //Change prompt text, when you select, what are you searching for
         findChoiceBox.setOnAction(event -> {
