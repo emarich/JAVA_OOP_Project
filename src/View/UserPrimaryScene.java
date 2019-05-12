@@ -26,14 +26,12 @@ public class UserPrimaryScene extends FlowPane{
     private MenuBar menuBar = new MenuBar();
 
     private Menu userMenu = new Menu();
-    private MenuItem accountItem = new MenuItem("Account");
     private MenuItem propertyItem = new MenuItem("Property");
     private MenuItem signOutItem = new MenuItem("Sign out");
 
     private Menu requestsMenu = new Menu("Requests");
     private MenuItem sendRequestItem = new MenuItem("Send request");
-    private MenuItem pendingItem = new MenuItem("Pending requests");
-    private MenuItem acceptedItem = new MenuItem("Accepted request");
+    private MenuItem pendingItem = new MenuItem("My requests");
 
     //Text fields
     private TextField searchField = new TextField();
@@ -71,9 +69,9 @@ public class UserPrimaryScene extends FlowPane{
         menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
         menuBar.getMenus().addAll(userMenu, requestsMenu);
         userMenu.setText("User: "+username);
-        userMenu.getItems().addAll(accountItem, propertyItem, signOutItem);
+        userMenu.getItems().addAll(propertyItem, signOutItem);
 
-        requestsMenu.getItems().addAll(sendRequestItem,pendingItem, acceptedItem);
+        requestsMenu.getItems().addAll(sendRequestItem,pendingItem);
 
         //Choice box
         findChoiceBox.show();
@@ -107,5 +105,7 @@ public class UserPrimaryScene extends FlowPane{
         userController.propertyClicked(propertyItem);
 
         userController.newRequestClicked(sendRequestItem);
+
+        userController.myRequestsClicked(pendingItem);
     }
 }

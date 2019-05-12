@@ -1,24 +1,17 @@
 package View;
 
 import OtherFunctionality.PrintCadastre;
-import Requests.Request;
-import Requests.RequestType;
 import UserObject.User;
-import ViewContollers.RequestsController;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.shape.Line;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import javax.jws.soap.SOAPBinding;
+
 
 public class UserPropertyStage extends FlowPane {
     private Stage stage = new Stage();

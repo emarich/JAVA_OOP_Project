@@ -8,7 +8,9 @@ import Owners.Ownership;
 import UserObject.Database;
 import UserObject.User;
 
-public class CadastreSearch {
+import java.io.Serializable;
+
+public class CadastreSearch implements Serializable {
 
     public static void compareRegNum(CadasterObject object, Database database)  throws SameRegNumException{
         int seekingNum = object.getRegisterNum(); //actual reg number of object

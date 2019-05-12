@@ -2,10 +2,7 @@ package ViewContollers;
 
 import OtherFunctionality.DataObserver;
 import UserObject.Database;
-import View.CheckUserStage;
-import View.NewRequestStage;
-import View.SignInScene;
-import View.UserPropertyStage;
+import View.*;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -36,6 +33,16 @@ public class UserController extends GuestController{
         menuItem.setOnAction(event -> {
             try {
                UserPropertyStage userPropertyStage = new UserPropertyStage(usersDatabase.getUser(username));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public void myRequestsClicked (MenuItem menuItem) {
+        menuItem.setOnAction(event -> {
+            try {
+                RequestsStage requestsStage = new RequestsStage(usersDatabase.getUser(username));
             } catch (Exception e) {
                 e.printStackTrace();
             }

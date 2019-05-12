@@ -104,9 +104,10 @@ public class NewRequestController {
             for (int i = 0; i < cadasterObjectList.size(); i++) {
                 Request request = new Request(user, secondUser, requestType, cadasterObjectList.get(i));
                 System.out.println(request.getNumber());
-                user.addRequest(request);
-                secondUser.addRequest(request);
-                office.addRequest(request);
+                usersDatabase.getUser(user.getUsername()).addRequest(request);
+                usersDatabase.getUser(secondUser.getUsername()).addRequest(request);
+                usersDatabase.getUser(office.getUsername()).addRequest(request);
+                SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
             }
             stage.close();
         } catch (NullPointerException e) {
@@ -127,8 +128,9 @@ public class NewRequestController {
             for (int i = 0; i < cadasterObjectList.size(); i++) {
                 Request request = new Request(user, requestType, cadasterObjectList.get(i));
                 System.out.println(request.getNumber());
-                user.addRequest(request);
-                office.addRequest(request);
+                usersDatabase.getUser(user.getUsername()).addRequest(request);
+                usersDatabase.getUser(office.getUsername()).addRequest(request);
+                SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
             }
             stage.close();
         } catch (NullPointerException e) {
