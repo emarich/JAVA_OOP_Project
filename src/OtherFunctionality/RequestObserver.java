@@ -16,20 +16,9 @@ public class RequestObserver implements Observer, Serializable {
     private List<Request> requestList = new ArrayList<>();
     //private String requestNumber;
 
-    public RequestObserver(Request request) {
-        this.requestList.add(request);
-    }
-
     public RequestObserver() {
         usersDatabase.setUsersDataHM(SerializableUtility.loadUsers());
-        for ( String s : usersDatabase.getUsersDataHM().keySet()) {
-            if (usersDatabase.getUser(s).getUserType().equals(UserType.OFFICE)) {
-                if (usersDatabase.getUser(s).getRequests() != null ||
-                        !(usersDatabase.getUser(s).getRequests().isEmpty())) {
-                    requestList.addAll(usersDatabase.getUser(s).getRequests());
-                }
-            }
-        }
+        requestList = usersDatabase.getAllRequests();
     }
 
     private void setAccepted(boolean accepted) {
@@ -51,38 +40,29 @@ public class RequestObserver implements Observer, Serializable {
 
     //definitive update
     @Override
-    public void update(Object o) {
-        usersDatabase.setUsersDataHM(SerializableUtility.loadUsers());
+    public void update(Object o) { //o = request number
 
         if (requestList == null || requestList.isEmpty()) {
-            for ( String s : usersDatabase.getUsersDataHM().keySet()) {
-                if (usersDatabase.getUser(s).getUserType().equals(UserType.OFFICE)) {
-                    if (usersDatabase.getUser(s).getRequests() != null ||
-                            !(usersDatabase.getUser(s).getRequests().isEmpty())) {
-                        requestList.addAll(usersDatabase.getUser(s).getRequests());
-                    }
-                }
-            }
+            System.out.println("THERE ARE NO REQUESTS");
         }
 
         for (Request r : requestList) {
 
-            if (r.getNumber().equalsIgnoreCase((String) o)) {
+            if (r.getNumber().equalsIgnoreCase(((Request)o).getNumber())) {
 
                 if (r.getRequestingUser() != null) {
-                    r.getRequestingUser().getRequest((String) o).setAccepted(accepted);
-                    r.getRequestingUser().getRequest((String) o).setRejected(rejected);
+                    r.getRequestingUser().getRequest(((Request)o).getNumber()).setAccepted(accepted);
+                    r.getRequestingUser().getRequest(((Request)o).getNumber()).setRejected(rejected);
                     usersDatabase.getUsersDataHM().replace( r.getRequestingUser().getUsername(),  r.getRequestingUser());
                 }
                 if (r.getOtherUser() != null){
-                    r.getOtherUser().getRequest((String) o).setAccepted(accepted);
-                    r.getOtherUser().getRequest((String) o).setRejected(rejected);
+                    r.getOtherUser().getRequest(((Request)o).getNumber()).setAccepted(accepted);
+                    r.getOtherUser().getRequest(((Request)o).getNumber()).setRejected(rejected);
                     usersDatabase.getUsersDataHM().replace( r.getOtherUser().getUsername(),  r.getOtherUser());
                 }
 
                 SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
 
-                requestList.remove(r);
                 break;
             }
         }

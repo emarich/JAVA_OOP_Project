@@ -3,6 +3,7 @@ package UserObject;
 import OtherFunctionality.SerializableUtility;
 import Owners.Owner;
 import Owners.Ownership;
+import Requests.Request;
 import javafx.scene.control.Alert;
 import java.io.*;
 import java.util.ArrayList;
@@ -58,27 +59,6 @@ public class Database implements Serializable {
         SerializableUtility.saveUsers(usersData);
     }
 
-    public void changeUsername(String oldUsername, String newUsername ) {
-        if (existingUser(newUsername)) {
-            System.out.println("Username "+newUsername+" is already used.");
-            //PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING, "Username "+newUsername+" is already used.");
-        } else {
-            usersData.put(newUsername, usersData.get(oldUsername));
-            usersData.remove(oldUsername);
-        }
-    }
-
-    public void changePassword(String username, String oldPassword, String newPassword) {
-        User tmp = usersData.get(username);
-        if (tmp.getPassword().equals(oldPassword)) {
-            tmp.setPassword(newPassword);
-            usersData.put(username, tmp);
-            tmp = null;
-        } else {
-            System.out.println("Wrong current password.");
-            //PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING, "Wrong current password.");
-        }
-    }
 
     public List<Owner> findOwnerByName(String name) {
         List<Owner> owners = new ArrayList<>();
@@ -115,6 +95,18 @@ public class Database implements Serializable {
             }
         }
         return null;
+    }
+
+    public List<Request> getAllRequests() {
+        List<Request> requests = new ArrayList<>();
+        for (String u : usersData.keySet()) {
+            if (getUser(u).getUserType().equals(UserType.OFFICE)) {
+                if (getUser(u).getRequests() != null || !(getUser(u).getRequests().isEmpty())) {
+                    requests.addAll(getUser(u).getRequests());
+                }
+            }
+        }
+        return requests;
     }
 
 }

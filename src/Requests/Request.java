@@ -26,7 +26,6 @@ public class Request implements Serializable {
     public Request(){}
 
     public Request(User user1, User user2, RequestType requestType, CadasterObject cadasterObject, String date) {
-        requestObserver = new RequestObserver(this);
         generateRequestNumber();
         this.requestingUser = user1;
         this.otherUser = user2;
@@ -36,7 +35,6 @@ public class Request implements Serializable {
     }
 
     public Request(User user1, RequestType requestType, CadasterObject cadasterObject, String date) {
-        requestObserver = new RequestObserver(this);
         generateRequestNumber();
         this.requestingUser = user1;
         this.requestType = requestType;
@@ -87,9 +85,6 @@ public class Request implements Serializable {
         return date;
     }
 
-    public RequestObserver getRequestObserver() {
-        return requestObserver;
-    }
 
     private void generateRequestNumber() {
         Random rand = new Random();

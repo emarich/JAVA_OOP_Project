@@ -39,17 +39,20 @@ public class RequestsStage extends FlowPane {
         private final String btnId;
         private final String requestNumber;
         private final String buttonName;
+        private final HBox button;
 
         //private RequestsController requestsController = new RequestsController();
 
-        public RequestButtonHandler(String btnId) {
+        public RequestButtonHandler(String btnId, HBox button) {
             this.btnId = btnId;
             requestNumber = btnId.replaceAll("\\D+","");
             buttonName = btnId.replaceAll("[^A-Za-z]+", "");
+            this.button = button;
         }
 
         @Override
         public void handle(ActionEvent event) {
+            button.getChildren().clear();
             if (buttonName.equalsIgnoreCase("accept")) {
                 requestsController.acceptButtonClicked(requestNumber);
             } else if (buttonName.equalsIgnoreCase("reject")) {
@@ -96,58 +99,67 @@ public class RequestsStage extends FlowPane {
                 VBox vBox = new VBox();
                 vBox.setSpacing(5);
 
-                System.out.println(r.getNumber());
+                    System.out.println(r.getNumber());
 
-                vBox.getChildren().addAll(new HBox(new Label("From: "), new Text(r.getRequestingUser().getUsername())));
+                    vBox.getChildren().addAll(new HBox(new Label("From: "), new Text(r.getRequestingUser().getUsername())));
 
-                if (r.getOtherUser() != null) {
-                    vBox.getChildren().addAll(new HBox(new Label("To: "), new Text(r.getOtherUser().getUsername())));
-                }
-
-                vBox.getChildren().addAll( new HBox(new Label("Request: "), new Text(r.getRequestType().toString())),
-                        new HBox(new Label("Object: "), new Text(r.getCadasterObject().toString())));
-
-                if (user.getUserType().equals(UserType.OFFICE)) {
-
-                    Button sendBtn = createButton("Send to geodesy", r.getNumber());
-                    Button acceptBtn = createButton("Accept", r.getNumber());
-                    Button rejectBtn = createButton("Reject", r.getNumber());
-
-                    vBox.getChildren().addAll(new HBox(sendBtn, acceptBtn, rejectBtn));
-
-                    if (r.getRequestType().equals(RequestType.BUILD) ||
-                            r.getRequestType().equals(RequestType.DEMOLITION) ||
-                            r.getRequestType().equals(RequestType.TERRAIN)) {
-
-                        acceptBtn.setDisable(true);
-                        rejectBtn.setDisable(true);
-
-                    } else {
-                        sendBtn.setDisable(true);
-
+                    if (r.getOtherUser() != null) {
+                        vBox.getChildren().addAll(new HBox(new Label("To: "), new Text(r.getOtherUser().getUsername())));
                     }
 
-                } else {
+                    vBox.getChildren().addAll( new HBox(new Label("Request: "), new Text(r.getRequestType().toString())),
+                            new HBox(new Label("Object: "), new Text(r.getCadasterObject().toString())));
 
-                    ProgressIndicator pi = new ProgressIndicator();
-                    pi.setPrefSize(30, 30);
+                    if (user.getUserType().equals(UserType.OFFICE)) {
 
-                    Text stateText = new Text();
+                        if (!(r.getRejected()) && !(r.getAccepted())) {
+                            HBox hBoxButtons = new HBox();
+                            Button sendBtn = createButton("Send to geodesy", r.getNumber(), hBoxButtons);
+                            Button acceptBtn = createButton("Accept", r.getNumber(), hBoxButtons);
+                            Button rejectBtn = createButton("Reject", r.getNumber(), hBoxButtons);
+
+                            hBoxButtons.getChildren().addAll(sendBtn, acceptBtn, rejectBtn);
+                            vBox.getChildren().addAll(hBoxButtons);
+
+                            if (r.getRequestType().equals(RequestType.BUILD) ||
+                                    r.getRequestType().equals(RequestType.DEMOLITION) ||
+                                    r.getRequestType().equals(RequestType.TERRAIN)) {
+
+                                acceptBtn.setDisable(true);
+                                rejectBtn.setDisable(true);
+
+                            } else {
+                                sendBtn.setDisable(true);
+
+                            }
+                        } else {
+                            vBox.getChildren().addAll(new Text("Done!"));
+                        }
 
 
-                    if (r.getAccepted()) {
-                        pi.setProgress(1.0);
-                        stateText.setText("Accepted");
-                        vBox.getChildren().addAll(new HBox(pi, stateText));
 
-                    } else if (r.getRejected()) {
-                        stateText.setText("Rejected");
-                        vBox.getChildren().add(stateText);
+
                     } else {
-                        pi.setProgress(-1.0);
-                        vBox.getChildren().add(pi);
+
+                        ProgressIndicator pi = new ProgressIndicator();
+                        pi.setPrefSize(30, 30);
+
+                        Text stateText = new Text();
+
+
+                        if (r.getAccepted()) {
+                            pi.setProgress(1.0);
+                            stateText.setText("Accepted");
+                            vBox.getChildren().addAll(new HBox(pi, stateText));
+
+                        } else if (r.getRejected()) {
+                            stateText.setText("Rejected");
+                            vBox.getChildren().add(stateText);
+                        } else {
+                            pi.setProgress(-1.0);
+                            vBox.getChildren().add(pi);
+                        }
                     }
-                }
 
                 Separator separator = new Separator();
                 separator.setMaxWidth(500);
@@ -163,10 +175,10 @@ public class RequestsStage extends FlowPane {
 
     }
 
-    private Button createButton(String name, String request) {
+    private Button createButton(String name, String request, HBox hBox) {
         Button button = new Button(name);
         button.setId(name+request);
-        button.setOnAction(new RequestButtonHandler(button.getId()));
+        button.setOnAction(new RequestButtonHandler(button.getId(), hBox));
         return button ;
     }
 

@@ -79,20 +79,16 @@ public class NewRequestStage extends FlowPane {
 
     private Button sendBtn = new Button("Send");
 
-    public NewRequestStage(User user, Database usersDatabase) throws Exception {
-        try {
-            requestingUser = user;
-            newRequestController = new NewRequestController(user, usersDatabase);
-            this.usersDatabase = usersDatabase;
+    public NewRequestStage(User user, Database usersDatabase) {
+        requestingUser = user;
+        newRequestController = new NewRequestController(user, usersDatabase);
+        this.usersDatabase = usersDatabase;
 
-            setScene(stage, user);
+        setScene(stage, user);
 
-            sceneEvents();
+        sceneEvents();
 
-            stage.show();
-        } catch (WrongInputException e) {
-            PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR, e.getMessage());
-        }
+        stage.show();
     }
 
 
@@ -254,7 +250,7 @@ public class NewRequestStage extends FlowPane {
         sendBtn.setPrefWidth(280);
     }
 
-    private void sceneEvents() throws WrongInputException {
+    private void sceneEvents() {
         sendBtn.setOnAction(event -> {
             if (vBox.getChildren().size() == 13) {
                 if ((idText1.getText() == null || idText1.getText().trim().isEmpty()) ||
@@ -262,13 +258,14 @@ public class NewRequestStage extends FlowPane {
                         (address2.getValue() == null || address2.getValue().isEmpty()) ||
                         (requestBox.getValue() == null || requestBox.getValue().isEmpty()) ||
                         (propertyBox.getSelectionModel().getSelectedItems() == null || propertyBox.getSelectionModel().getSelectedItems().isEmpty())) {
-                    PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING, "Everything must be filled");
+                    PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING, "Everything must be filled or selected");
 
                 } else {
                     try {
+
                         newRequestController.sendRequest(usersDatabase.getUser(officeBox.getValue()),
                                 usersDatabase.findUserByOwner(usersDatabase.findOwnerByID(idText2.getText())),
-                                RequestType.getRequestFromAttribute(requestBox.getValue()), propertyList, stage, actualDate);
+                                RequestType.getRequestFromAttribute(requestBox.getValue()), propertyBox.getSelectionModel().getSelectedItems(), stage, actualDate);
 
                     } catch (WrongInputException e) {
                         PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR, e.getMessage());
@@ -277,12 +274,13 @@ public class NewRequestStage extends FlowPane {
             } else if (vBox.getChildren().size() == 10) {
                 if ((requestBox.getValue() == null || requestBox.getValue().isEmpty()) ||
                         (propertyBox.getSelectionModel().getSelectedItems() == null || propertyBox.getSelectionModel().getSelectedItems().isEmpty())) {
-                    PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING, "Everything must be filled");
+                    PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING, "Everything must be filled or selected");
 
                 } else {
                     try {
+
                         newRequestController.sendRequest(usersDatabase.getUser(officeBox.getValue()),
-                                RequestType.getRequestFromAttribute(requestBox.getValue()), propertyList, stage, actualDate);
+                                RequestType.getRequestFromAttribute(requestBox.getValue()), propertyBox.getSelectionModel().getSelectedItems(), stage, actualDate);
 
                     } catch (WrongInputException e) {
                         PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR, e.getMessage());

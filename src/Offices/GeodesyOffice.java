@@ -8,6 +8,7 @@ import Requests.RequestType;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 public class GeodesyOffice extends Office implements Serializable {
@@ -28,96 +29,137 @@ public class GeodesyOffice extends Office implements Serializable {
 
         Landform landform = land.getLandform();
 
+        Random random = new Random();
+        int number = random.nextInt(10);
+
         switch (landform.getShortName()) {
             case "arable":
-                    if (request.getRequestType().equals(RequestType.BUILD)) {
-
-                    } else if (request.getRequestType().equals(RequestType.TERRAIN)) {
-
-                    }
-                break;
-
-
-            case "hop":
-                if (request.getRequestType().equals(RequestType.BUILD)) {
-
-                } else if (request.getRequestType().equals(RequestType.TERRAIN)) {
-
-                }
-                break;
-
-
-            case "vineyard":
-                if (request.getRequestType().equals(RequestType.BUILD)) {
-
-                } else if (request.getRequestType().equals(RequestType.TERRAIN)) {
-
-                }
-                break;
-
-
-            case "garden":
-                if (request.getRequestType().equals(RequestType.BUILD)) {
-
-                } else if (request.getRequestType().equals(RequestType.TERRAIN)) {
-
-                }
-                break;
-
-
             case "grove":
+            case "hop": {
                 if (request.getRequestType().equals(RequestType.BUILD)) {
-
+                    if (number > 3) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 } else if (request.getRequestType().equals(RequestType.TERRAIN)) {
-
+                    if (number > 1) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
                 break;
+            }
 
-
-            case "grass":
+            case "vineyard": {
                 if (request.getRequestType().equals(RequestType.BUILD)) {
-
+                    if (number > 3) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 } else if (request.getRequestType().equals(RequestType.TERRAIN)) {
-
+                    if (number > 3) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
                 break;
-
-
-            case "woods":
-                if (request.getRequestType().equals(RequestType.BUILD)) {
-
-                } else if (request.getRequestType().equals(RequestType.TERRAIN)) {
-
-                }
-                break;
-
-
-            case "water":
-                if (request.getRequestType().equals(RequestType.BUILD)) {
-
-                } else if (request.getRequestType().equals(RequestType.TERRAIN)) {
-
-                }
-                break;
-
+            }
 
             case "built":
+            case "garden": {
                 if (request.getRequestType().equals(RequestType.BUILD)) {
-
+                    if (number > 1) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 } else if (request.getRequestType().equals(RequestType.TERRAIN)) {
-
+                    if (number > 1) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
                 break;
+            }
 
 
-            case "other":
+            case "grass": {
                 if (request.getRequestType().equals(RequestType.BUILD)) {
-
+                    if (number > 5) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 } else if (request.getRequestType().equals(RequestType.TERRAIN)) {
-
+                    if (number > 7) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
                 break;
+            }
+
+            case "woods": {
+                if (request.getRequestType().equals(RequestType.BUILD)) {
+                    if (number > 5) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else if (request.getRequestType().equals(RequestType.TERRAIN)) {
+                    if (number > 9) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+                break;
+            }
+
+
+            case "water": {
+                if (request.getRequestType().equals(RequestType.BUILD)) {
+                    if (number > 1) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else if (request.getRequestType().equals(RequestType.TERRAIN)) {
+                    if (number > 5) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+                break;
+            }
+
+
+            case "other": {
+                if (request.getRequestType().equals(RequestType.BUILD)) {
+                    if (number > 5) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else if (request.getRequestType().equals(RequestType.TERRAIN)) {
+                    if (number > 5) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+                break;
+            }
         }
+
+        return false;
     }
 }
 

@@ -31,7 +31,9 @@ public class MakeREController {
             if (!((Integer.parseInt(regNum.getText()) >= 1000) && (Integer.parseInt(regNum.getText()) <= 9999))) {
                 throw new WrongInputException("Register number must have 4 digits.");
             }
+
             Address.correctAddress(address.getText());
+
 
             RealEstate realEstate = new RealEstate(Integer.parseInt(regNum.getText()), address.getText(),
                     Integer.parseInt(area.getText()), user.getOwner(), REBox.getValue());

@@ -84,6 +84,16 @@ public class User implements Serializable {
         return null;
     }
 
+    public void replaceRequest (Request request) {
+        for (Request r : requests) {
+            if (r.getNumber().equalsIgnoreCase(request.getNumber())){
+                requests.remove(r);
+                requests.add(request);
+                break;
+            }
+        }
+    }
+
     //Getters and Setters-------------------------------------------------------
 
 

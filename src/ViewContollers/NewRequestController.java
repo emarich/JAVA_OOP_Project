@@ -74,6 +74,7 @@ public class NewRequestController {
     }
 
     private void arrayFromObservableList(ObservableList<String> obList) {
+
         for (String s : obList) {
             if (user.getOwner().getHaveLand()) {
                 for (Land l : user.getOwner().getOwnedLands()) {

@@ -4,6 +4,7 @@ import CadasterObjects.Address;
 import CadasterObjects.Land;
 import MyExceptions.AddressFormatException;
 import MyExceptions.SameRegNumException;
+import MyExceptions.WrongInputException;
 import MyExceptions.WrongLandformInputException;
 import OtherFunctionality.*;
 import UserObject.Database;
@@ -28,6 +29,10 @@ public class MakeLandController {
     public void makeLandClicked(TextField regNum, TextField address, TextField area, ChoiceBox<String> landBox, Stage stage) {
         try {
             Address.correctAddress(address.getText());
+
+            if (!((Integer.parseInt(regNum.getText()) >= 1000) && (Integer.parseInt(regNum.getText()) <= 9999))) {
+                throw new WrongInputException("Register number must have 4 digits.");
+            }
 
             Land land = new Land(Integer.parseInt(regNum.getText()), address.getText(),
                     Integer.parseInt(area.getText()), user.getOwner(), landBox.getValue());
@@ -61,6 +66,10 @@ public class MakeLandController {
                 PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING,
                         e.getMessage());
                 alert.setHeaderText("Error: same register number");
+            } else if (e instanceof WrongInputException){
+                PopUpAlert alert = new PopUpAlert(Alert.AlertType.WARNING,
+                        e.getMessage());
+                alert.setHeaderText("Error: register number format");
             } else {
                 e.printStackTrace();
             }

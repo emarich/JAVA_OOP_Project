@@ -69,8 +69,15 @@ public abstract class Ownership implements Serializable {
     public void addLand(Land land) {
         ownedLands.add(land);
     }
+    public void deleteLand(Land land) {
+        ownedLands.remove(land);
+    }
+
     public void addRE(RealEstate realEstate) {
         ownedRE.add(realEstate);
+    }
+    public void deleteRE(RealEstate realEstate) {
+        ownedRE.remove(realEstate);
     }
 
 
