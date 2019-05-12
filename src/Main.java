@@ -1,19 +1,15 @@
-import CadasterObjects.Land;
-import CadasterObjects.RealEstate;
-import OtherFunctionality.PopUpAlert;
 import OtherFunctionality.SerializableUtility;
-import Owners.Owner;
-import Owners.Ownership;
 import UserObject.Database;
-import UserObject.User;
 import View.*;
-
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
-import java.util.HashMap;
+/**
+ *<h1>ECO - Electronic Cadastral Office<h1/>
+ * The program is intended for the officers in the Cadastre office and for citizens
+ *
+ * @author Ema Richnakova
+ */
 
 public class Main extends Application{
     private Database usersDatabase = new Database();

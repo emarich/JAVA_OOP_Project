@@ -7,6 +7,9 @@ public class Address {
         String[] outputAddress = new String[3];
         boolean bool = false;
         try {
+            if (!(address.contains(","))) {
+                throw new AddressFormatException("Please, write it in this format:\n(example) Hlavna 1, 801 01 Bratislava, Slovensko");
+            }
             outputAddress = address.split(","); //splits string to street, city and state string
 
             for (int i = 0; i < 3; i++) {

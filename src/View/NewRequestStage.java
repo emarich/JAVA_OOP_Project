@@ -74,7 +74,8 @@ public class NewRequestStage extends FlowPane {
 
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private LocalDate localDate = LocalDate.now();
-    private Text footer = new Text("Date: "+dtf.format(localDate));
+    private String actualDate = dtf.format(localDate);
+    private Text footer = new Text("Date: "+actualDate);
 
     private Button sendBtn = new Button("Send");
 
@@ -103,13 +104,13 @@ public class NewRequestStage extends FlowPane {
 
         vBox.setSpacing(20);
 
-        propertyBox.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        propertyBox.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         propertyBox.setPrefHeight(100);
 
         //prevents sending requests from user, that is not owner
         if (user.getOwner() instanceof Owner) {
             for (String s : usersDatabase.getUsersDataHM().keySet()) {
-                //set officies to choice box, from where you can choose, to which offices will be send that request
+                //set offices to choice box, from where you can choose, to which offices will be send that request
                 if (usersDatabase.getUser(s).getUserType().toString().equalsIgnoreCase("OFFICE")) {
                     officeList.add(usersDatabase.getUser(s).getUsername());
                 }
@@ -267,7 +268,7 @@ public class NewRequestStage extends FlowPane {
                     try {
                         newRequestController.sendRequest(usersDatabase.getUser(officeBox.getValue()),
                                 usersDatabase.findUserByOwner(usersDatabase.findOwnerByID(idText2.getText())),
-                                RequestType.getRequestFromAttribute(requestBox.getValue()), propertyList, stage);
+                                RequestType.getRequestFromAttribute(requestBox.getValue()), propertyList, stage, actualDate);
 
                     } catch (WrongInputException e) {
                         PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR, e.getMessage());
@@ -281,7 +282,7 @@ public class NewRequestStage extends FlowPane {
                 } else {
                     try {
                         newRequestController.sendRequest(usersDatabase.getUser(officeBox.getValue()),
-                                RequestType.getRequestFromAttribute(requestBox.getValue()), propertyList, stage);
+                                RequestType.getRequestFromAttribute(requestBox.getValue()), propertyList, stage, actualDate);
 
                     } catch (WrongInputException e) {
                         PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR, e.getMessage());

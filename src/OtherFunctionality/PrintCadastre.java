@@ -48,45 +48,7 @@ public class PrintCadastre implements Serializable {
                     textArea.appendText("\n|| Username: " + s + " \n");
 
                     if (usersDatabase.getUser(s).getIsOwner()) {
-                        if (owner instanceof Owner) {
-                            textArea.appendText("|| Name: " + ((Owner) owner).getName() + "\n");
-                            textArea.appendText("|| Mutual address: " + ((Owner) owner).getMutualAddress() + "\n");
-                        } else if (owner instanceof City) {
-                            textArea.appendText("|| Phone number: " + ((City) owner).getPhoneNumber() + "\n");
-                            textArea.appendText("|| Email: " + ((City) owner).getEmail() + "\n");
-                        } else {
-                            textArea.appendText("Error: object Owner has different instance\n");
-                        }
-
-                        textArea.appendText("LANDS:-------------------------\n");
-                        if (owner.getHaveLand()) {
-                            Land land;
-                            for (int i = 0; i < owner.getOwnedLands().size(); i++) {
-                                land = owner.getOwnedLands().get(i);
-                                if (land == null) {
-                                    continue;
-                                }
-                                printFormula(land, textArea);
-                            }
-                            land = null;
-                        } else {
-                            textArea.appendText("...none...\n");
-                        }
-
-                        textArea.appendText("REAL ESTATES:------------------\n");
-                        if (owner.getHaveRealEstate()) {
-                            RealEstate realEstate;
-                            for (int i = 0; i < owner.getOwnedRE().size(); i++) {
-                                realEstate = owner.getOwnedRE().get(i);
-                                if (realEstate == null) {
-                                    continue;
-                                }
-                                printFormula(realEstate, textArea);
-                            }
-                            realEstate = null;
-                        } else {
-                            textArea.appendText("...none...\n");
-                        }
+                        printOwnerWithProperty(owner);
                     } else {
                         textArea.appendText("User " + s + " doesn't have any property.\n");
                     }
@@ -148,46 +110,7 @@ public class PrintCadastre implements Serializable {
             basicTextArea.appendText("\n|| Username: " + user.getUsername() + " \n");
 
             if (user.getIsOwner()) {
-                owner = user.getOwner();
-                if (owner instanceof Owner) {
-                    basicTextArea.appendText("|| Name: " + ((Owner) owner).getName() + "\n");
-                    basicTextArea.appendText("|| Mutual address: " + ((Owner) owner).getMutualAddress() + "\n");
-                } else if (owner instanceof City) {
-                    basicTextArea.appendText("|| Phone number: " + ((City) owner).getPhoneNumber() + "\n");
-                    basicTextArea.appendText("|| Email: " + ((City) owner).getEmail() + "\n");
-                } else {
-                    basicTextArea.appendText("Error: object Owner has different instance\n");
-                }
-
-                basicTextArea.appendText("LANDS:-------------------------\n");
-                if (owner.getHaveLand()) {
-                    Land land;
-                    for (int i = 0; i < owner.getOwnedLands().size(); i++) {
-                        land = owner.getOwnedLands().get(i);
-                        if (land == null) {
-                            continue;
-                        }
-                        printFormula(land, basicTextArea);
-                    }
-                    land = null;
-                } else {
-                    textArea.appendText("...none...\n");
-                }
-
-                basicTextArea.appendText("REAL ESTATES:------------------\n");
-                if (owner.getHaveRealEstate()) {
-                    RealEstate realEstate;
-                    for (int i = 0; i < owner.getOwnedRE().size(); i++) {
-                        realEstate = owner.getOwnedRE().get(i);
-                        if (realEstate == null) {
-                            continue;
-                        }
-                        printFormula(realEstate, basicTextArea);
-                    }
-                    realEstate = null;
-                } else {
-                    basicTextArea.appendText("...none...\n");
-                }
+                printOwnerWithProperty(owner);
             } else {
                 basicTextArea.appendText("User " + user.getUsername() + " doesn't have any property.\n");
             }
@@ -204,6 +127,49 @@ public class PrintCadastre implements Serializable {
                 running = false;
                 basicTextArea.setText("");
                 System.out.println("||||Whole running thread catching expression");
+            }
+        }
+
+        private void printOwnerWithProperty(Ownership owner) {
+            owner = user.getOwner();
+            if (owner instanceof Owner) {
+                basicTextArea.appendText("|| Name: " + ((Owner) owner).getName() + "\n");
+                basicTextArea.appendText("|| Mutual address: " + ((Owner) owner).getMutualAddress() + "\n");
+            } else if (owner instanceof City) {
+                basicTextArea.appendText("|| Phone number: " + ((City) owner).getPhoneNumber() + "\n");
+                basicTextArea.appendText("|| Email: " + ((City) owner).getEmail() + "\n");
+            } else {
+                basicTextArea.appendText("Error: object Owner has different instance\n");
+            }
+
+            basicTextArea.appendText("LANDS:-------------------------\n");
+            if (owner.getHaveLand()) {
+                Land land;
+                for (int i = 0; i < owner.getOwnedLands().size(); i++) {
+                    land = owner.getOwnedLands().get(i);
+                    if (land == null) {
+                        continue;
+                    }
+                    printFormula(land, basicTextArea);
+                }
+                land = null;
+            } else {
+                textArea.appendText("...none...\n");
+            }
+
+            basicTextArea.appendText("REAL ESTATES:------------------\n");
+            if (owner.getHaveRealEstate()) {
+                RealEstate realEstate;
+                for (int i = 0; i < owner.getOwnedRE().size(); i++) {
+                    realEstate = owner.getOwnedRE().get(i);
+                    if (realEstate == null) {
+                        continue;
+                    }
+                    printFormula(realEstate, basicTextArea);
+                }
+                realEstate = null;
+            } else {
+                basicTextArea.appendText("...none...\n");
             }
         }
 

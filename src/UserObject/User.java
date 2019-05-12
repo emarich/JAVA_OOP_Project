@@ -75,6 +75,15 @@ public class User implements Serializable {
         return requests;
     }
 
+    public Request getRequest(String reqNum) {
+        for (Request r : requests) {
+            if (r.getNumber().equalsIgnoreCase(reqNum)){
+                return r;
+            }
+        }
+        return null;
+    }
+
     //Getters and Setters-------------------------------------------------------
 
 

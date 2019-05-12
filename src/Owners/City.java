@@ -21,8 +21,4 @@ public class City extends Ownership implements Serializable {
     public Office getOffice() {
         return office;
     }
-
-    public void addLand(Land land) {
-            ownedLands.add(land);
-    }
 }

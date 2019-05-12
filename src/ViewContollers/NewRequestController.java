@@ -93,7 +93,7 @@ public class NewRequestController {
         }
     }
 
-    public void sendRequest(User office, User secondUser, RequestType requestType, ObservableList<String> obList, Stage stage) throws WrongInputException {
+    public void sendRequest(User office, User secondUser, RequestType requestType, ObservableList<String> obList, Stage stage, String actualDate) throws WrongInputException {
         try {
             if (office.getUserType() != (UserType.OFFICE)) {
                 throw new WrongInputException("Admin user not found");
@@ -102,7 +102,7 @@ public class NewRequestController {
             arrayFromObservableList(obList);
 
             for (int i = 0; i < cadasterObjectList.size(); i++) {
-                Request request = new Request(user, secondUser, requestType, cadasterObjectList.get(i));
+                Request request = new Request(user, secondUser, requestType, cadasterObjectList.get(i), actualDate);
                 System.out.println(request.getNumber());
                 usersDatabase.getUser(user.getUsername()).addRequest(request);
                 usersDatabase.getUser(secondUser.getUsername()).addRequest(request);
@@ -110,6 +110,7 @@ public class NewRequestController {
                 SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
             }
             stage.close();
+
         } catch (NullPointerException e) {
             PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR, office.getUsername()+" doesn't have owner");
         }
@@ -117,7 +118,7 @@ public class NewRequestController {
 
     }
 
-    public void sendRequest(User office, RequestType requestType, ObservableList<String> obList, Stage stage) throws WrongInputException {
+    public void sendRequest(User office, RequestType requestType, ObservableList<String> obList, Stage stage, String actualDate) throws WrongInputException {
         try {
             if (office.getUserType() != (UserType.OFFICE)) {
                 throw new WrongInputException("Admin user not found");
@@ -126,13 +127,14 @@ public class NewRequestController {
             arrayFromObservableList(obList);
 
             for (int i = 0; i < cadasterObjectList.size(); i++) {
-                Request request = new Request(user, requestType, cadasterObjectList.get(i));
+                Request request = new Request(user, requestType, cadasterObjectList.get(i), actualDate);
                 System.out.println(request.getNumber());
                 usersDatabase.getUser(user.getUsername()).addRequest(request);
                 usersDatabase.getUser(office.getUsername()).addRequest(request);
                 SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
             }
             stage.close();
+
         } catch (NullPointerException e) {
             PopUpAlert alert = new PopUpAlert(Alert.AlertType.ERROR, office.getUsername()+" doesn't have owner");
         }

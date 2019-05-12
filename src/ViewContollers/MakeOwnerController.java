@@ -40,6 +40,8 @@ public class MakeOwnerController {
                 try {
                     Owner.isValidDateFormat(date.getText());
                     Address.correctAddress(address.getText());
+
+                    //make subclass Owner
                     user.setOwner(new Owner(name.getText(), gender.getValue(), date.getText(), address.getText()));
                     user.setIsOwner(true);
                     usersDatabase.getUsersDataHM().replace(user.getUsername(), user);
@@ -84,6 +86,8 @@ public class MakeOwnerController {
                     try {
                         Ownership.phoneNumberCheck(phoneNum.getText());
                         Ownership.emailCheck(email.getText());
+
+                        //make subclass City
                         user.setOwner(new City(phoneNum.getText(), email.getText()));
                         user.setIsOwner(true);
                         usersDatabase.getUsersDataHM().put(user.getUsername(), user);

@@ -7,7 +7,6 @@ import javafx.scene.control.TextArea;
 
 public class DataObserver extends TextArea implements Observer {
     private Database usersDatabase = new Database();
-    //private PrintCadastreThread printCadastreThread;
     private PrintCadastre printCadastre;
 
     public void setUsersDatabase(Database usersDatabase) {
@@ -20,17 +19,18 @@ public class DataObserver extends TextArea implements Observer {
         this.usersDatabase = database;
     }
 
-
+    @Override
     public void update() {
-
-        /*for (Land l : usersDatabase.getUser("Office").getOwner().getOwnedLands()) {
-            if (l == null) {
-                break;
-            }
-            System.out.println(l.getRegisterNum()+"\n");
-        }*/
         this.setText("");
         printCadastre = new PrintCadastre(usersDatabase, this);
+        printCadastre.print();
+        printCadastre = null;
+    }
+
+    @Override
+    public void update(Object o) {
+        this.setText("");
+        printCadastre = new PrintCadastre((Database) o, this);
         printCadastre.print();
         printCadastre = null;
     }
