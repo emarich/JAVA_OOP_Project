@@ -11,7 +11,7 @@ import java.util.List;
  * @serial serializuje {@code registerNum} - registračné číslo nehnuteľnosti, serializuje address {@code address} -
  * adresu nehnuteľnosti, serializuje area {@code area} - veľkosť nehnuteľnosti, serializuje {@code owners} - list majiteľov
  *
- * @see #toString() prepíše objekt do String formátu "registerNum{@value}; address{@value}"
+ * @see #toString() prepíše objekt do String formátu "{@code registerNum}; {@code address}"
  */
 public abstract class CadasterObject implements Serializable {
     protected int registerNum;

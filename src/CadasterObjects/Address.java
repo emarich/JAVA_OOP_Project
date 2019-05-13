@@ -3,10 +3,10 @@ package CadasterObjects;
 import MyExceptions.AddressFormatException;
 
 /**
- * Trieda, ktorá je zodpovedná za kontolu formátu adresy a zdokonalenie formy adesy
+ * Trieda, ktorá je zodpovedná za kontrolu formátu adresy a zdokonalenie formy adesy
  */
 public class Address {
-    /**Metóda pre kontolu <code>String address<code/> vloženej adresy.
+    /**Metóda pre kontolu {@code String address} vloženej adresy.
      * Kontroluje, či daná adresa používa ako oddeľovače "," a či je adresa kompletná (ulica, mesto, štát)
      *
      * @param address adresa, ktorá sa má zkontrolovať
@@ -47,7 +47,7 @@ public class Address {
      * Ak je adresa formátovo korektná, tak upravý na nej len maličkosti. Ak začiatočné písmená sú malým písmom
      * napísané, zmení ich na veľké, aj je príliš veľa medzier medzi danými slovami, odstráni ich
      * @param address adresa, ktorá sa má zkontrolovať
-     * @return upravenú verziu <code>String address<code/>
+     * @return upravenú verziu {@code String address}
      */
     public static String setPerfectAddress(String address) {
         String finalAddress = ""; //whole address

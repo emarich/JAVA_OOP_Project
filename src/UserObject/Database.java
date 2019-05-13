@@ -10,9 +10,9 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Trieda {@code Database} ukladá všetkých používateľov do HaskMap {@link .usersData}, ktorí sa ukladjú podľa kľúča
+ * Trieda {@code Database} ukladá všetkých používateľov do HaskMap {@code usersData}, ktorí sa ukladjú podľa kľúča
  * , ktorý je vo forme {@code username} používateľa.
- * Daná HashMap {@link .usersData} sa serializuje v {@link SerializableUtility}.
+ * Daná HashMap {@code usersData} sa serializuje v {@link SerializableUtility}.
  */
 public class Database implements Serializable {
     //users are saving to this

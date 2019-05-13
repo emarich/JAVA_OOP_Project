@@ -5,7 +5,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
- *<h1>ECO - Electronic Cadastral Office<h1/>
+ *ECO - Electronic Cadastral Office
  * Štart do prihlasovacieho okna.
  * @author Ema Richnakova
  */
