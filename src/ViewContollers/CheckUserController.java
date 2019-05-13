@@ -2,20 +2,21 @@ package ViewContollers;
 
 import OtherFunctionality.DataObserver;
 import OtherFunctionality.PopUpAlert;
-import OtherFunctionality.SerializableUtility;
 import UserObject.Database;
 import UserObject.User;
-import View.CheckUserStage;
 import View.MakeLandStage;
 import View.MakeOwnerScene;
 import View.MakeREStage;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Trieda kontroluje, či zadaný username používateľa je správnz a či vôbec taký používateľ existuje a na základe
+ * ID menuItemu, z ktorého sa spúšťal {@link View.CheckUserStage}, tak podľa toho prepne na príslušný stage
+ */
 public class CheckUserController {
     private Database usersDatabase;
     private String menuItemTxt;

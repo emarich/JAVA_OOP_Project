@@ -14,7 +14,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-//refactor later
+/**
+ * Vytvára nové pozemky, ktoré vie vytvárať administrátor pre všetkych používateľov.
+ */
 public class MakeLandController {
     private Database usersDatabase;
     private User user;

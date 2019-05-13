@@ -1,5 +1,8 @@
 package OtherFunctionality;
 
+/**
+ * Trieda sa využíva najmä pri porovnávaní ulíc a miest v adresách v {@link CadastreSearch}
+ */
 public class FindSubstring { //find if there is concrete substring in string
 
     static public boolean findExact(String str1, String str2) {

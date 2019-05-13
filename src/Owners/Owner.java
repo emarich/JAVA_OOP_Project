@@ -5,10 +5,17 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.Random;
 
+/**
+ * {@code Owner} je podtriedou abstraktnej triedy {@link Ownership}.
+ * Daná trieda ukladá v sebe údaje obýčajných používateľov (nie administrátorov).
+ * Aggreguje v sebe údaje ako {@code name} - meno používateľa , {@code birthDate} - dátum narodenia,
+ * {@code mutualAddress} - trvalé bydlisko používateľa, {@code ownerID} - identifikačné číslo (ktoré je generované
+ * v {@link #generateID()} podľa dátumu narodenia), {@code gender} - pohlavie používateľa (ktoré je využité len pri
+ * generovaní ID užívateľa)
+ */
 public class Owner extends Ownership implements Serializable {
 
     private String name;
@@ -16,7 +23,6 @@ public class Owner extends Ownership implements Serializable {
     private String mutualAddress;
     private String ownerID;
     private Gender gender;
-    //private double money = 100000;
 
     public Owner(String name, String gender, String date, String address){
         this.name = name;
@@ -91,6 +97,11 @@ public class Owner extends Ownership implements Serializable {
     }
 
 
+    /**
+     * Metóda kontroluje formát dátumu narodenia
+     * @param date dátum narodenia používateľa
+     * @throws DateTimeParseException výnimka pre kontrolu formátu dátumu
+     */
     //checks, if the date of birth is in the valid format dd.MM.yyyy
     public static void isValidDateFormat(String date) throws DateTimeParseException {
         String format = "dd.MM.yyyy";

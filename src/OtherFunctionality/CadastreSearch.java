@@ -7,11 +7,21 @@ import MyExceptions.SameRegNumException;
 import Owners.Ownership;
 import UserObject.Database;
 import UserObject.User;
-
 import java.io.Serializable;
 
+/**
+ * Trieda slúži na porovnávanie registračných čísel a novo vytvorenej nehnuteľnosti a ostatných nehnuteľností.
+ * Ak sa nájde nechcený prípad, hodí výnimku.
+ */
 public class CadastreSearch implements Serializable {
 
+    /**
+     * Daná metóda porovnáva reqistrašé čísla
+     * @param object s
+     * @param database databáza užívateľov
+     * @throws SameRegNumException výnimka, ktorá sa hodí, ak nájde 2 pozemky s rovnakým registračných číslom alebo už nemôže viac ukladať
+     * budovy do pozemku
+     */
     public static void compareRegNum(CadasterObject object, Database database)  throws SameRegNumException{
         int seekingNum = object.getRegisterNum(); //actual reg number of object
 
@@ -58,6 +68,14 @@ public class CadastreSearch implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param newObject novovytvorená nehnuteľnosť
+     * @param current objekt, ktorý má rovnaké registrační číslo, ako {@code newObject}
+     * @param regNum rovnaké registračné číslo
+     * @throws SameRegNumException výnimka, ktorá sa hodí, ak nájde 2 pozemky s rovnakým registračných číslom alebo už nemôže viac ukladať
+     * budovy do pozemku
+     */
     private static void compareAddress(CadasterObject newObject, CadasterObject current, int regNum) throws SameRegNumException {
         String[] outputAddress;
         //newObject

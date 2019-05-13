@@ -1,12 +1,12 @@
 package OtherFunctionality;
 
-import UserObject.Database;
 import UserObject.User;
-
 import java.io.*;
 import java.util.HashMap;
-import java.util.function.Consumer;
 
+/**
+ * Daná trieda je zodpovedná za serializáciu údajov z {@link UserObject.Database}
+ */
 public class SerializableUtility {
     //serializing hash map
     public static void saveUsers(HashMap<String, User> usersData) {

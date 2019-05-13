@@ -1,11 +1,16 @@
 package OtherFunctionality;
 
-import CadasterObjects.Land;
 import UserObject.Database;
 import javafx.scene.control.TextArea;
 
 
+/**
+ * Observer pre aktualizáciu údajov v {@code TextArea} na hlavnom okne používateľa.
+ * Akualizuje sa pri pridaní nového používateľa, nových údajov priradeným používateľovi, evidovaní pozemku alebo
+ * budovy
+ */
 public class DataObserver extends TextArea implements Observer {
+
     private Database usersDatabase = new Database();
     private PrintCadastre printCadastre;
 
@@ -19,6 +24,9 @@ public class DataObserver extends TextArea implements Observer {
         this.usersDatabase = database;
     }
 
+    /**
+     * Metóda {@code update(Object o)} je implementovaná z rozhrania {@code Observer}, ktoré implementuje daná tieda.
+     */
     @Override
     public void update() {
         this.setText("");
@@ -27,6 +35,9 @@ public class DataObserver extends TextArea implements Observer {
         printCadastre = null;
     }
 
+    /**
+     * @param o inštancia {@link Database}
+     */
     @Override
     public void update(Object o) {
         this.setText("");

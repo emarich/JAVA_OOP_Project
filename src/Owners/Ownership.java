@@ -9,6 +9,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Nadradená trieda triedam {@link Owner} a {@link City}.
+ * Ukladá vo svojej ínštancii list {@code land} objektov a list {@code realEstate} objektov a informáciu, čí dané typy
+ * nehnuteľností vlastní alebo nie viď {@link #ownedLands} a {@link #ownedRE}
+ */
 public abstract class Ownership implements Serializable {
     //Contact
     protected String phoneNumber;
@@ -68,19 +73,38 @@ public abstract class Ownership implements Serializable {
 
     public void addLand(Land land) {
         ownedLands.add(land);
+        if (ownedLands.size() > 1) {
+            haveLand = true;
+        }
     }
     public void deleteLand(Land land) {
         ownedLands.remove(land);
+        if (ownedLands.size() == 0) {
+            haveLand = false;
+        }
     }
 
     public void addRE(RealEstate realEstate) {
         ownedRE.add(realEstate);
+        if (ownedRE.size() > 1) {
+            haveRealEstate = true;
+        }
     }
     public void deleteRE(RealEstate realEstate) {
         ownedRE.remove(realEstate);
+        if (ownedRE.size() == 0) {
+            haveRealEstate = false;
+        }
     }
 
 
+    /**
+     * Metóda slúži na kontrolu telefónneho čísla, ktoré má byť uložené do objektu. Kontroluje len čísla slovenského
+     * formátu.
+     * @param phoneNumber telefónne číslo, ktoré chceme uložiť
+     * @throws PhoneNumberFormatException ak {@code phoneNumber} nespĺňa nejaké formátové kritéria, hodí vlastnú
+     * výnimku
+     */
     //checks, if the phone number is correct
     public static void phoneNumberCheck(String phoneNumber) throws PhoneNumberFormatException {
         char firstChar = phoneNumber.charAt(0);
@@ -110,6 +134,12 @@ public abstract class Ownership implements Serializable {
             throw new PhoneNumberFormatException("Invalid characters");
         }
     }
+
+
+    /**Metóda slúži na kontrolu mailovej adresy, ktorá má byť uložené do objektu.
+     * @param usersEmail mail, ktorý chceme uložiť
+     * @throws EmailFormatException ak {@code usesrsEmail} nespĺňa nejaké formátové kritéria, hodí vlastnú výnimku
+     */
     //checks, if the email is correct
     public static void emailCheck(String usersEmail) throws EmailFormatException {
             int count = 0;

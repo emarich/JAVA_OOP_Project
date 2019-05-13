@@ -13,7 +13,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-//refactor later
+/**
+ * Vytvára nové budovy, ktoré vie vytvárať administrátor pre všetkych používateľov.
+ */
 public class MakeREController {
     private Database usersDatabase;
     private User user;

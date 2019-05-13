@@ -7,6 +7,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Trieda ukladá informácie o použivateľoch. Konkrátne sú to {@code username}, {@code password}, {@code userType} - udáva,
+ * či je používateľ administrátor alebo obýčajný používateľ.
+ */
 public class User implements Serializable {
     private String username;
     private String password;

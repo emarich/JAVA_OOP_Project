@@ -6,6 +6,10 @@ import UserObject.Database;
 import View.RegisterStage;
 import javafx.scene.control.*;
 
+/**
+ * Je nadtrieda tried {@link UserController} a {@link OfficeController}, keďže z danej triedy využívajú {@link LogOut}
+ * triedu a jej funkcie a aj funkcie danej triedy
+ */
 public class GuestController extends LogOut {
     protected Database usersDatabase;
 

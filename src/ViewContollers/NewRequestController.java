@@ -16,6 +16,9 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Vytvára nové requesty, ktoré vie vytvárať obyčajný používateľ (vlastník). Odosiela ich administrátorm.
+ */
 public class NewRequestController {
     private Database usersDatabase;
     private User user;

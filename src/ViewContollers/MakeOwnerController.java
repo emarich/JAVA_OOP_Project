@@ -18,6 +18,10 @@ import javafx.stage.Stage;
 
 import java.time.format.DateTimeParseException;
 
+/**
+ * Vytvára nových vlastníkov (prídáva používateľovi nové údaje a možnosť vlastníctva), ktorých vie vytvárať
+ * administrátor pre všetkych používateľov.
+ */
 public class MakeOwnerController {
     private Database usersDatabase;
     private final DataObserver dataObserver;

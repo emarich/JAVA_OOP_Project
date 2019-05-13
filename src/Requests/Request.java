@@ -3,12 +3,15 @@ package Requests;
 import CadasterObjects.CadasterObject;
 import OtherFunctionality.RequestObserver;
 import UserObject.User;
-import javafx.scene.text.Text;
-
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Random;
+
+/**
+ * Trieda je používaná vo funkcionalite požiadavok uživateľov.
+ * Trieda agreguje {@code number} - 4 miestne číslo (ID) požiadavky, {@code requestingUser} - žiadateľa, {@code otherUser}
+ * - prijímateľa, {@code requestType} - typ požiadavky, {@code cadasterObject} - objekt (nehnuteľnosť) požiadavky,
+ * {@code date} - dátum vytvorenia požiadavky
+ */
 
 public class Request implements Serializable {
     private String number;
@@ -18,10 +21,7 @@ public class Request implements Serializable {
     private boolean accepted = false;
     private boolean rejected = false;
     private CadasterObject cadasterObject;
-    private String message;
     private String date;
-
-    private RequestObserver requestObserver;
 
     public Request(){}
 
@@ -75,10 +75,6 @@ public class Request implements Serializable {
 
     public CadasterObject getCadasterObject() {
         return cadasterObject;
-    }
-
-    public String getMessage() {
-        return message;
     }
 
     public String getDate() {

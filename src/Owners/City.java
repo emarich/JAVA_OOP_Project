@@ -4,6 +4,10 @@ import Offices.Office;
 
 import java.io.Serializable;
 
+
+/**
+ * Typ vlastníka pre administrátorov (úrad). Zabezpečuje, že nehnuteľnosti budú typu "Verejné".
+ */
 public class City extends Ownership implements Serializable {
     private Office office = new Office();
 

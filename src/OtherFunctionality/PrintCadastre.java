@@ -9,10 +9,12 @@ import Owners.Ownership;
 import UserObject.Database;
 import UserObject.User;
 import javafx.scene.control.TextArea;
-
-import javax.jws.soap.SOAPBinding;
 import java.io.Serializable;
 
+/**
+ * Daná trieda je zodpovedná za výpis údajov ako je {@code username}, {@code name}, {@code mutualAddress}, {@code phoneNumber},
+ * {@code email}, {@code land} a jeho údaje, {@code realEstate} a jeho údaje
+ */
 public class PrintCadastre implements Serializable {
 
     private Database usersDatabase;

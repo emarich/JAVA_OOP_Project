@@ -1,11 +1,14 @@
 package ViewContollers;
 
-import OtherFunctionality.SerializableUtility;
 import UserObject.Database;
 import View.SignInScene;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
+/**
+ * Nadtrieda tried {@link GuestController}, {@link OfficeController}, {@link UserController}.
+ * Je zodpovedná za prepínanie na {@link SignInScene}(odhlasovanie sa)
+ */
 public abstract class LogOut {
 
     public void logOut(MenuItem signInBtn, Stage primaryStage, Database usersData) {

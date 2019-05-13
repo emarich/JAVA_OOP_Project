@@ -3,7 +3,6 @@ package View;
 import OtherFunctionality.DataObserver;
 import UserObject.Database;
 import ViewContollers.CheckUserController;
-import ViewContollers.MakeOwnerController;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

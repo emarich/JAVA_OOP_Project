@@ -9,6 +9,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Aktualizuje stavy údajov pre requesty a upovedomuje o ich zmenách používateľov.
+ * Implementované iba v {@link ViewContollers.RequestsController#geodesyButtonClicked(String) geodesyButtonClicked}
+ */
 public class RequestObserver implements Observer, Serializable {
     private Database usersDatabase = new Database();
     private boolean accepted = false;

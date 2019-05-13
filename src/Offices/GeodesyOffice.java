@@ -4,13 +4,15 @@ import CadasterObjects.Land;
 import CadasterObjects.Landform;
 import Requests.Request;
 import Requests.RequestType;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 
+/**
+ * Táto trieda slúži len na posudzovanie požiadavok typu {@link RequestType#BUILD}, {@link RequestType#TERRAIN},
+ * {@link RequestType#DEMOLITION}, kedy vygeneruje náhodné číslo a na základe jeho hodnoty a typu pozemku pošle
+ * pravdivostnú hodnotu, či akceptuje alebo neakceptje požiadavku
+ */
 public class GeodesyOffice extends Office implements Serializable {
     private Request requests;
     private Land land;
