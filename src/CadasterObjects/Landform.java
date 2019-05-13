@@ -1,5 +1,8 @@
 package CadasterObjects;
 
+/**
+ * Enumerický typ pre definovanie typu pozemku
+ */
 public enum Landform {
 
     ARABLE_LAND ("arable", "02"),

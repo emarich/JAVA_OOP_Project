@@ -31,17 +31,12 @@ public class RequestsStage extends FlowPane {
     private VBox vBoxMain = new VBox();
     private ScrollPane scrollPane = new ScrollPane();
 
-    /*private EventHandler<ActionEvent> geodesyHandler = event -> System.out.println("Button succesfully clicked");
-    private EventHandler<ActionEvent> acceptHandler;
-    private EventHandler<ActionEvent> rejectHandler = event -> System.out.println("Button succesfully clicked");*/
 
     class RequestButtonHandler implements EventHandler<ActionEvent> {
         private final String btnId;
         private final String requestNumber;
         private final String buttonName;
         private final HBox button;
-
-        //private RequestsController requestsController = new RequestsController();
 
         public RequestButtonHandler(String btnId, HBox button) {
             this.btnId = btnId;
@@ -61,7 +56,6 @@ public class RequestsStage extends FlowPane {
                 requestsController.geodesyButtonClicked(requestNumber);
             }
         }
-
     }
 
 
@@ -69,7 +63,7 @@ public class RequestsStage extends FlowPane {
         this.user = user;
         requestList = user.getRequests();
 
-        requestsController = new RequestsController(user);
+        requestsController = new RequestsController();
 
         setScene();
 
@@ -135,8 +129,6 @@ public class RequestsStage extends FlowPane {
                         } else {
                             vBox.getChildren().addAll(new Text("Done!"));
                         }
-
-
 
 
                     } else {

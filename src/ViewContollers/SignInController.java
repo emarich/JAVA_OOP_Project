@@ -6,6 +6,10 @@ import View.*;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+
+/**
+ * Controller pre SignInScene (GUI)
+ */
 public class SignInController {
 
     private Database usersDatabase;
@@ -15,6 +19,17 @@ public class SignInController {
         this.usersDatabase = usersDatabase;
     }
 
+    /**
+     * Pri vybratí adekvátneho typu prihlasovaného použivateľa a kontrole existujúceho uživateľského mena sa metódou
+     * @see #switchScenes(ChoiceBox, String, Stage)
+     * prepne na adekvátny stage.
+     *
+     * @param signIn po stlačení daného tlačidla sa spustí akcia metódy
+     * @param username prihlasovacie meno uživateľa (Textfield s daným údajom)
+     * @param password heslo uživateľa (Textfield s daným údajom)
+     * @param userType  typ uživateľa (ChoiceBox, z ktorého sa vyberá typ uživateľa)
+     * @param primaryStage  hlavný stage
+     */
     public void buttonClicked(Button signIn, TextField username, TextField password, ChoiceBox<String> userType,
                               Stage primaryStage) {
         signIn.setOnAction(e -> {
@@ -40,6 +55,15 @@ public class SignInController {
         });
     }
 
+    /**
+     * Prepne na adekvátny stage podľa typu prihlasovaného používateľa.
+     *
+     * @exception Exception ak vznikne nejaká chyba pri prepínaní podľa uživateľa, prepne na {@link GuestPrimaryScene}
+     *
+     * @param usertype typ prihlasovaného užívateľa
+     * @param username uživateľské meno
+     * @param primaryStage hlavný stage
+     */
     //choose which scene will be showing
     private void switchScenes (ChoiceBox<String> usertype, String username, Stage primaryStage) {
         if (usertype.getValue().equalsIgnoreCase("Citizen")) {
@@ -57,6 +81,12 @@ public class SignInController {
         }
     }
 
+    /**
+     * Sleduje zmeny výberu v ChoiceBoxe. Ak na ChoiceBoxe zaklikneme hodnotu "Guest", automaticky nás to
+     * prepne na {@link GuestPrimaryScene}.
+     * @param userTypeBox sledovaná hodnota ChoiceBoxu
+     * @param primaryStage hlavný stage
+     */
     //if guest is checked in check box, automatically change scenes
     public void checkGuest(ChoiceBox<String> userTypeBox, Stage primaryStage) {
         userTypeBox.setOnAction(e -> {
@@ -66,6 +96,10 @@ public class SignInController {
         });
     }
 
+    /**Ak je zakliknutý argument <code>reqisterBtn</code>, vyvoláme zobrazenie ďalšieho okna, kde sa uživateľ
+     * vie registrovať
+     * @param registerBtn metóda pre nakliknutie daného tlačidla
+     */
     //switch to register formula
     public void switchRegisterStage(Button registerBtn) {
         registerBtn.setOnAction(e -> {

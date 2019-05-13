@@ -1,11 +1,7 @@
 package UserObject;
 
-import Offices.CadastralOffice;
-import Offices.Office;
-import Owners.Owner;
 import Owners.Ownership;
 import Requests.Request;
-import javafx.fxml.FXML;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -70,7 +66,6 @@ public class User implements Serializable {
     public void addRequest(Request request) {
         this.requests.add(request);
     }
-
     public List<Request> getRequests() {
         return requests;
     }

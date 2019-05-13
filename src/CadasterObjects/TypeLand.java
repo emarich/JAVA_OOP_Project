@@ -3,6 +3,9 @@ package CadasterObjects;
 import Owners.City;
 import Owners.Owner;
 
+/**
+ * Enumerický typ pre definovanie prístupnosti pozemku
+ */
 public enum TypeLand {
     PUBLIC, PRIVATE;
 

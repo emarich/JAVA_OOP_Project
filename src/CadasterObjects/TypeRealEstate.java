@@ -1,5 +1,8 @@
 package CadasterObjects;
 
+/**
+ * Enumerický typ pre definovanie typu budovy
+ */
 public enum TypeRealEstate {
     RESIDENTIAL, COMMERCIAL, INDUSTRIAL, FARM;
 

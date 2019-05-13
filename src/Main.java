@@ -6,8 +6,7 @@ import javafx.stage.Stage;
 
 /**
  *<h1>ECO - Electronic Cadastral Office<h1/>
- * The program is intended for the officers in the Cadastre office and for citizens
- *
+ * Štart do prihlasovacieho okna.
  * @author Ema Richnakova
  */
 

@@ -1,13 +1,18 @@
 package CadasterObjects;
 
-import MyExceptions.WrongInputException;
-import OtherFunctionality.CadastreSearch;
 import Owners.Ownership;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Je to supertrieda tried Land a RealEstate.
+ *
+ * @serial serializuje {@code registerNum} - registračné číslo nehnuteľnosti, serializuje address {@code address} -
+ * adresu nehnuteľnosti, serializuje area {@code area} - veľkosť nehnuteľnosti, serializuje {@code owners} - list majiteľov
+ *
+ * @see #toString() prepíše objekt do String formátu "registerNum{@value}; address{@value}"
+ */
 public abstract class CadasterObject implements Serializable {
     protected int registerNum;
     protected String address;

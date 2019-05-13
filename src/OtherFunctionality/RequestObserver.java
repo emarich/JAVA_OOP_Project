@@ -13,11 +13,17 @@ public class RequestObserver implements Observer, Serializable {
     private Database usersDatabase = new Database();
     private boolean accepted = false;
     private boolean rejected = false;
-    private List<Request> requestList = new ArrayList<>();
+    private List<Request> requestList;
+    private List<User> offices = new ArrayList<>();
     //private String requestNumber;
 
     public RequestObserver() {
         usersDatabase.setUsersDataHM(SerializableUtility.loadUsers());
+        for (String u : usersDatabase.getUsersDataHM().keySet()) {
+            if (usersDatabase.getUser(u).getUserType().equals(UserType.OFFICE)) {
+                offices.add(usersDatabase.getUser(u));
+            }
+        }
         requestList = usersDatabase.getAllRequests();
     }
 
@@ -51,14 +57,17 @@ public class RequestObserver implements Observer, Serializable {
             if (r.getNumber().equalsIgnoreCase(((Request)o).getNumber())) {
 
                 if (r.getRequestingUser() != null) {
-                    r.getRequestingUser().getRequest(((Request)o).getNumber()).setAccepted(accepted);
-                    r.getRequestingUser().getRequest(((Request)o).getNumber()).setRejected(rejected);
+                    r.getRequestingUser().replaceRequest((Request)o);
                     usersDatabase.getUsersDataHM().replace( r.getRequestingUser().getUsername(),  r.getRequestingUser());
                 }
                 if (r.getOtherUser() != null){
-                    r.getOtherUser().getRequest(((Request)o).getNumber()).setAccepted(accepted);
-                    r.getOtherUser().getRequest(((Request)o).getNumber()).setRejected(rejected);
+                    r.getOtherUser().replaceRequest((Request) o);
                     usersDatabase.getUsersDataHM().replace( r.getOtherUser().getUsername(),  r.getOtherUser());
+                }
+
+                for (User u : offices) {
+                    u.replaceRequest((Request) o);
+                    usersDatabase.getUsersDataHM().replace( u.getUsername(),  u);
                 }
 
                 SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());

@@ -1,30 +1,35 @@
 package ViewContollers;
 
-import CadasterObjects.CadasterObject;
 import CadasterObjects.Land;
 import CadasterObjects.RealEstate;
 import Offices.GeodesyOffice;
-import OtherFunctionality.PopUpAlert;
 import OtherFunctionality.RequestObserver;
 import OtherFunctionality.SerializableUtility;
 import Requests.Request;
 import UserObject.Database;
 import UserObject.User;
+import UserObject.UserType;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RequestsController {
-    private Database usersDatabse;
+    private Database usersDatabase = new Database();
     private RequestObserver requestObserver = new RequestObserver();
 
-    private User office;
+    private List<User> offices = new ArrayList<>();
     private List<Request> requestList;
 
-    public RequestsController(User user) {
-        usersDatabse = new Database();
-        office = user;
-        requestList = office.getRequests();
+    public RequestsController() {
+        usersDatabase.setUsersDataHM(SerializableUtility.loadUsers());
+
+        for (String u : usersDatabase.getUsersDataHM().keySet()) {
+            if (usersDatabase.getUser(u).getUserType().equals(UserType.OFFICE)) {
+                offices.add(usersDatabase.getUser(u));
+            }
+        }
+
+        requestList = usersDatabase.getAllRequests();
     }
 
     public void geodesyButtonClicked(String requestNumber) {
@@ -60,6 +65,9 @@ public class RequestsController {
     public void acceptButtonClicked(String requestNumber) {
         try {
             Request request = getRequest(requestNumber);
+
+            request.setAccepted(true);
+
             User requestingUser = request.getRequestingUser();
             User otherUser = request.getOtherUser();
 
@@ -70,13 +78,17 @@ public class RequestsController {
                         otherUser.getOwner().addRE(realEstate);
                         requestingUser.getOwner().deleteRE(realEstate);
 
-                        request.setAccepted(true);
+
+                        for (User u : offices) {
+                            u.replaceRequest(request);
+                            usersDatabase.getUsersDataHM().replace( u.getUsername(),  u);
+                        }
 
                         requestingUser.replaceRequest(request);
                         otherUser.replaceRequest(request);
 
-                        usersDatabse.getUsersDataHM().replace(requestingUser.getUsername(), requestingUser);
-                        usersDatabse.getUsersDataHM().replace(otherUser.getUsername(), otherUser);
+                        usersDatabase.getUsersDataHM().replace(requestingUser.getUsername(), requestingUser);
+                        usersDatabase.getUsersDataHM().replace(otherUser.getUsername(), otherUser);
 
                         break;
                     }
@@ -88,20 +100,23 @@ public class RequestsController {
                         otherUser.getOwner().addLand(land);
                         requestingUser.getOwner().deleteLand(land);
 
-                        request.setAccepted(true);
+                        for (User u : offices) {
+                            u.replaceRequest(request);
+                            usersDatabase.getUsersDataHM().replace( u.getUsername(),  u);
+                        }
 
                         requestingUser.replaceRequest(request);
                         otherUser.replaceRequest(request);
 
-                        usersDatabse.getUsersDataHM().replace(requestingUser.getUsername(), requestingUser);
-                        usersDatabse.getUsersDataHM().replace(otherUser.getUsername(), otherUser);
+                        usersDatabase.getUsersDataHM().replace(requestingUser.getUsername(), requestingUser);
+                        usersDatabase.getUsersDataHM().replace(otherUser.getUsername(), otherUser);
 
                         break;
                     }
                 }
             }
 
-            SerializableUtility.saveUsers(usersDatabse.getUsersDataHM());
+            SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
 
         } catch (NullPointerException e) {
             e.printStackTrace();
@@ -115,21 +130,27 @@ public class RequestsController {
         User requestingUser = request.getRequestingUser();
         User otherUser = request.getOtherUser();
 
+        for (User u : offices) {
+            u.replaceRequest(request);
+            usersDatabase.getUsersDataHM().replace( u.getUsername(),  u);
+        }
         requestingUser.replaceRequest(request);
         otherUser.replaceRequest(request);
 
-        usersDatabse.getUsersDataHM().replace(requestingUser.getUsername(), requestingUser);
-        usersDatabse.getUsersDataHM().replace(otherUser.getUsername(), otherUser);
+        usersDatabase.getUsersDataHM().replace(requestingUser.getUsername(), requestingUser);
+        usersDatabase.getUsersDataHM().replace(otherUser.getUsername(), otherUser);
 
-        SerializableUtility.saveUsers(usersDatabse.getUsersDataHM());
+        SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
 
         System.out.println("Reject"+requestNumber);
     }
 
     private Request getRequest(String string) {
         for (Request r : requestList) {
-            if (r.getNumber().equalsIgnoreCase(string)) {
-                return  r;
+            for (User u : offices) {
+                if (r.getNumber().equalsIgnoreCase(string) || r.equals(u.getRequest(string))) {
+                    return  r;
+                }
             }
         }
         return null;

@@ -1,15 +1,24 @@
 package CadasterObjects;
 
-import MyExceptions.WrongInputException;
 import OtherFunctionality.FindSubstring;
 import MyExceptions.WrongLandformInputException;
 import Owners.City;
 import Owners.Owner;
 import Owners.Ownership;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ *  Subtrieda triedy
+ * @see CadasterObject
+ * @serial okrem hodnôt nadtriedy {@code typeLand} - typ pozemku, {@code landform} - definovanie pozemku,
+ * {@code realEstates} - list budov, {@code haveRE} - pravdivostná hodnota existencie budovz na pozemku
+ *
+ * @see #toString() formát Stringu berie z nadtriedz + k nemu pridáva {@code landform}
+ * @see #getLastRE() metóda, ktorá sa využíva, ak k pozemku pripájame budovu, tak zisťuje posledné číslo poslednej budovy,
+ * aby sme vedeli dať nasledujúcej budove poslednú číslicu o hodnotu väčšiu
+ */
 
 public class Land extends CadasterObject implements Serializable {
     private TypeLand typeLand;

@@ -1,15 +1,11 @@
 package ViewContollers;
 
-import Offices.CadastralOffice;
-import Offices.Office;
 import OtherFunctionality.DataObserver;
 import UserObject.Database;
 import View.*;
 import javafx.scene.control.*;
 
 public class OfficeController extends GuestController {
-
-    private Office office = new CadastralOffice();
 
     public OfficeController(Database usersDatabase) {
         this.usersDatabase = usersDatabase;

@@ -2,7 +2,16 @@ package CadasterObjects;
 
 import MyExceptions.AddressFormatException;
 
+/**
+ * Trieda, ktorá je zodpovedná za kontolu formátu adresy a zdokonalenie formy adesy
+ */
 public class Address {
+    /**Metóda pre kontolu <code>String address<code/> vloženej adresy.
+     * Kontroluje, či daná adresa používa ako oddeľovače "," a či je adresa kompletná (ulica, mesto, štát)
+     *
+     * @param address adresa, ktorá sa má zkontrolovať
+     * @throws AddressFormatException výnimka sa hodí ak je formát adresy zlý
+     */
     public static void correctAddress(String address) throws AddressFormatException { //checks, if address is in correct format
         String[] outputAddress = new String[3];
         boolean bool = false;
@@ -34,6 +43,12 @@ public class Address {
         }
     }
 
+    /**
+     * Ak je adresa formátovo korektná, tak upravý na nej len maličkosti. Ak začiatočné písmená sú malým písmom
+     * napísané, zmení ich na veľké, aj je príliš veľa medzier medzi danými slovami, odstráni ich
+     * @param address adresa, ktorá sa má zkontrolovať
+     * @return upravenú verziu <code>String address<code/>
+     */
     public static String setPerfectAddress(String address) {
         String finalAddress = ""; //whole address
         String finalElement = ""; //one element of the address
@@ -42,6 +57,7 @@ public class Address {
         outputAddress = address.split(","); //splits string to street, city and state string
 
         for(int x = 0; x < 3; x++) {
+
             outputAddress[x] = outputAddress[x].trim();
 
             String[] element = outputAddress[x].split("\\s+"); //get element in array

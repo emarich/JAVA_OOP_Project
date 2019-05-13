@@ -1,14 +1,8 @@
 package ViewContollers;
 
 import CadasterObjects.*;
-import MyExceptions.AddressFormatException;
-import MyExceptions.SameRegNumException;
 import MyExceptions.WrongInputException;
-import MyExceptions.WrongLandformInputException;
-import Offices.CadastralOffice;
-import Offices.Office;
 import OtherFunctionality.*;
-import Owners.City;
 import Owners.Owner;
 import Requests.Request;
 import Requests.RequestType;
@@ -17,8 +11,6 @@ import UserObject.User;
 import UserObject.UserType;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -108,8 +100,10 @@ public class NewRequestController {
                 usersDatabase.getUser(user.getUsername()).addRequest(request);
                 usersDatabase.getUser(secondUser.getUsername()).addRequest(request);
                 usersDatabase.getUser(office.getUsername()).addRequest(request);
-                SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
+
             }
+
+            SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
             stage.close();
 
         } catch (NullPointerException e) {
@@ -132,8 +126,9 @@ public class NewRequestController {
                 System.out.println(request.getNumber());
                 usersDatabase.getUser(user.getUsername()).addRequest(request);
                 usersDatabase.getUser(office.getUsername()).addRequest(request);
-                SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
             }
+
+            SerializableUtility.saveUsers(usersDatabase.getUsersDataHM());
             stage.close();
 
         } catch (NullPointerException e) {

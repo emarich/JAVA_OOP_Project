@@ -1,13 +1,18 @@
 package CadasterObjects;
 
-import MyExceptions.WrongInputException;
-import Offices.CadastralOffice;
-import Owners.City;
-import Owners.Owner;
 import Owners.Ownership;
 
 import java.io.Serializable;
 
+/**
+ * Subtrieda triedy
+ * @see CadasterObject
+ * @serial okrem hodnôt nadtriedy {@code typeRealEstate} - typ budovy,
+ * {@code land} - pozemok, na ktorom stojí budova, {@code haveLand} - pravdivostná hodnota existencie pozemku,
+ * ktorý je evidovaný k budove
+ *
+ * @see #toString() formát Stringu berie z nadtriedz + k nemu pridáva {@code typeRealEstate}
+ */
 public class RealEstate extends CadasterObject implements Serializable {
     private TypeRealEstate typeRealEstate;
     //real estate can be only on one land
