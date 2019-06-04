@@ -56,7 +56,7 @@ Program taktiež bude slúžiť občanom. Občan, ktorý nebude registrovaný v 
 - [ ] použitie návrhových vzorov okrem návehového vzoru Singleton
 - [x] ošetrenie mimoriadnych stavov prostredníctvom vlastných výnimiek
 - [x] poskytnutie grafického používateľského rozhrania oddelene od aplikačnej logiky a s aspoň časťou spracovateľov udalosti (handlers) vytvorenou manuálne
-- [x] explicitné použitie viacniťovosti (multithreading)
+- [ ] explicitné použitie viacniťovosti (multithreading)
 - [ ] použitie generickosti vo vlastných triedach
 - [x] explicitné použitie RTTI
 - [ ] použitie vhniezdených tried a rozhraní
